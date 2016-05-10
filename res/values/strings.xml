@@ -7,4 +7,5 @@
     <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="account">账户信息</string>
+    <string name="personal_sharing">我的分享</string>
 </resources>
