@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">myapp</string>
+    <string name="app_name">myapp1</string>
+    <string name="nick_name">昵称</string>
+    <string name="register_name">邮箱</string>
+    <string name="login_password">密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="register">注册</string>
+    <string name="account">账户信息</string>
 </resources>
