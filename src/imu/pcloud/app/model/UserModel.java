@@ -1,8 +1,8 @@
 package imu.pcloud.app.model;
 
-import imu.pcloud.server.been.Image;
-import imu.pcloud.server.been.User;
-import imu.pcloud.server.utils.DateTool;
+import imu.pcloud.app.been.Image;
+import imu.pcloud.app.been.User;
+import imu.pcloud.app.utils.DateTool;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
 package imu.pcloud.app.model;
 
-import imu.pcloud.server.been.SharingRecord;
+import imu.pcloud.app.been.SharingRecord;
 
 import java.util.ArrayList;
 import java.util.List;

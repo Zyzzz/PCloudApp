@@ -1,6 +1,6 @@
 package imu.pcloud.app.model;
 
-import imu.pcloud.server.utils.Information;
+import imu.pcloud.app.utils.Information;
 
 public class BaseModel {
 

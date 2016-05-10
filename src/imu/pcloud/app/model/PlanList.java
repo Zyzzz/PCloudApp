@@ -1,6 +1,6 @@
 package imu.pcloud.app.model;
 
-import imu.pcloud.server.been.PersonalPlan;
+import imu.pcloud.app.been.PersonalPlan;
 
 import java.util.ArrayList;
 import java.util.List;

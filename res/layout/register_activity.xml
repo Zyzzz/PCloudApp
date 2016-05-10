@@ -12,7 +12,7 @@
                       android:layout_weight="1"
                       android:layout_marginTop="30dp">
 
-                    <EditText android:id="@+id/nick_name"
+                    <EditText android:id="@+id/username"
                               android:hint="@string/nick_name"
                               android:layout_weight="6"
                               android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
                                   android:layout_marginTop="1dp" android:background="@android:color/white"
                                   android:layout_weight="1">
 
-                        <EditText android:id="@+id/register_name"
+                        <EditText android:id="@+id/email"
                                   android:hint="@string/register_name"
                                   android:layout_width="wrap_content"
                                   android:layout_height="match_parent"
@@ -42,7 +42,7 @@
                                   android:layout_marginTop="1dp" android:background="@android:color/white"
                                   android:layout_weight="1">
 
-                        <EditText android:id="@+id/login_password"
+                        <EditText android:id="@+id/password"
                                   android:hint="@string/login_password"
                                   android:layout_width="wrap_content"
                                   android:layout_height="match_parent"
@@ -57,7 +57,7 @@
                                   android:layout_marginTop="1dp" android:layout_weight="1"
                                   android:background="@android:color/white">
 
-                        <EditText android:id="@+id/confirm_password"
+                        <EditText android:id="@+id/repassword"
                                   android:hint="@string/confirm_password"
                                   android:layout_width="wrap_content"
                                   android:layout_height="match_parent"
