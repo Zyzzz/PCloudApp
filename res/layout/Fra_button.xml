@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <RelativeLayout
-            android:id="@+id/mainface_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+              android:layout_height="55dp"
+                android:orientation="horizontal" >
+
         <LinearLayout
-                android:id="@+id/button_layout"
-                android:layout_width="fill_parent"
+                android:id="@+id/personal"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="bottom">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
             <ImageButton
 
                     android:id="@+id/button1"
@@ -20,8 +19,15 @@
                     android:layout_weight="1"
                     android:background="@drawable/button1"
             />
+        </LinearLayout>
 
-
+    <LinearLayout
+            android:id="@+id/team"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <ImageButton
                 android:id="@+id/button2"
                 android:layout_width="fill_parent"
@@ -29,6 +35,14 @@
                 android:layout_weight="1"
                 android:background="@drawable/ic_launcher"
             />
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/zone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <ImageButton
                     android:id="@+id/button3"
                     android:layout_width="fill_parent"
@@ -36,6 +50,14 @@
                     android:layout_weight="1"
                     android:background="@drawable/ic_launcher"
             />
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/setting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <ImageButton
                     android:id="@+id/button4"
                     android:layout_width="fill_parent"
@@ -43,9 +65,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/ic_launcher"
             />
+    </LinearLayout>
 
         </LinearLayout>
 
-    </RelativeLayout>
 
-</RelativeLayout>
+

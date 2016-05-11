@@ -2,11 +2,6 @@ package imu.pcloud.app.activity;
 
 import android.app.*;
 import android.os.Bundle;
-import android.os.CancellationSignal;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.view.View.OnClickListener;
 import imu.pcloud.app.R;
 
 /**
@@ -16,7 +11,7 @@ public class MainFace extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainface);
+        setContentView(R.layout.Fra_button);
 
     }
 
