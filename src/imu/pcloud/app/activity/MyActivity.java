@@ -51,6 +51,7 @@ public class MyActivity extends Activity {
             case android.R.id.home:
                 finish();
                 break;
+            
             case R.id.action_refresh:
                 Intent intent1 = new Intent();
                 intent1.setClass(MyActivity.this, Findpad.class);
