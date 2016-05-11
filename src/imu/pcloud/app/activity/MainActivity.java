@@ -2,11 +2,17 @@ package imu.pcloud.app.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import imu.pcloud.app.R;
+import imu.pcloud.app.fragment.PersonalFragment;
+import imu.pcloud.app.fragment.SettingFragment;
+import imu.pcloud.app.fragment.TeamFragment;
+import imu.pcloud.app.fragment.ZoneFragment;
 
 
 /**
@@ -36,6 +42,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
         setContentView(R.layout.fragment_layout);
         innitView();
         innitEvents();
+        setSelcet(0);
     }
 
     @Override
@@ -59,25 +66,72 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
         mImgTeam = (ImageButton) findViewById(R.id.button2);
         mImgZone = (ImageButton) findViewById(R.id.button3);
         mImgSetting = (ImageButton) findViewById(R.id.button4);
+        mtab01=new PersonalFragment();
+        mtab02=new TeamFragment();
+        mtab03=new ZoneFragment();
+        mtab04=new SettingFragment();
     }
     private void setSelcet(int i){
         //把图片设置为亮的
         //设置内容区域
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        HideFragment(transaction);
         switch (i){
             case 0:
+                if(mtab01==null){
+                    mtab01=new PersonalFragment();
+                }
+                else{
+                    transaction.show(mtab01);
+                }
                 mImgPersonal.setImageResource(R.drawable.ic_launcher);
                 break;
             case 1:
+                if(mtab02==null){
+                    mtab02=new TeamFragment();
+                }
+                else{
+                    transaction.show(mtab02);
+                }
                 mImgTeam.setImageResource(R.drawable.ic_launcher);
                 break;
             case 2:
+                if(mtab03==null){
+                    mtab03=new ZoneFragment();
+                }
+                else{
+                    transaction.show(mtab03);
+                }
                 mImgZone.setImageResource(R.drawable.ic_launcher);
                 break;
             case 3:
+                if(mtab04==null){
+                    mtab04=new SettingFragment();
+                }
+                else{
+                    transaction.show(mtab04);
+                }
                 mImgSetting.setImageResource(R.drawable.ic_launcher);
                 break;
         }
+        transaction.commit();
 
+    }
+
+    private void HideFragment(FragmentTransaction transaction) {
+        if(mtab01!=null){
+            transaction.hide(mtab01);
+        }
+        if(mtab02!=null){
+            transaction.hide(mtab02);
+        }
+        if(mtab03!=null){
+            transaction.hide(mtab03);
+        }
+        if(mtab04!=null){
+            transaction.hide(mtab04);
+        }
     }
 
     @Override
