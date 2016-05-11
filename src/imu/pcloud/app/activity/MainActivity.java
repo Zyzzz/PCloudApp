@@ -155,7 +155,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
         }
 
     }
-
     private void RsetImgs() {
         mImgPersonal.setImageResource(R.drawable.ic_launcher);
         mImgTeam.setImageResource(R.drawable.ic_launcher);
