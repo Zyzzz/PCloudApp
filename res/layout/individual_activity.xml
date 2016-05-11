@@ -53,7 +53,7 @@
                             android:id="@+id/imageView1"
                             android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                             android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
-                            android:layout_weight="0.5"/>
+                            android:layout_weight="0.5" android:background="@drawable/mysharing"/>
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="match_parent"
                               android:text="@string/personal_sharing"
