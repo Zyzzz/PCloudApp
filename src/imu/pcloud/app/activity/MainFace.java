@@ -11,7 +11,7 @@ public class MainFace extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.Fra_button);
+        setContentView(R.layout.fra_button);
 
     }
 
