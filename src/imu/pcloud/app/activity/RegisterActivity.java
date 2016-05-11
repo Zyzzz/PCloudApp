@@ -18,7 +18,7 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
     TextView repassword;
     Button register;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
     }

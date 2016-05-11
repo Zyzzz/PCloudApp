@@ -20,9 +20,7 @@ public class Findpad extends Activity{
             case android.R.id.home:
                 finish();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

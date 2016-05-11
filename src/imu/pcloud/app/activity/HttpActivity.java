@@ -28,7 +28,7 @@ abstract public class HttpActivity extends Activity {
     protected ViewFinder finder;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
         editor = sharedPreferences.edit();

@@ -1,4 +1,4 @@
-package imu.pcloud.app.activity;
+package imu.pcloud.app.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;

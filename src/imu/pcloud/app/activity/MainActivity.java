@@ -11,7 +11,7 @@ import imu.pcloud.app.R;
 /**
  * Created by acer on 2016/5/11.
  */
-public class Fra_Activity extends Activity implements View.OnClickListener{
+public class MainActivity extends HttpActivity implements View.OnClickListener{
 
     private LinearLayout mTabPersonal;
     private LinearLayout mTabTeam;
@@ -31,6 +31,11 @@ public class Fra_Activity extends Activity implements View.OnClickListener{
         innitEvents();
     }
 
+    @Override
+    protected void OnSuccess() {
+
+    }
+
     private void innitEvents() {
         mTabPersonal.setOnClickListener(this);
         mTabTeam.setOnClickListener(this);
@@ -39,7 +44,7 @@ public class Fra_Activity extends Activity implements View.OnClickListener{
     }
 
     private void innitView() {
-        mTabPersonal=(LinearLayout) findViewById(R.id.personal);
+        mTabPersonal= find(R.id.personal);
         mTabTeam=(LinearLayout)findViewById(R.id.team);
         mTabZone=(LinearLayout)findViewById(R.id.zone);
         mTabSetting=(LinearLayout)findViewById(R.id.setting);
