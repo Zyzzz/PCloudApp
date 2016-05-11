@@ -81,6 +81,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
             case 0:
                 if(mtab01==null){
                     mtab01=new PersonalFragment();
+                    transaction.add(R.id.content, mtab01);
                 }
                 else{
                     transaction.show(mtab01);
@@ -90,6 +91,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
             case 1:
                 if(mtab02==null){
                     mtab02=new TeamFragment();
+                    transaction.add(R.id.content, mtab02);
                 }
                 else{
                     transaction.show(mtab02);
@@ -99,6 +101,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
             case 2:
                 if(mtab03==null){
                     mtab03=new ZoneFragment();
+                    transaction.add(R.id.content, mtab03);
                 }
                 else{
                     transaction.show(mtab03);
@@ -108,11 +111,14 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
             case 3:
                 if(mtab04==null){
                     mtab04=new SettingFragment();
+                    transaction.add(R.id.content, mtab04);
                 }
                 else{
                     transaction.show(mtab04);
                 }
                 mImgSetting.setImageResource(R.drawable.ic_launcher);
+                break;
+            default:
                 break;
         }
         transaction.commit();

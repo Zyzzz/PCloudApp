@@ -65,7 +65,7 @@ public class MyAdspter extends BaseAdapter {
             convertView=layoutInflater.inflate(R.layout.list, null);
             zujian.image=(ImageView)convertView.findViewById(R.id.image);
             zujian.title=(TextView)convertView.findViewById(R.id.title);
-            zujian.view=(Button)convertView.findViewById(R.id.view);
+            //zujian.view=(Button)convertView.findViewById(R.id.view);
             zujian.info=(TextView)convertView.findViewById(R.id.info);
             convertView.setTag(zujian);
         }else{
