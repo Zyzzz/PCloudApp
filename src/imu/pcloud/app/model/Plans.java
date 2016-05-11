@@ -29,6 +29,6 @@ public class Plans {
 		return gson.toJson(plans);
 	}
 	public void setByJsonString(String jsonString) {
-		plans = gson.fromJson(jsonString, new TypeToken<List<Plan>>(){}.getType());
+		plans = gson.fromJson(jsonString, new TypeToken<ArrayList<Plan>>(){}.getType());
 	}
 }

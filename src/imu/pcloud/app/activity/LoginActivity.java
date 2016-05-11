@@ -7,39 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import imu.pcloud.app.R;
 
 public class LoginActivity extends HttpActivity {
+
+    private Button register;
+    private Button login;
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-
-        Button error_button = (Button) findViewById(R.id.register);
-        Button login_button = (Button) findViewById(R.id.login);
-        error_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, Findpad.class);
-                startActivity(intent);
-            }
-        });
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toast("clicked");
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
+        setContentView(R.layout.login_layout);
+        register = find(R.id.register);
     }
 
     @Override
@@ -47,7 +28,7 @@ public class LoginActivity extends HttpActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    /*public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.text, menu);
         return true;
     }
@@ -65,6 +46,6 @@ public class LoginActivity extends HttpActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 }
