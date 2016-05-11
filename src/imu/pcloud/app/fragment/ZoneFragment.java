@@ -13,6 +13,14 @@ import imu.pcloud.app.R;
 public class ZoneFragment extends HttpFragment {
 
     private ListView listView1;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        listView1=find(R.id.listView);
+        //listView1.setAdapter();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
