@@ -11,20 +11,22 @@
                                 android:layout_weight="1"
                                 android:layout_marginTop="30dp">
                               <ImageView android:layout_width="wrap_content"
-                                          android:layout_height="match_parent"
-                                           android:background="@drawable/user"
-                                            android:layout_weight="3"/>
+                                         android:layout_height="match_parent"
+                                         android:background="@drawable/user"
+                                         android:layout_weight="3" android:layout_marginLeft="10dp"
+                                         android:layout_marginTop="3dp" android:layout_marginRight="10dp"
+                                         android:layout_marginBottom="3dp"/>
                               <LinearLayout android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="10"
                                             android:orientation="vertical">
                                             <TextView android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
-                                                      android:text="@string/nick_name"
+                                                      android:hint="@string/nick_name"
                                                       android:layout_weight="1"/>
                                             <TextView android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
-                                                      android:text="@string/nick_name"
+                                                      android:hint="@string/nick_name"
                                                       android:layout_weight="1"/>
                               </LinearLayout>
                               <ImageButton
@@ -46,12 +48,13 @@
                               android:orientation="horizontal" android:focusableInTouchMode="false"
                               android:background="@android:color/white" android:layout_weight="0.5">
                     <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="26dp"
                             android:layout_height="29dp"
                             android:id="@+id/imageView"
-                            android:background="@drawable/friends" android:layout_weight="0.5"
+                            android:background="@drawable/test"
                             android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
-                            android:layout_marginTop="3dp" android:layout_marginBottom="3dp"/>
+                            android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
+                            android:layout_weight="0.5"/>
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="match_parent"
                               android:text="@string/personal_sharing"
@@ -64,7 +67,7 @@
                     <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -76,7 +79,7 @@
                               android:layout_weight="0.5"
                               android:layout_marginTop="1dp">
                     <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="26dp"
                             android:layout_height="29dp"
                             android:id="@+id/imageView"
                             android:background="@drawable/message" android:layout_weight="0.5"
