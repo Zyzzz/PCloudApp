@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="newTheme"
+           parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/newbackground</item>
+    </style>
+    <style name="newbackground"
+           parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/anctionbar_background</item>
+    </style>
+</resources>

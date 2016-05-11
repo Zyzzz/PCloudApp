@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fitsSystemWindows="true"
+                android:background="#f5f5f5">
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:orientation="vertical"
+                android:layout_height="150dp">
+            <EditText
+                    android:id="@+id/username_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:hint=" 邮箱"
+
+                    android:background="@android:color/white"/>
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/buttonshape"
+                    android:layout_marginLeft="280dp"
+                    android:layout_marginRight="25dp"
+                    android:text="确 认"
+                    android:layout_marginTop="2dp"
+
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
