@@ -5,17 +5,18 @@
               android:background="#f5f5f5"
                 android:orientation="vertical">
     <FrameLayout
-            android:id="@+id/Account_layout"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
 
             >
         <Button
+                android:id="@+id/AccountSetting_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
-        <TextView android:layout_width="fill_parent"
+        <TextView
+                android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:layout_marginLeft="50dp"
                     android:text="账号设置"
@@ -32,6 +33,7 @@
             android:layout_marginTop="2dp"
            >
         <Button
+                android:id="@+id/OtherSetting_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
@@ -52,6 +54,7 @@
             android:layout_marginTop="2dp"
             >
         <Button
+                android:id="@+id/Function_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
@@ -73,6 +76,7 @@
 
             >
         <Button
+                android:id="@+id/About_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
