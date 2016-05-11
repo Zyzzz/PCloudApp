@@ -55,6 +55,21 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
     }
     private void setSelcet(int i){
         //把图片设置为亮的
+        //设置内容区域
+        switch (i){
+            case 0:
+                mImgPersonal.setImageResource(R.drawable.ic_launcher);
+                break;
+            case 1:
+                mImgTeam.setImageResource(R.drawable.ic_launcher);
+                break;
+            case 2:
+                mImgZone.setImageResource(R.drawable.ic_launcher);
+                break;
+            case 3:
+                mImgSetting.setImageResource(R.drawable.ic_launcher);
+                break;
+        }
 
     }
 
@@ -63,16 +78,16 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
         RsetImgs();
         switch (v.getId()){
             case R.id.personal:
-
+                setSelcet(0);
                 break;
             case R.id.team:
-
+                setSelcet(1);
                 break;
             case R.id.zone:
-
+                setSelcet(2);
                 break;
             case R.id.setting:
-
+                setSelcet(3);
                 break;
             default:
                 break;
