@@ -9,6 +9,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+
             >
         <Button
                 android:layout_width="fill_parent"
@@ -16,9 +17,13 @@
                 android:background="@android:color/white"/>
         <TextView android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
+                  android:layout_marginLeft="50dp"
                     android:text="账号设置"
                   android:gravity="left|center"
         />
+        <ImageView android:layout_width="50dp"
+                   android:layout_height="fill_parent"
+                   android:background="@drawable/icon"/>
 
     </FrameLayout>
     <FrameLayout
@@ -30,6 +35,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_marginLeft="50dp"
+                  android:text="其他设置"
+                  android:gravity="left|center"
+        />
+        <ImageView android:layout_width="50dp"
+                   android:layout_height="fill_parent"
+                   android:background="@drawable/icon"/>
 
     </FrameLayout>
     <FrameLayout
@@ -41,6 +55,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_marginLeft="50dp"
+                  android:text="辅助功能"
+                  android:gravity="left|center"
+        />
+        <ImageView android:layout_width="50dp"
+                   android:layout_height="fill_parent"
+                   android:background="@drawable/icon"/>
 
     </FrameLayout>
     <FrameLayout
@@ -53,6 +76,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@android:color/white"/>
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_marginLeft="50dp"
+                  android:text="关于"
+                  android:gravity="left|center"
+        />
+        <ImageView android:layout_width="50dp"
+                   android:layout_height="fill_parent"
+                   android:background="@drawable/icon"/>
 
     </FrameLayout>
 
