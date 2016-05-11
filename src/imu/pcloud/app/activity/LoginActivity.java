@@ -7,9 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import imu.pcloud.app.R;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends HttpActivity {
     /**
      * Called when the activity is first created.
      */
@@ -28,7 +29,21 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("clicked");
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
+
+    }
+
+    @Override
+    protected void OnSuccess() {
 
     }
 
