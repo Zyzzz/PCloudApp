@@ -1,6 +1,7 @@
 package imu.pcloud.app.activity;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,6 +22,12 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
     private ImageButton mImgTeam;
     private ImageButton mImgZone;
     private ImageButton mImgSetting;
+    private Fragment mtab01;
+    private Fragment mtab02;
+    private Fragment mtab03;
+    private Fragment mtab04;
+
+
 
 
     @Override
