@@ -17,6 +17,11 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     private Button login;
     private TextView email;
     private TextView password;
+    private static UserModel user;
+
+    public static UserModel getUser() {
+        return user;
+    }
     /**
      * Called when the activity is first created.
      */
@@ -24,6 +29,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+        get("relogin", "cookies", getCookie());
         register = find(R.id.register);
         login = find(R.id.login);
         email = find(R.id.email_text);
@@ -32,17 +38,15 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
 
     @Override
     protected void OnSuccess() {
-        UserModel model = getObject(UserModel.class);
-        if(model.getStatus() != 0) {
-            toast(model.getResult());
-
+        user = getObject(UserModel.class);
+        if(user.getStatus() != 0) {
+            toast(user.getResult());
+            startActivity(new Intent("imu.pcloud.app.MainActivity"));
         }
         else {
             toast("登录成功");
         }
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -51,25 +55,4 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
                 get("login", "email", email.getText(), "password", password.getText());
         }
     }
-
-    /*public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.text, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-
-            case R.id.action_refresh:
-                Intent intent1 = new Intent();
-                intent1.setClass(LoginActivity.this, Findpad.class);
-                startActivity(intent1);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
 }

@@ -12,7 +12,6 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/b"
                 android:layout_weight="7"/>
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
