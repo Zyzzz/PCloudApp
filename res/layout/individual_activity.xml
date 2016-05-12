@@ -53,13 +53,13 @@
                             android:id="@+id/imageView1"
                             android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                             android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
-                            android:layout_weight="0.5"/>
+                            android:layout_weight="0.5" android:background="@drawable/mysharing"/>
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="match_parent"
                               android:text="@string/personal_sharing"
                               android:layout_weight="15"
                               android:textIsSelectable="true"
-                              android:textSize="20dp"
+                              android:textSize="20sp"
                               android:autoText="false"
                               android:layout_gravity="bottom" android:layout_marginTop="3dp"
                               android:layout_marginBottom="3dp"/>
@@ -81,7 +81,7 @@
                             android:layout_width="26dp"
                             android:layout_height="29dp"
                             android:id="@+id/imageView"
-                            android:background="@drawable/message" android:layout_weight="0.5"
+                            android:background="@drawable/myaccount" android:layout_weight="0.5"
                             android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                             android:layout_marginTop="3dp" android:layout_marginBottom="3dp"/>
                     <TextView android:layout_width="wrap_content"
