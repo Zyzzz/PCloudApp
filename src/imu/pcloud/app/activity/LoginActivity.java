@@ -33,8 +33,8 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
 
     protected void init() {
         setContentView(R.layout.login_layout);
-        if(getCookie().length() > 1)
-            get("relogin", "cookies", getCookie());
+        //if(getCookie().length() > 1)
+            //get("relogin", "cookies", getCookie());
         register = find(R.id.register);
         login = find(R.id.login);
         email = find(R.id.email_text);
@@ -66,7 +66,6 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
                 break;
             case R.id.register:
                 startActivity(RegisterActivity.class);
-                finish();
                 break;
         }
     }
