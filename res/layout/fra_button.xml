@@ -59,7 +59,7 @@
                     android:id="@+id/button4"
                     android:layout_width="40dp"
                     android:layout_height="55dp"
-                    android:background="@drawable/personal_setting"
+                    android:background="@drawable/aboutme"
                     android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
     </LinearLayout>
 
