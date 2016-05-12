@@ -11,6 +11,9 @@ import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class LoginActivity extends HttpActivity implements View.OnClickListener {
 
     private Button register;
@@ -18,23 +21,30 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     private TextView email;
     private TextView password;
     private static UserModel user;
+    private int loginFlag = 0;
+    private Timer timer = new Timer();
 
     public static UserModel getUser() {
         return user;
     }
+
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        setContentView(R.layout.welcome_layout);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                get("relogin", "cookies", getCookie());
+            }
+        }, 2000);
     }
 
     protected void init() {
         setContentView(R.layout.login_layout);
-        //if(getCookie().length() > 1)
-            //get("relogin", "cookies", getCookie());
         register = find(R.id.register);
         login = find(R.id.login);
         email = find(R.id.email_text);
@@ -47,12 +57,14 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     @Override
     protected void OnSuccess() {
         user = getObject(UserModel.class);
-        if(user.getStatus() == 0) {
-            toast("登录成功");
+        if (user.getStatus() == 0) {
             setCookie(user.getCookies());
             startActivity(MainActivity.class);
-        }
-        else {
+        } else {
+            if (loginFlag == 0) {
+                init();
+                loginFlag = 1;
+            }
             toast(user.getResult());
             setCookie("");
         }

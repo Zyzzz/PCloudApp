@@ -12,7 +12,7 @@ import imu.pcloud.app.R;
 public class TeamFragment extends HttpFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.team_layout,container,false);
+        return inflater.inflate(R.layout.team_layout, container, false);
     }
 
     @Override

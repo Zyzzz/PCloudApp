@@ -4,28 +4,27 @@
               android:layout_height="70dp"
               android:orientation="horizontal" android:background="@android:color/white">
 
-        <LinearLayout
-                android:id="@+id/personal"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+    <LinearLayout
+            android:id="@+id/personal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+        <ImageButton
+                android:id="@+id/button1"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-            <ImageButton
-
-                    android:id="@+id/button1"
-                    android:layout_width="40dp"
-                    android:layout_height="38dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/personal_plan"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="计划"
-                    android:id="@+id/textView" android:textColor="#4a4a4a"/>
-        </LinearLayout>
+                android:background="@drawable/personal_plan"
+                android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="计划"
+                android:id="@+id/textView" android:textColor="#4a4a4a"/>
+    </LinearLayout>
 
     <LinearLayout
             android:id="@+id/team"
@@ -34,13 +33,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageButton
-                    android:id="@+id/button2"
-                    android:layout_width="40dp"
-                    android:layout_height="38dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/discovery"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+        <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="@drawable/discovery"
+                android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,13 +54,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageButton
-                    android:id="@+id/button3"
-                    android:layout_width="40dp"
-                    android:layout_height="38dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/cooperation_plan"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+        <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="@drawable/cooperation_plan"
+                android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,13 +75,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageButton
-                    android:id="@+id/button4"
-                    android:layout_width="40dp"
-                    android:layout_height="38dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/personal_setting"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+        <ImageButton
+                android:id="@+id/button4"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="@drawable/personal_setting"
+                android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +90,7 @@
                 android:id="@+id/textView4" android:textColor="#4a4a4a"/>
     </LinearLayout>
 
-        </LinearLayout>
+</LinearLayout>
 
 
 

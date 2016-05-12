@@ -40,6 +40,7 @@ abstract public class HttpActivity extends Activity {
     public <V extends View> V find(final int id) {
         return finder.find(id);
     }
+
     void get(String url, Object... prams) {
         RequestParams requestParams = new RequestParams();
         for (int i = 0; i < prams.length; i += 2) {
@@ -59,7 +60,7 @@ abstract public class HttpActivity extends Activity {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 
-    protected void setCookie(String cookie){
+    protected void setCookie(String cookie) {
         editor.putString("cookie", cookie);
         editor.commit();
     }
@@ -68,7 +69,7 @@ abstract public class HttpActivity extends Activity {
         return sharedPreferences.getString("cookie", "");
     }
 
-    protected  <T> void startActivity(Class<T> tartActivity) {
+    protected <T> void startActivity(Class<T> tartActivity) {
         startActivity(new Intent(getApplicationContext(), tartActivity));
     }
 
@@ -81,6 +82,7 @@ abstract public class HttpActivity extends Activity {
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 result[0] = gson.fromJson(new String(bytes), UserModel.class);
             }
+
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
@@ -89,12 +91,13 @@ abstract public class HttpActivity extends Activity {
         return result[0];
     }
 
-    class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler{
+    class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
         @Override
         public void onSuccess(int i, Header[] headers, byte[] bytes) {
             jsonString = new String(bytes);
             OnSuccess();
         }
+
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 

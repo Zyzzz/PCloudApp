@@ -27,26 +27,29 @@ public class ZoneFragment extends HttpFragment {
 
         //listView1.setAdapter();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zone_layout,container,false);
+        View view = inflater.inflate(R.layout.zone_layout, container, false);
         listView1 = (ListView) view.findViewById(R.id.listView);
-        List<Map<String, Object>> list=getData();
+        List<Map<String, Object>> list = getData();
         MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);
         listView1.setAdapter(myAdspter);
         return view;
     }
-    public List<Map<String, Object>> getData(){
-        List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
+
+    public List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 10; i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("image", R.drawable.ic_launcher);
-            map.put("title", "这是一个标题"+i);
-            map.put("info", "这是一个详细信息"+i);
+            map.put("title", "这是一个标题" + i);
+            map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
         return list;
     }
+
     @Override
     protected void OnSuccess() {
 
