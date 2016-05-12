@@ -34,7 +34,7 @@ public class MyAdspter extends BaseAdapter {
     public final class Zujian{
         public ImageView image;
         public TextView title;
-        public Button view;
+        //public Button view;
         public TextView info;
     }
     @Override
