@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
@@ -62,7 +61,7 @@ public class MyAdspter extends BaseAdapter {
         if(convertView==null){
             zujian=new Zujian();
             //获得组件，实例化组件
-            convertView=layoutInflater.inflate(R.layout.list, null);
+            convertView=layoutInflater.inflate(R.layout.zone_list_item, null);
             zujian.image=(ImageView)convertView.findViewById(R.id.image);
             zujian.title=(TextView)convertView.findViewById(R.id.title);
             //zujian.view=(Button)convertView.findViewById(R.id.view);
