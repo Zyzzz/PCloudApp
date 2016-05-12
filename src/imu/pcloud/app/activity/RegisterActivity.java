@@ -44,7 +44,13 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
 
     @Override
     protected void OnSuccess() {
-        UserModel userModel = getObject(UserModel.class);
-        toast(userModel.getId() + ":" + userModel.getUsername());
+        UserModel user = getObject(UserModel.class);
+        if(user.getStatus() == 0) {
+            toast("注册成功");
+            this.finish();
+        }
+        else {
+            toast(user.getResult());
+        }
     }
 }

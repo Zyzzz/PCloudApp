@@ -1,6 +1,7 @@
 package imu.pcloud.app.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
+import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.HttpClient;
 import imu.pcloud.app.utils.ViewFinder;
 import org.apache.http.Header;
@@ -64,6 +66,27 @@ abstract public class HttpActivity extends Activity {
 
     protected String getCookie() {
         return sharedPreferences.getString("cookie", "");
+    }
+
+    protected  <T> void startActivity(Class<T> tartActivity) {
+        startActivity(new Intent(getApplicationContext(), tartActivity));
+    }
+
+    protected UserModel relogin() {
+        RequestParams prams = new RequestParams();
+        prams.put("cookies", getCookie());
+        final UserModel[] result = new UserModel[1];
+        HttpClient.get("relogin", prams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                result[0] = gson.fromJson(new String(bytes), UserModel.class);
+            }
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+            }
+        });
+        return result[0];
     }
 
     class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler{

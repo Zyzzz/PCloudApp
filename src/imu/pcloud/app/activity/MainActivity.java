@@ -66,10 +66,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener{
         mImgTeam = (ImageButton) findViewById(R.id.button2);
         mImgZone = (ImageButton) findViewById(R.id.button3);
         mImgSetting = (ImageButton) findViewById(R.id.button4);
-        mtab01=new PersonalFragment();
-        mtab02=new TeamFragment();
-        mtab03=new ZoneFragment();
-        mtab04=new SettingFragment();
     }
     private void setSelcet(int i){
         //把图片设置为亮的
