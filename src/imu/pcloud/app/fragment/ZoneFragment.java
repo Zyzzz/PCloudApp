@@ -29,11 +29,12 @@ public class ZoneFragment extends HttpFragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        View view = inflater.inflate(R.layout.zone_layout,container,false);
+        listView1 = (ListView) view.findViewById(R.id.listView);
         List<Map<String, Object>> list=getData();
-        listView1=find(R.id.listView);
-        listView1.setAdapter(new MyAdspter(getActivity().getApplicationContext(),list));
-        return inflater.inflate(R.layout.zone_layout,container,false);
+        MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);
+        listView1.setAdapter(myAdspter);
+        return view;
     }
     public List<Map<String, Object>> getData(){
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
