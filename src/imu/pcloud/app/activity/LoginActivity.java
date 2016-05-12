@@ -28,23 +28,33 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
+    }
+
+    protected void init() {
         setContentView(R.layout.login_layout);
-        get("relogin", "cookies", getCookie());
+        if(getCookie().length() > 1)
+            get("relogin", "cookies", getCookie());
         register = find(R.id.register);
         login = find(R.id.login);
         email = find(R.id.email_text);
         password = find(R.id.password_text);
+
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
     }
 
     @Override
     protected void OnSuccess() {
         user = getObject(UserModel.class);
-        if(user.getStatus() != 0) {
-            toast(user.getResult());
-            startActivity(new Intent("imu.pcloud.app.MainActivity"));
+        if(user.getStatus() == 0) {
+            toast("登录成功");
+            setCookie(user.getCookies());
+            startActivity(MainActivity.class);
         }
         else {
-            toast("登录成功");
+            toast(user.getResult());
+            setCookie("");
         }
     }
 
@@ -53,6 +63,11 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.login:
                 get("login", "email", email.getText(), "password", password.getText());
+                break;
+            case R.id.register:
+                startActivity(RegisterActivity.class);
+                finish();
+                break;
         }
     }
 }
