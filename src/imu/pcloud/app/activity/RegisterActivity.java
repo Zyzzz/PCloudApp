@@ -10,13 +10,14 @@ import imu.pcloud.app.model.UserModel;
 /**
  * Created by guyu on 2016/5/10.
  */
-public class RegisterActivity extends HttpActivity implements View.OnClickListener{
+public class RegisterActivity extends HttpActivity implements View.OnClickListener {
 
     TextView username;
     TextView email;
     TextView password;
     TextView repassword;
     Button register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +46,10 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
     @Override
     protected void OnSuccess() {
         UserModel user = getObject(UserModel.class);
-        if(user.getStatus() == 0) {
+        if (user.getStatus() == 0) {
             toast("注册成功");
             this.finish();
-        }
-        else {
+        } else {
             toast(user.getResult());
         }
     }

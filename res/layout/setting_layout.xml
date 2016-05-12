@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:background="#f5f5f5"
-                android:orientation="vertical">
+              android:orientation="vertical">
     <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
 
-            >
+    >
         <Button
                 android:id="@+id/AccountSetting_button"
                 android:layout_width="fill_parent"
@@ -17,10 +17,10 @@
                 android:background="@android:color/white"/>
         <TextView
                 android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:layout_marginLeft="50dp"
-                    android:text="账号设置"
-                  android:gravity="left|center"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="50dp"
+                android:text="账号设置"
+                android:gravity="left|center"
         />
         <ImageView android:layout_width="50dp"
                    android:layout_height="fill_parent"
@@ -31,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-           >
+    >
         <Button
                 android:id="@+id/OtherSetting_button"
                 android:layout_width="fill_parent"
@@ -52,7 +52,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            >
+    >
         <Button
                 android:id="@+id/Function_button"
                 android:layout_width="fill_parent"
@@ -74,7 +74,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
 
-            >
+    >
         <Button
                 android:id="@+id/About_button"
                 android:layout_width="fill_parent"

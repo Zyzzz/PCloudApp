@@ -4,22 +4,23 @@ import imu.pcloud.app.utils.Information;
 
 public class BaseModel {
 
-	protected String result;
-	protected int status;
-	public String getResult() {
-		return result;
-	}
+    protected String result;
+    protected int status;
 
-	public void setResult(String result) {
-		this.result = result;
-	}
+    public String getResult() {
+        return result;
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public void setResult(String result) {
+        this.result = result;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-		setResult(Information.getInstance().getErrorInfo(status));
-	}
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+        setResult(Information.getInstance().getErrorInfo(status));
+    }
 }

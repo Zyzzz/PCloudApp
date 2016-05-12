@@ -9,54 +9,60 @@ import java.util.Set;
 
 public class Image implements java.io.Serializable {
 
-	// Fields
+    // Fields
 
-	private Integer id;
-	private String imageFile;
-	private Set users = new HashSet(0);
+    private Integer id;
+    private String imageFile;
+    private Set users = new HashSet(0);
 
-	// Constructors
+    // Constructors
 
-	/** default constructor */
-	public Image() {
-	}
+    /**
+     * default constructor
+     */
+    public Image() {
+    }
 
-	/** minimal constructor */
-	public Image(Integer id) {
-		this.id = id;
-	}
+    /**
+     * minimal constructor
+     */
+    public Image(Integer id) {
+        this.id = id;
+    }
 
-	/** full constructor */
-	public Image(Integer id, String imageFile, Set users) {
-		this.id = id;
-		this.imageFile = imageFile;
-		this.users = users;
-	}
+    /**
+     * full constructor
+     */
+    public Image(Integer id, String imageFile, Set users) {
+        this.id = id;
+        this.imageFile = imageFile;
+        this.users = users;
+    }
 
-	// Property accessors
+    // Property accessors
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getImageFile() {
-		return this.imageFile;
-	}
+    public String getImageFile() {
+        return this.imageFile;
+    }
 
-	public void setImageFile(String imageFile) {
-		this.imageFile = imageFile;
-	}
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
+    }
 
-	public Set getUsers() {
-		return this.users;
-	}
+    public Set getUsers() {
+        return this.users;
+    }
 
-	public void setUsers(Set users) {
-		this.users = users;
-	}
+    public void setUsers(Set users) {
+        this.users = users;
+    }
 
 }
