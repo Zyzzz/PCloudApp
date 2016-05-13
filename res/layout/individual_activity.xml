@@ -15,7 +15,7 @@
                    android:background="@drawable/user"
                    android:layout_weight="3" android:layout_marginLeft="10dp"
                    android:layout_marginTop="3dp" android:layout_marginRight="10dp"
-                   android:layout_marginBottom="3dp"/>
+                   android:layout_marginBottom="3dp" android:id="@+id/personal_header"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="match_parent"
                       android:layout_weight="10"
@@ -23,11 +23,11 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/nick_name"
-                      android:layout_weight="1"/>
+                      android:layout_weight="1" android:id="@+id/nick_name"/>
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:hint="@string/nick_name"
-                      android:layout_weight="1"/>
+                      android:hint="@string/register_name"
+                      android:layout_weight="1" android:id="@+id/register_name"/>
         </LinearLayout>
         <ImageButton
                 android:layout_width="wrap_content"
