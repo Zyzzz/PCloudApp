@@ -1,6 +1,5 @@
 package imu.pcloud.app.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -28,10 +27,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private ImageButton mImgTeam;
     private ImageButton mImgZone;
     private ImageButton mImgSetting;
-    private Fragment mtab01;
-    private Fragment mtab02;
-    private Fragment mtab03;
-    private Fragment mtab04;
+    private Fragment mFragPersonal;
+    private Fragment mFragZone;
+    private Fragment mFragTeam;
+    private Fragment mFragSetting;
 
 
     @Override
@@ -40,7 +39,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         setContentView(R.layout.fragment_layout);
         innitView();
         innitEvents();
-        setSelcet(2);
+        setSelcet(0);
     }
 
     @Override
@@ -71,43 +70,44 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         //设置内容区域
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        HideFragment(transaction);
+        hideFragment(transaction);
+        rsetImgs();
         switch (i) {
             case 0:
-                if (mtab01 == null) {
-                    mtab01 = new PersonalFragment();
-                    transaction.add(R.id.content, mtab01);
+                if (mFragPersonal == null) {
+                    mFragPersonal = new PersonalFragment();
+                    transaction.add(R.id.content, mFragPersonal);
                 } else {
-                    transaction.show(mtab01);
+                    transaction.show(mFragPersonal);
                 }
-                mImgPersonal.setImageResource(R.drawable.ic_launcher);
+                mImgPersonal.setSelected(true);
                 break;
             case 1:
-                if (mtab02 == null) {
-                    mtab02 = new TeamFragment();
-                    transaction.add(R.id.content, mtab02);
+                if (mFragZone == null) {
+                    mFragZone = new TeamFragment();
+                    transaction.add(R.id.content, mFragZone);
                 } else {
-                    transaction.show(mtab02);
+                    transaction.show(mFragZone);
                 }
-                mImgTeam.setImageResource(R.drawable.ic_launcher);
+                mImgTeam.setSelected(true);
                 break;
             case 2:
-                if (mtab03 == null) {
-                    mtab03 = new ZoneFragment();
-                    transaction.add(R.id.content, mtab03);
+                if (mFragTeam == null) {
+                    mFragTeam = new ZoneFragment();
+                    transaction.add(R.id.content, mFragTeam);
                 } else {
-                    transaction.show(mtab03);
+                    transaction.show(mFragTeam);
                 }
-                mImgZone.setImageResource(R.drawable.ic_launcher);
+                mImgZone.setSelected(true);
                 break;
             case 3:
-                if (mtab04 == null) {
-                    mtab04 = new SettingFragment();
-                    transaction.add(R.id.content, mtab04);
+                if (mFragSetting == null) {
+                    mFragSetting = new SettingFragment();
+                    transaction.add(R.id.content, mFragSetting);
                 } else {
-                    transaction.show(mtab04);
+                    transaction.show(mFragSetting);
                 }
-                mImgSetting.setImageResource(R.drawable.ic_launcher);
+                mImgSetting.setSelected(true);
                 break;
             default:
                 break;
@@ -116,24 +116,24 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
 
     }
 
-    private void HideFragment(FragmentTransaction transaction) {
-        if (mtab01 != null) {
-            transaction.hide(mtab01);
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mFragPersonal != null) {
+            transaction.hide(mFragPersonal);
         }
-        if (mtab02 != null) {
-            transaction.hide(mtab02);
+        if (mFragZone != null) {
+            transaction.hide(mFragZone);
         }
-        if (mtab03 != null) {
-            transaction.hide(mtab03);
+        if (mFragTeam != null) {
+            transaction.hide(mFragTeam);
         }
-        if (mtab04 != null) {
-            transaction.hide(mtab04);
+        if (mFragSetting != null) {
+            transaction.hide(mFragSetting);
         }
     }
 
     @Override
     public void onClick(View v) {
-        RsetImgs();
+        rsetImgs();
         switch (v.getId()) {
             case R.id.personal:
                 setSelcet(0);
@@ -153,10 +153,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
 
     }
 
-    private void RsetImgs() {
-        mImgPersonal.setImageResource(R.drawable.ic_launcher);
-        mImgTeam.setImageResource(R.drawable.ic_launcher);
-        mImgZone.setImageResource(R.drawable.ic_launcher);
-        mImgSetting.setImageResource(R.drawable.ic_launcher);
+    private void rsetImgs() {
+        mImgPersonal.setSelected(false);
+        mImgTeam.setSelected(false);
+        mImgZone.setSelected(false);
+        mImgSetting.setSelected(false);
     }
 }

@@ -58,7 +58,8 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     protected void OnSuccess() {
         user = getObject(UserModel.class);
         if (user.getStatus() == 0) {
-            setCookie(user.getCookies());
+            if(loginFlag != 0)
+                setCookie(user.getCookies());
             startActivity(MainActivity.class);
         } else {
             if (loginFlag == 0) {
