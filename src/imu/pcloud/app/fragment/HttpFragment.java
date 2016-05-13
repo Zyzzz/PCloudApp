@@ -15,6 +15,8 @@ import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.utils.HttpClient;
 import org.apache.http.Header;
 
+import java.util.jar.Attributes;
+
 /**
  * Created by guyu on 2016/5/11.
  */
@@ -24,12 +26,15 @@ abstract public class HttpFragment extends Fragment {
     protected Gson gson = new GsonBuilder().create();
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
+    private  String UserName;
+    private  String UserPassword;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         sharedPreferences = getActivity().getSharedPreferences("userinfo", getActivity().MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        
     }
 
     void get(String url, Object... prams) {
