@@ -23,12 +23,6 @@ public class ZoneFragment extends HttpFragment {
 
     private ListView listView1;
     private List<PlanCircle> planCircles;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //listView1.setAdapter();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
