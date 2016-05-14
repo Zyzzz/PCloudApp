@@ -45,6 +45,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
                 get("relogin", "cookies", getCookie());
             }
         }, 2000);
+
     }
 
     protected void init() {
@@ -94,10 +95,15 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         editor.commit();
     }
 
-    private void getLogin(){
+    private  void rememberUser(){
         SharedPreferences sharedPre=getSharedPreferences("config", MODE_PRIVATE);
-        String username=sharedPre.getString("email", "");
-        String password=sharedPre.getString("password", "");
+        String Email=sharedPre.getString("email", "");
+        String Password=sharedPre.getString("password", "");
+        email.setText(Email);
+        password.setText(Password);
+
     }
+
+
 }
 
