@@ -14,4 +14,5 @@ public class AllPlanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allplan);
     }
+
 }
