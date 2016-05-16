@@ -24,14 +24,14 @@
                     android:hint=" 邮箱"
                     android:layout_weight="1"
                     android:background="@android:color/white" android:textColor="@android:color/black"
-                    android:textColorHint="#b9b9b9"/>
+                    android:textColorHint="@color/gray_l"/>
             <EditText
                     android:id="@+id/password_text"
                     android:hint=" 密码"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" android:background="@android:color/white" android:layout_marginTop="1dp"
-                    android:textColor="@android:color/black" android:textColorHint="#b9b9b9"/>
+                    android:textColor="@android:color/black" android:textColorHint="@color/gray_l"/>
 
         </LinearLayout>
         <Button

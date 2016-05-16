@@ -1,7 +1,9 @@
 package imu.pcloud.app.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,8 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     private static UserModel user;
     private int loginFlag = 0;
     private Timer timer = new Timer();
+    private SharedPreferences spf;
+    private Context context;
 
     public static UserModel getUser() {
         return user;
@@ -41,6 +45,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
                 get("relogin", "cookies", getCookie());
             }
         }, 2000);
+
     }
 
     protected void init() {
@@ -55,11 +60,12 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void OnSuccess() {
+    protected void onSuccess() {
         user = getObject(UserModel.class);
         if (user.getStatus() == 0) {
-            setCookie(user.getCookies());
-            startActivity(MainActivity.class);
+            if(loginFlag != 0)
+                setCookie(user.getCookies());
+                startActivity(MainActivity.class);
         } else {
             if (loginFlag == 0) {
                 init();
@@ -81,4 +87,23 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
                 break;
         }
     }
+    private void saveLoginInfo(Context context,String email,String password){
+        spf=context.getSharedPreferences("config", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=spf.edit();
+        editor.putString("email",email);
+        editor.putString("password",password);
+        editor.commit();
+    }
+
+    private  void rememberUser(){
+        SharedPreferences sharedPre=getSharedPreferences("config", MODE_PRIVATE);
+        String Email=sharedPre.getString("email", "");
+        String Password=sharedPre.getString("password", "");
+        email.setText(Email);
+        password.setText(Password);
+
+    }
+
+
 }
+
