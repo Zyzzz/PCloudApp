@@ -60,7 +60,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void OnSuccess() {
+    protected void onSuccess() {
         user = getObject(UserModel.class);
         if (user.getStatus() == 0) {
             if(loginFlag != 0)

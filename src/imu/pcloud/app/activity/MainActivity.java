@@ -43,7 +43,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void OnSuccess() {
+    protected void onSuccess() {
 
     }
 

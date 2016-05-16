@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.HttpClient;
 import imu.pcloud.app.utils.ViewFinder;
 import org.apache.http.Header;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * Created by guyu on 2016/5/11.
@@ -54,7 +51,11 @@ abstract public class HttpActivity extends Activity {
         return gson.fromJson(jsonString, t);
     }
 
-    abstract protected void OnSuccess();
+    abstract protected void onSuccess();
+
+    protected void onFailure(){
+
+    }
 
     protected void toast(String string) {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
@@ -95,12 +96,13 @@ abstract public class HttpActivity extends Activity {
         @Override
         public void onSuccess(int i, Header[] headers, byte[] bytes) {
             jsonString = new String(bytes);
-            OnSuccess();
+            HttpActivity.this.onSuccess();
         }
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+            toast("网络连接失败");
+            HttpActivity.this.onFailure();
         }
     }
 }

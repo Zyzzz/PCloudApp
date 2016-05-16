@@ -27,7 +27,7 @@ public class ZoneFragment extends HttpFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
-        get("getPlanCircleList");
+        get("getPlanCircleList","cookies", getCookie());
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
         List<Map<String, Object>> list = getData();
         MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);

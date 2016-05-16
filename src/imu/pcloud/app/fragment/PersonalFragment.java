@@ -25,6 +25,8 @@ public class PersonalFragment extends HttpFragment {
     private ListView listView1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         getData(pList);
         View view = inflater.inflate(R.layout.zone_layout, container, false);
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
