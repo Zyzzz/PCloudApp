@@ -45,7 +45,7 @@ public class PersonalFragment extends HttpFragment {
     }
 
     @Override
-    protected void onSuccess() {
+    protected void OnSuccess() {
         myActionBar=getActivity().getActionBar();
         myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
