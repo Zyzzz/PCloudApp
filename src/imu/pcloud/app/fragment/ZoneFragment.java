@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by acer on 2016/5/11.
  */
 public class ZoneFragment extends HttpFragment {
-
+    //小鱼鱼
     private ListView listView1;
     private List<PlanCircle> planCircles;
     private List<Map<String, Object>> list;
