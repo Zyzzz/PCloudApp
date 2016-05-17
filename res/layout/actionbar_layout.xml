@@ -3,9 +3,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="#f5f5f5">
+
+                >
+    <ImageButton
+            android:id="@+id/left_imbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/icon" />
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -13,5 +21,15 @@
             android:textColor="#FFFFFFFF"
             android:textSize="18sp"
             android:text="标题" />
+
+
+    <ImageButton
+            android:id="@+id/right_imbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/icon" />
 
 </RelativeLayout>
