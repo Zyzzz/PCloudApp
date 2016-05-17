@@ -18,11 +18,11 @@
 
     <ImageButton
             android:id="@+id/right_imbt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@null"
-            android:src="@drawable/icon" />
+            android:background="@drawable/add_icon"
+            android:layout_marginRight="15dp"/>
 
 </RelativeLayout>

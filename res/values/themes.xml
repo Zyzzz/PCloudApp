@@ -6,7 +6,7 @@
     </style>
     <style name="newbackground"
            parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#59C5EF</item>
+        <item name="android:background">#48B2EF</item>
 
     </style>
 
