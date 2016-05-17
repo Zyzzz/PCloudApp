@@ -25,26 +25,14 @@ public class ZoneFragment extends HttpFragment {
 
     private ListView listView1;
     private List<PlanCircle> planCircles;
+    private List<Map<String, Object>> list;
+    MyAdspter myAdspter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
-        get("getPlanCircleList");
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
-        List<Map<String, Object>> list = getData();
-        MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);
-        listView1.setAdapter(myAdspter);
-
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setClass(inflater.getContext(),PlanCircle.class);
-                intent.putExtra("planCircleID",(int)list.get(position).get("id"));
-                startActivity(intent);
-            }
-        });
-
+        get("getPlanCircleList");
         return view;
     }
 
@@ -55,17 +43,30 @@ public class ZoneFragment extends HttpFragment {
             map.put("image", R.drawable.ic_launcher);
             map.put("name",planCircles.get(i).getName());
             map.put("id",planCircles.get(i).getId());
-           // map.put("info", "这是一个详细信息" + i);
+            // map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
         return list;
     }
+
 
     @Override
     protected void OnSuccess() {
         PlanCircleList planCircleList = getObject(PlanCircleList.class);
         if(planCircleList.getStatus() ==0) {
             planCircles = planCircleList.getPlanCircles();
+            list = getData();
+            myAdspter = new MyAdspter(getActivity().getApplicationContext(), list);
+            listView1.setAdapter(myAdspter);
+            listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity().getApplicationContext(),PlanCircle.class);
+                    intent.putExtra("planCircleID",(int)list.get(position).get("id"));
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
