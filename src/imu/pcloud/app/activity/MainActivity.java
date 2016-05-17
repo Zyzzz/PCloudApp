@@ -1,12 +1,13 @@
 package imu.pcloud.app.activity;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import imu.pcloud.app.R;
@@ -62,7 +63,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_layout);
-        newTextView=(TextView)findViewById(R.id.actext);
+
         innitView();
         innitEvents();
         setSelcet(0);
@@ -106,8 +107,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
 
                 } else {
                     transaction.show(mFragPersonal);
-
-                    newTextView.setText("个人计划");
                 }
                 mImgPersonal.setSelected(true);
                 break;
@@ -118,7 +117,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 } else {
                     transaction.show(mFragZone);
 
-                    newTextView.setText("计划圈");
                 }
                 mImgZone.setSelected(true);
                 break;
@@ -129,7 +127,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 } else {
                     transaction.show(mFragTeam);
 
-                    newTextView.setText("多人计划");
                 }
                 mImgTeam.setSelected(true);
                 break;
@@ -140,7 +137,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 } else {
                     transaction.show(mFragSetting);
 
-                    newTextView.setText("设置");
                 }
                 mImgSetting.setSelected(true);
                 break;
