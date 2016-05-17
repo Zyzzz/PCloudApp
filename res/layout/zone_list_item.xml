@@ -16,7 +16,9 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#666872"/>
+                android:textColor="#666872"
+                android:textSize="55dp"
+                />
         <!--
        <Button
                android:id="@+id/view"
