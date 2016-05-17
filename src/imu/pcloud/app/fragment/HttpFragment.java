@@ -74,7 +74,7 @@ abstract public class HttpFragment extends Fragment {
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+            toast("网络连接失败");
         }
     }
 }

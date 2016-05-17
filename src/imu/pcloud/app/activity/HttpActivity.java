@@ -70,8 +70,8 @@ abstract public class HttpActivity extends Activity {
         return sharedPreferences.getString("cookie", "");
     }
 
-    protected <T> void startActivity(Class<T> tartActivity) {
-        startActivity(new Intent(getApplicationContext(), tartActivity));
+    protected <T> void startActivity(Class<T> targetActivity) {
+        startActivity(new Intent(getApplicationContext(), targetActivity));
     }
 
     protected UserModel relogin() {
