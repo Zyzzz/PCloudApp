@@ -2,6 +2,7 @@ package imu.pcloud.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import imu.pcloud.app.R;
 
 /**
@@ -19,6 +20,14 @@ public class PlanCircleActivity extends HttpActivity{
         Bundle bundle = intent_accept.getExtras();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         int planCircleID = bundle.getInt("planCircleID");
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
