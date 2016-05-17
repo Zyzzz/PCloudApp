@@ -16,7 +16,7 @@ public class TeamFragment extends HttpFragment {
     }
 
     @Override
-    protected void OnSuccess() {
+    protected void onSuccess() {
 
     }
 }

@@ -26,7 +26,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     }
 
     @Override
-    protected void OnSuccess() {
+    protected void onSuccess() {
 
     }
 

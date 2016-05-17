@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import imu.pcloud.app.activity.HttpActivity;
 import imu.pcloud.app.utils.HttpClient;
 import org.apache.http.Header;
 
@@ -50,7 +51,12 @@ abstract public class HttpFragment extends Fragment {
         return gson.fromJson(jsonString, t);
     }
 
-    abstract protected void OnSuccess();
+    abstract protected void onSuccess();
+
+    protected  void  onFailure(){
+
+    }
+
 
     protected void toast(String string) {
         Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
@@ -69,12 +75,13 @@ abstract public class HttpFragment extends Fragment {
         @Override
         public void onSuccess(int i, Header[] headers, byte[] bytes) {
             jsonString = new String(bytes);
-            OnSuccess();
+            HttpFragment.this.onSuccess();
         }
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
             toast("网络连接失败");
+            HttpFragment.this.onFailure();
         }
     }
 }
