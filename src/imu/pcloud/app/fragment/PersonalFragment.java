@@ -42,16 +42,17 @@ public class PersonalFragment extends HttpFragment {
     }
 
     private void setActionBar() {
-    }
-
-    @Override
-    protected void OnSuccess() {
         myActionBar=getActivity().getActionBar();
         myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         myActionBar.setCustomView(actionbarLayout);
+
+    }
+
+    @Override
+    protected void OnSuccess() {
 
     }
 
