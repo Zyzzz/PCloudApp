@@ -44,6 +44,11 @@ public class PersonalFragment extends HttpFragment {
     private void setActionBar() {
         myActionBar=getActivity().getActionBar();
         myActionBar.setDisplayShowTitleEnabled(false);
+        myActionBar.setHomeButtonEnabled(true);
+        // 使左上角图标(系统)是否显示
+        myActionBar.setDisplayShowHomeEnabled(false);
+        // 显示标题
+        myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
