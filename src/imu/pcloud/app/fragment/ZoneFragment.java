@@ -62,10 +62,9 @@ public class ZoneFragment extends HttpFragment {
     }
 
     @Override
-    protected void OnSuccess() {
-        PlanCircleList planCircleList = getObject(PlanCircleList.class);
-        if(planCircleList.getStatus() ==0) {
-            planCircles = planCircleList.getPlanCircles();
+    protected void dgasdgrgtqwegfvt planCircleList = getObject(PlanCircleList.class);
+        if(planCircleLidgst.getStatus() ==0) {
+            planCirfgasasdasdv = planCircleList.getPlanCircles();ewrtwyewrtewasgfvasgf
         }
     }
 }
