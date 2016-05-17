@@ -4,18 +4,19 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="#f5f5f5">
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout android:id="@+id/personal_info"
+            android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:background="@android:color/white"
+                  android:background="@drawable/item_select"
                   android:layout_weight="1"
                   android:layout_marginTop="30dp">
-        <ImageView android:layout_width="wrap_content"
-                   android:layout_height="match_parent"
-                   android:background="@drawable/user"
-                   android:layout_weight="3" android:layout_marginLeft="10dp"
+        <ImageView android:layout_width="80dp"
+                   android:layout_height="80dp"
+                   android:background="@drawable/header"
+                   android:layout_marginLeft="10dp"
                    android:layout_marginTop="3dp" android:layout_marginRight="10dp"
-                   android:layout_marginBottom="3dp" android:id="@+id/personal_header"/>
+                   android:id="@+id/personal_header" android:layout_gravity="center_vertical"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="match_parent"
                       android:layout_weight="10"
@@ -23,17 +24,18 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/nick_name"
-                      android:layout_weight="1" android:id="@+id/nick_name"/>
+                      android:layout_weight="1" android:id="@+id/nick_name" android:textIsSelectable="false"
+                      android:gravity="fill_vertical"/>
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/register_name"
-                      android:layout_weight="1" android:id="@+id/register_name"/>
+                      android:layout_weight="1" android:id="@+id/register_name" android:gravity="fill_vertical"/>
         </LinearLayout>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/user"/>
+        <ImageView
+                android:layout_width="14dp"
+                android:layout_height="17dp"
+                android:background="@drawable/arrow" android:id="@+id/my_information"
+                android:layout_gravity="center_vertical" android:layout_marginRight="10dp"/>
 
     </LinearLayout>
 
@@ -46,27 +48,29 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal" android:focusableInTouchMode="false"
-                  android:background="@android:color/white" android:layout_weight="0.5">
+                  android:background="@drawable/item_select" android:layout_weight="0.5"
+                  android:layout_gravity="center_vertical" android:id="@+id/my_sharing"
+                  android:layoutMode="opticalBounds">
         <ImageView
-                android:layout_width="26dp"
+                android:layout_width="29dp"
                 android:layout_height="29dp"
                 android:id="@+id/imageView1"
                 android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                 android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
-                android:layout_weight="0.5" android:background="@drawable/mysharing"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:text="@string/personal_sharing"
-                  android:layout_weight="15"
-                  android:textIsSelectable="true"
-                  android:textSize="20sp"
-                  android:autoText="false"
-                  android:layout_gravity="bottom" android:layout_marginTop="3dp"
-                  android:layout_marginBottom="3dp"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:background="@drawable/mysharing"
+                android:layout_gravity="center_vertical"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:hint="@string/personal_sharing" android:layout_weight="1" android:id="@+id/textView6"
+                      android:gravity="fill_vertical" android:textColorHint="@android:color/black"
+                      android:textSize="20dp"/>
+            <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView4"
+                       android:background="@drawable/arrow" android:layout_marginRight="10dp"
+                       android:layout_gravity="center_vertical"/>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -74,34 +78,33 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:focusableInTouchMode="false"
-                  android:background="@android:color/white"
+                  android:background="@drawable/item_select"
                   android:layout_weight="0.5"
-                  android:layout_marginTop="1dp">
+                  android:layout_marginTop="1dp" android:layout_gravity="center_vertical" android:id="@+id/my_account">
         <ImageView
-                android:layout_width="26dp"
+                android:layout_width="29dp"
                 android:layout_height="29dp"
                 android:id="@+id/imageView"
-                android:background="@drawable/myaccount" android:layout_weight="0.5"
+                android:background="@drawable/myaccount"
                 android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
-                android:layout_marginTop="3dp" android:layout_marginBottom="3dp"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:text="@string/account" android:layout_weight="15" android:textIsSelectable="true"
-                  android:textSize="20dp" android:autoText="false"
-                  android:layout_marginTop="3dp"
-                  android:layout_marginBottom="3dp"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/imageButton"
-                android:layout_weight="1"/>
+                android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
+                android:layout_gravity="center_vertical"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
+                  android:layout_weight="15"
+                  android:textSize="20dp" android:autoText="false" android:layout_marginTop="3dp"
+                  android:layout_marginBottom="3dp" android:layout_gravity="center_vertical"
+                  android:id="@+id/textView5" android:clickable="false" android:gravity="fill_vertical"
+                  android:hint="@string/account" android:textColorHint="@android:color/black"/>
+        <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView3"
+                   android:background="@drawable/arrow" android:layout_marginRight="10dp"
+                   android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_weight="12">
+                  android:layout_weight="12" android:layout_gravity="center_vertical">
     </LinearLayout>
 
 

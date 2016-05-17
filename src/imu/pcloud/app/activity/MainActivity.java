@@ -39,7 +39,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         setContentView(R.layout.fragment_layout);
         innitView();
         innitEvents();
-        setSelcet(0);
+        setSelcet(3);
     }
 
     @Override

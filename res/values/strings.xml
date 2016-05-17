@@ -9,4 +9,6 @@
     <string name="account">账户信息</string>
     <string name="personal_sharing">我的分享</string>
     <string name="newplan">添加计划</string>
+    <string name="my_header">我的头像</string>
+    <string name="sex">性别</string>
 </resources>
