@@ -1,9 +1,11 @@
 package imu.pcloud.app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
@@ -32,14 +34,27 @@ public class ZoneFragment extends HttpFragment {
         List<Map<String, Object>> list = getData();
         MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);
         listView1.setAdapter(myAdspter);
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(inflater.getContext(),PlanCircle.class);
+                intent.putExtra("planCircleID",(int)list.get(position).get("id"));
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
     public List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < planCircles.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("image", R.drawable.ic_launcher);
             map.put("name",planCircles.get(i).getName());
+            map.put("id",planCircles.get(i).getId());
            // map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
