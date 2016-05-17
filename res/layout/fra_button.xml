@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="50dp"
+              android:layout_height="70dp"
               android:orientation="horizontal" android:background="@android:color/white">
 
     <LinearLayout
@@ -11,13 +11,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center" android:weightSum="1" android:background="@android:color/white">
-        <ImageButton
+        <Button
 
                 android:id="@+id/button1"
-                android:layout_width="35dp"
-                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:layout_height="55dp"
                 android:background="@drawable/personal_select"
-                android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+                android:layout_marginTop="10dp" android:layout_marginBottom="2dp" android:clickable="true"
+                android:enabled="true"/>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/team"
@@ -26,12 +27,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center" android:background="@android:color/white">
-            <ImageButton
+            <Button
                     android:id="@+id/button2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/discovery_select"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp" android:clickable="true"
+                    android:enabled="true"/>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/zone"
@@ -40,12 +42,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center" android:background="@android:color/white">
-            <ImageButton
+            <Button
                     android:id="@+id/button3"
-                    android:layout_width="30dp"
-                    android:layout_height="45dp"
+                    android:layout_width="44dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/cooeration_select"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp" android:clickable="true"
+                    android:enabled="true"/>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/setting"
@@ -54,12 +57,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center" android:weightSum="1" android:background="@android:color/white">
-            <ImageButton
+            <Button
                     android:id="@+id/button4"
-                    android:layout_width="30dp"
-                    android:layout_height="45dp"
+                    android:layout_width="40dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/aboutme_select"
-                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp"/>
+                    android:layout_marginTop="10dp" android:layout_marginBottom="2dp" android:clickable="true"
+                    android:enabled="true"/>
     </LinearLayout>
 
 </LinearLayout>

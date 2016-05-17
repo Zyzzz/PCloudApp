@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.PlanCircleList;
 import imu.pcloud.app.utils.MyAdspter;
@@ -57,7 +58,7 @@ public class ZoneFragment extends HttpFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity().getApplicationContext(),PlanCircle.class);
+                intent.setClass(getActivity().getApplicationContext(),PlanCircleActivity.class);
                 intent.putExtra("planCircleID",(int)list.get(position).get("id"));
                 startActivity(intent);
             }

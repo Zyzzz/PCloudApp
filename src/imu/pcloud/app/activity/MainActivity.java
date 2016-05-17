@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,10 +47,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private LinearLayout mTabTeam;
     private LinearLayout mTabZone;
     private LinearLayout mTabSetting;
-    private ImageButton mImgPersonal;
-    private ImageButton mImgTeam;
-    private ImageButton mImgZone;
-    private ImageButton mImgSetting;
+    private Button mImgPersonal;
+    private Button mImgTeam;
+    private Button mImgZone;
+    private Button mImgSetting;
     private Fragment mFragPersonal;
     private Fragment mFragZone;
     private Fragment mFragTeam;
@@ -84,10 +85,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         mTabTeam = (LinearLayout) findViewById(R.id.team);
         mTabZone = (LinearLayout) findViewById(R.id.zone);
         mTabSetting = (LinearLayout) findViewById(R.id.setting);
-        mImgPersonal = (ImageButton) findViewById(R.id.button1);
-        mImgTeam = (ImageButton) findViewById(R.id.button2);
-        mImgZone = (ImageButton) findViewById(R.id.button3);
-        mImgSetting = (ImageButton) findViewById(R.id.button4);
+        mImgPersonal = (Button) findViewById(R.id.button1);
+        mImgTeam = (Button) findViewById(R.id.button2);
+        mImgZone = (Button) findViewById(R.id.button3);
+        mImgSetting = (Button) findViewById(R.id.button4);
     }
 
     private void setSelcet(int i) {
