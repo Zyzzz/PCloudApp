@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import imu.pcloud.app.R;
 import imu.pcloud.app.fragment.PersonalFragment;
@@ -46,10 +47,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private LinearLayout mTabTeam;
     private LinearLayout mTabZone;
     private LinearLayout mTabSetting;
-    private Button mImgPersonal;
-    private Button mImgTeam;
-    private Button mImgZone;
-    private Button mImgSetting;
+    private ImageView mImgPersonal;
+    private ImageView mImgTeam;
+    private ImageView mImgZone;
+    private ImageView mImgSetting;
     private Fragment mFragPersonal;
     private Fragment mFragZone;
     private Fragment mFragTeam;
@@ -79,13 +80,13 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
 
     private void innitView() {
         mTabPersonal = find(R.id.personal);
-        mTabTeam = (LinearLayout) findViewById(R.id.team);
-        mTabZone = (LinearLayout) findViewById(R.id.zone);
-        mTabSetting = (LinearLayout) findViewById(R.id.setting);
-        mImgPersonal = (Button) findViewById(R.id.button1);
-        mImgTeam = (Button) findViewById(R.id.button2);
-        mImgZone = (Button) findViewById(R.id.button3);
-        mImgSetting = (Button) findViewById(R.id.button4);
+        mTabTeam = find(R.id.team);
+        mTabZone = find(R.id.zone);
+        mTabSetting = find(R.id.setting);
+        mImgPersonal = find(R.id.button1);
+        mImgTeam = find(R.id.button2);
+        mImgZone = find(R.id.button3);
+        mImgSetting = find(R.id.button4);
     }
 
     private void setSelcet(int i) {
