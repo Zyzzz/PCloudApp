@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Image;
 import imu.pcloud.app.model.Plan;
@@ -26,6 +27,7 @@ public class PersonalFragment extends HttpFragment {
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
     private ActionBar myActionBar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
