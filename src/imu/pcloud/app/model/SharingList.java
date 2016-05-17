@@ -6,6 +6,7 @@ import imu.pcloud.app.been.SharingRecord;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SharingList extends BaseModel{
 	
 	List<SharingRecord> sharingRecords = new ArrayList();

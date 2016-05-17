@@ -1,5 +1,6 @@
 package imu.pcloud.app.fragment;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class PersonalFragment extends HttpFragment {
     private Plan plan = new Plan("7:25", "9:25", "我要好好听课", "上课");
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
+    private ActionBar myActionBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -35,11 +37,21 @@ public class PersonalFragment extends HttpFragment {
         ListAdapter listAdapter=new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content});
         listView.setAdapter(listAdapter);
+        setActionBar();
         return view;
+    }
+
+    private void setActionBar() {
     }
 
     @Override
     protected void OnSuccess() {
+        myActionBar=getActivity().getActionBar();
+        myActionBar.setDisplayShowTitleEnabled(false);
+        myActionBar.setDisplayShowCustomEnabled(true);
+        View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
+                R.layout.actionbar_layout, null);
+        myActionBar.setCustomView(actionbarLayout);
 
     }
 
