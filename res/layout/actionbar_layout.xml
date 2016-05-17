@@ -8,12 +8,13 @@
 
 
     <TextView
+            android:id="@+id/acText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="#FFFFFFFF"
             android:textSize="18sp"
-            android:text="标题" />
+            android:text="biaoti" />
 
 
     <ImageButton

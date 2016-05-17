@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.been.PlanCircle;
@@ -34,6 +35,7 @@ public class ZoneFragment extends HttpFragment {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
         get("getPlanCircleList");
+
         return view;
     }
 

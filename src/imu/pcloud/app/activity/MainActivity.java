@@ -1,14 +1,15 @@
 package imu.pcloud.app.activity;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.fragment.PersonalFragment;
 import imu.pcloud.app.fragment.SettingFragment;
@@ -47,20 +48,22 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private LinearLayout mTabTeam;
     private LinearLayout mTabZone;
     private LinearLayout mTabSetting;
-    private ImageView mImgPersonal;
-    private ImageView mImgTeam;
-    private ImageView mImgZone;
-    private ImageView mImgSetting;
+    private Button mImgPersonal;
+    private Button mImgTeam;
+    private Button mImgZone;
+    private Button mImgSetting;
     private Fragment mFragPersonal;
     private Fragment mFragZone;
     private Fragment mFragTeam;
     private Fragment mFragSetting;
+    private TextView newTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_layout);
+
         innitView();
         innitEvents();
         setSelcet(0);
@@ -80,13 +83,13 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
 
     private void innitView() {
         mTabPersonal = find(R.id.personal);
-        mTabTeam = find(R.id.team);
-        mTabZone = find(R.id.zone);
-        mTabSetting = find(R.id.setting);
-        mImgPersonal = find(R.id.button1);
-        mImgTeam = find(R.id.button2);
-        mImgZone = find(R.id.button3);
-        mImgSetting = find(R.id.button4);
+        mTabTeam = (LinearLayout) findViewById(R.id.team);
+        mTabZone = (LinearLayout) findViewById(R.id.zone);
+        mTabSetting = (LinearLayout) findViewById(R.id.setting);
+        mImgPersonal = (Button) findViewById(R.id.button1);
+        mImgTeam = (Button) findViewById(R.id.button2);
+        mImgZone = (Button) findViewById(R.id.button3);
+        mImgSetting = (Button) findViewById(R.id.button4);
     }
 
     private void setSelcet(int i) {
@@ -101,6 +104,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 if (mFragPersonal == null) {
                     mFragPersonal = new PersonalFragment();
                     transaction.add(R.id.content, mFragPersonal);
+
                 } else {
                     transaction.show(mFragPersonal);
                 }
@@ -112,6 +116,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                     transaction.add(R.id.content, mFragZone);
                 } else {
                     transaction.show(mFragZone);
+
                 }
                 mImgZone.setSelected(true);
                 break;
@@ -121,6 +126,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                     transaction.add(R.id.content, mFragTeam);
                 } else {
                     transaction.show(mFragTeam);
+
                 }
                 mImgTeam.setSelected(true);
                 break;
@@ -130,6 +136,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                     transaction.add(R.id.content, mFragSetting);
                 } else {
                     transaction.show(mFragSetting);
+
                 }
                 mImgSetting.setSelected(true);
                 break;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Image;
 import imu.pcloud.app.model.Plan;
@@ -26,6 +27,7 @@ public class PersonalFragment extends HttpFragment {
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
     private ActionBar myActionBar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,6 +58,8 @@ public class PersonalFragment extends HttpFragment {
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
+        TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
+        textview.setText("个人计划");
         myActionBar.setCustomView(actionbarLayout);
     }
 

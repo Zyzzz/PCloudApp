@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 
 /**
@@ -13,6 +14,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     View head;
     View mySharing;
     View myAccount;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.individual_activity, container, false);
@@ -22,6 +24,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         head.setOnClickListener(this);
         mySharing.setOnClickListener(this);
         myAccount.setOnClickListener(this);
+
         return view;
     }
 
@@ -29,6 +32,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     protected void onSuccess() {
 
     }
+
 
     @Override
     public void onClick(View v) {
