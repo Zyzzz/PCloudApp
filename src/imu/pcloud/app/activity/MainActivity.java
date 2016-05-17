@@ -39,7 +39,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         setContentView(R.layout.fragment_layout);
         innitView();
         innitEvents();
-        setSelcet(3);
+        setSelcet(0);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 } else {
                     transaction.show(mFragZone);
                 }
-                mImgTeam.setSelected(true);
+                mImgZone.setSelected(true);
                 break;
             case 2:
                 if (mFragTeam == null) {
@@ -98,7 +98,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 } else {
                     transaction.show(mFragTeam);
                 }
-                mImgZone.setSelected(true);
+                mImgTeam.setSelected(true);
                 break;
             case 3:
                 if (mFragSetting == null) {
@@ -138,10 +138,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
             case R.id.personal:
                 setSelcet(0);
                 break;
-            case R.id.team:
+            case R.id.zone:
                 setSelcet(1);
                 break;
-            case R.id.zone:
+            case R.id.team:
                 setSelcet(2);
                 break;
             case R.id.setting:

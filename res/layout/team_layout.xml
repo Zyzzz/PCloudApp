@@ -3,8 +3,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/gray_m">
-    <TextView android:layout_width="fill_parent"
-              android:text="2222"
-              android:layout_height="fill_parent"/>
 
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:layout_width="217dp"
+                android:layout_height="176dp"
+                android:text="群计划施工现场"
+                android:id="@+id/textView7" android:layout_gravity="center" android:textColor="@android:color/black"
+                android:textSize="50dp"/>
+    </FrameLayout>
 </RelativeLayout>

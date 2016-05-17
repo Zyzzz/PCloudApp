@@ -1,5 +1,10 @@
 package imu.pcloud.app.model;
 
+import imu.pcloud.app.utils.DateTool;
+
+import java.sql.Time;
+import java.util.Date;
+
 public class Plan {
     String startTimeString;
     String endTimeString;
@@ -9,6 +14,7 @@ public class Plan {
     public Plan() {
 
     }
+
 
     public Plan(String startTimeString, String endTimeString, String content,
                 String title) {
@@ -27,6 +33,13 @@ public class Plan {
         this.startTimeString = startTimeString;
     }
 
+    public void setStartTimeString(Date date) {
+        this.setStartTimeString(DateTool.timeToString((Time) date));
+    }
+
+    public void setEndTimeString(Date date) {
+        this.setEndTimeString(DateTool.timeToString((Time) date));
+    }
     public String getEndTimeString() {
         return endTimeString;
     }

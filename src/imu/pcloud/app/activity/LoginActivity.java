@@ -54,7 +54,6 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         login = find(R.id.login);
         email = find(R.id.email_text);
         password = find(R.id.password_text);
-
         login.setOnClickListener(this);
         register.setOnClickListener(this);
     }
@@ -66,6 +65,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
             if(loginFlag != 0)
                 setCookie(user.getCookies());
                 startActivity(MainActivity.class);
+                finish();
         } else {
             if (loginFlag == 0) {
                 init();
@@ -73,6 +73,16 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
             }
             toast(user.getResult());
             setCookie("");
+        }
+    }
+
+    @Override
+    protected void onFailure() {
+        super.onFailure();
+        if (loginFlag == 0) {
+            startActivity(MainActivity.class);
+            finish();
+            loginFlag = 1;
         }
     }
 
@@ -101,9 +111,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         String Password=sharedPre.getString("password", "");
         email.setText(Email);
         password.setText(Password);
-
     }
-
 
 }
 
