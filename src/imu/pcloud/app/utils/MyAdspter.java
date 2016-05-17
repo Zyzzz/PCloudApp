@@ -37,7 +37,7 @@ public class MyAdspter extends BaseAdapter {
         public ImageView image;
         public TextView title;
         //public Button view;
-        public TextView info;
+       // public TextView info;
     }
 
     @Override
@@ -71,15 +71,15 @@ public class MyAdspter extends BaseAdapter {
             zujian.image = (ImageView) convertView.findViewById(R.id.image);
             zujian.title = (TextView) convertView.findViewById(R.id.title);
             //zujian.view=(Button)convertView.findViewById(R.id.view);
-            zujian.info = (TextView) convertView.findViewById(R.id.info);
+            //zujian.info = (TextView) convertView.findViewById(R.id.info);
             convertView.setTag(zujian);
         } else {
             zujian = (Zujian) convertView.getTag();
         }
         //绑定数据
         zujian.image.setBackgroundResource((Integer) data.get(position).get("image"));
-        zujian.title.setText((String) data.get(position).get("title"));
-        zujian.info.setText((String) data.get(position).get("info"));
+        zujian.title.setText((String) data.get(position).get("name"));
+        //zujian.info.setText((String) data.get(position).get("info"));
         return convertView;
     }
 

@@ -27,21 +27,20 @@ public class ZoneFragment extends HttpFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
-        get("getPlanCircleList","cookies", getCookie());
+        get("getPlanCircleList");
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
         List<Map<String, Object>> list = getData();
         MyAdspter myAdspter = new MyAdspter(inflater.getContext(), list);
         listView1.setAdapter(myAdspter);
         return view;
     }
-
     public List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < planCircles.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("image", R.drawable.ic_launcher);
-            map.put("title",planCircles.get(i).getName());
-            map.put("info", "这是一个详细信息" + i);
+            map.put("name",planCircles.get(i).getName());
+           // map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
         return list;
