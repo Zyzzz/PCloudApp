@@ -49,26 +49,33 @@ public class ZoneFragment extends HttpFragment {
         return list;
     }
 
+    private void  init(){
+        list = getData();
+        myAdspter = new MyAdspter(getActivity().getApplicationContext(), list);
+        listView1.setAdapter(myAdspter);
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity().getApplicationContext(),PlanCircle.class);
+                intent.putExtra("planCircleID",(int)list.get(position).get("id"));
+                startActivity(intent);
+            }
+        });
+    }
 
-
+    @Override
+    protected void onFailure() {
+        toast("网络连接失败");
+        super.onFailure();
+    }
 
     @Override
     protected void onSuccess() {
         PlanCircleList planCircleList = getObject(PlanCircleList.class);
         if(planCircleList.getStatus() ==0) {
             planCircles = planCircleList.getPlanCircles();
-            list = getData();
-            myAdspter = new MyAdspter(getActivity().getApplicationContext(), list);
-            listView1.setAdapter(myAdspter);
-            listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity().getApplicationContext(),PlanCircle.class);
-                    intent.putExtra("planCircleID",(int)list.get(position).get("id"));
-                    startActivity(intent);
-                }
-            });
+            init();
         }
     }
 }
