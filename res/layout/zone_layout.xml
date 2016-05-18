@@ -6,6 +6,8 @@
                 >
     <ListView
             android:id="@+id/zone_listView"
+            android:divider="#87CEFF"
+            android:dividerHeight="1dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
     </ListView>
