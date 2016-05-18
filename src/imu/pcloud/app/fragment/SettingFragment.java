@@ -45,6 +45,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
                 Intent intent = new Intent();
                 intent.setClass(getActivity().getApplicationContext(),UserSharingActivity.class);
                 startActivity(intent);
+                break;
             case R.id.my_account:
                 toast("hahah");
         }
