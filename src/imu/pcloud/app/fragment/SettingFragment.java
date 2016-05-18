@@ -1,11 +1,14 @@
 package imu.pcloud.app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.PlanCircleActivity;
+import imu.pcloud.app.activity.UserSharingActivity;
 
 /**
  * Created by acer on 2016/5/11.
@@ -39,6 +42,9 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.personal_info:
             case R.id.my_sharing:
+                Intent intent = new Intent();
+                intent.setClass(getActivity().getApplicationContext(),UserSharingActivity.class);
+                startActivity(intent);
             case R.id.my_account:
                 toast("hahah");
         }
