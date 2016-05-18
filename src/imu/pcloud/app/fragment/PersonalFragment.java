@@ -61,6 +61,7 @@ public class PersonalFragment extends HttpFragment {
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
         textview.setText("个人计划");
         myActionBar.setCustomView(actionbarLayout);
+
     }
 
     @Override
