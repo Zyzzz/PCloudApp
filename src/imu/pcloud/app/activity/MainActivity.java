@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import imu.pcloud.app.R;
@@ -48,22 +49,20 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private LinearLayout mTabTeam;
     private LinearLayout mTabZone;
     private LinearLayout mTabSetting;
-    private Button mImgPersonal;
-    private Button mImgTeam;
-    private Button mImgZone;
-    private Button mImgSetting;
+    private ImageView mImgPersonal;
+    private ImageView mImgTeam;
+    private ImageView mImgZone;
+    private ImageView mImgSetting;
     private Fragment mFragPersonal;
     private Fragment mFragZone;
     private Fragment mFragTeam;
     private Fragment mFragSetting;
-    private TextView newTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_layout);
-
         innitView();
         innitEvents();
         setSelcet(0);
@@ -86,10 +85,10 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         mTabTeam = (LinearLayout) findViewById(R.id.team);
         mTabZone = (LinearLayout) findViewById(R.id.zone);
         mTabSetting = (LinearLayout) findViewById(R.id.setting);
-        mImgPersonal = (Button) findViewById(R.id.button1);
-        mImgTeam = (Button) findViewById(R.id.button2);
-        mImgZone = (Button) findViewById(R.id.button3);
-        mImgSetting = (Button) findViewById(R.id.button4);
+        mImgPersonal = (ImageView) findViewById(R.id.button1);
+        mImgTeam = (ImageView) findViewById(R.id.button2);
+        mImgZone = (ImageView) findViewById(R.id.button3);
+        mImgSetting = (ImageView) findViewById(R.id.button4);
     }
 
     private void setSelcet(int i) {
