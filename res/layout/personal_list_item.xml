@@ -9,21 +9,21 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:background="@color/gray_s" android:layout_margin="3dp"
-    >
+            android:layout_height="match_parent" android:background="@color/gray_s"
+            android:layout_marginRight="1dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="7:00"
                 android:id="@+id/start_time" android:layout_weight="1" android:textColor="@android:color/black"
-                android:gravity="fill_vertical" android:textSize="40dp" android:layout_marginBottom="2dp"
+                android:gravity="fill_vertical" android:textSize="40dp" android:layout_marginBottom="1dp"
                 android:background="@android:color/white" android:textStyle="italic"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium" android:text="9:00"
                   android:id="@+id/end_time" android:layout_weight="1" android:textColor="@android:color/black"
                   android:gravity="fill_vertical" android:textSize="40dp" android:background="@android:color/white"
-                  android:layout_marginTop="1dp" android:textStyle="italic"/>
+                  android:textStyle="italic"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
