@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="degrees">
-        <item>初中及以下</item>
-        <item>高中</item>
-        <item>大学</item>
-        <item>研究生及以上</item>
+        <item>添加</item>
+
     </string-array>
 </resources>
