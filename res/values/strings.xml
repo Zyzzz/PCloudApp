@@ -11,4 +11,6 @@
     <string name="newplan">添加计划</string>
     <string name="my_header">我的头像</string>
     <string name="sex">性别</string>
+    <string name="repassword">修改登录密码</string>
+    <string name="logout">退出登录</string>
 </resources>
