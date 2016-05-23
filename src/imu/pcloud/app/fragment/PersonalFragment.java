@@ -34,7 +34,7 @@ public class PersonalFragment extends HttpFragment {
             case R.id.action_manage:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ManagePlanActivity.class);
-                startActivity(intent); //这里用getActivity().startActivity(intent);
+                startActivity(intent); 
                 return true;
 
             case R.id.action_updatedays:
