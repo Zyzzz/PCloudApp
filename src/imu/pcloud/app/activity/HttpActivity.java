@@ -11,9 +11,11 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.model.UserModel;
+import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
 import imu.pcloud.app.utils.ViewFinder;
 import org.apache.http.Header;
+import org.apache.http.util.ExceptionUtils;
 
 /**
  * Created by guyu on 2016/5/11.
@@ -21,7 +23,7 @@ import org.apache.http.Header;
 abstract public class HttpActivity extends Activity {
     protected String jsonString = null;
     protected MyAsyncHttpResponseHandler myHandler = new MyAsyncHttpResponseHandler();
-    protected Gson gson = new GsonBuilder().create();
+    protected Gson gson = GsonTool.getGson();
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
     protected ViewFinder finder;
@@ -48,7 +50,12 @@ abstract public class HttpActivity extends Activity {
     }
 
     protected <T> T getObject(Class<T> t) {
-        return gson.fromJson(jsonString, t);
+        try {
+            return gson.fromJson(jsonString, t);
+        } catch(Exception e) {
+            System.out.println(jsonString);
+            return null;
+        }
     }
 
     abstract protected void onSuccess();
