@@ -1,6 +1,7 @@
 package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.ListAdapter;
@@ -8,6 +9,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.ManagePlanActivity;
 import imu.pcloud.app.been.Image;
 import imu.pcloud.app.model.Plan;
 
@@ -25,6 +27,25 @@ public class PersonalFragment extends HttpFragment {
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
     private ActionBar myActionBar;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_manage:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ManagePlanActivity.class);
+                startActivity(intent); //这里用getActivity().startActivity(intent);
+                return true;
+
+            case R.id.action_updatedays:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +63,9 @@ public class PersonalFragment extends HttpFragment {
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.personal, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
+
+
 
     private void setActionBar() {
         myActionBar=getActivity().getActionBar();
