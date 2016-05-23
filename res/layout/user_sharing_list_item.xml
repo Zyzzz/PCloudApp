@@ -19,13 +19,21 @@
                 android:layout_height="match_parent" android:background="@color/gray_m">
         </LinearLayout>
         <TextView
-                android:id="@+id/title"
+                android:id="@+id/user_sharing_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="#666872"
                 android:textSize="55dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"/>
+        <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonshape"
+                android:textColor="@android:color/white"
+                android:layout_below="@id/usercode_layout"
+                android:text="删除" android:layout_gravity="bottom"/>
         <!--
        <Button
                android:id="@+id/view"

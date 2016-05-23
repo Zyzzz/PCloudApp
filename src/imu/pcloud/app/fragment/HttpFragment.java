@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.activity.HttpActivity;
+import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
 import org.apache.http.Header;
 
@@ -24,7 +25,7 @@ import java.util.jar.Attributes;
 abstract public class HttpFragment extends Fragment {
     protected String jsonString = null;
     protected MyAsyncHttpResponseHandler myHandler = new MyAsyncHttpResponseHandler();
-    protected Gson gson = new GsonBuilder().create();
+    protected Gson gson = GsonTool.getGson();
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
     private  String UserName;
