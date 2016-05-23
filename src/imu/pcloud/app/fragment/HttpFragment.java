@@ -29,6 +29,7 @@ abstract public class HttpFragment extends Fragment {
     protected SharedPreferences.Editor editor;
     private  String UserName;
     private  String UserPassword;
+    public static String SPACE = "         ";
 
     @Override
     public void onAttach(Activity activity) {

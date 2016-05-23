@@ -27,7 +27,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         head.setOnClickListener(this);
         mySharing.setOnClickListener(this);
         myAccount.setOnClickListener(this);
-
+        initActionBar();
         return view;
     }
 
@@ -36,6 +36,25 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
 
     }
 
+    @Override
+    public void onResume() {
+        initActionBar();
+        super.onResume();
+    }
+
+    private void initActionBar() {
+        View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
+                R.layout.actionbar_layout, null);
+        TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
+        textview.setText("我");
+        getActivity().getActionBar().setCustomView(actionbarLayout);
+    }
+
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden == false)
+            initActionBar();
+        super.onHiddenChanged(hidden);
+    }
 
     @Override
     public void onClick(View v) {

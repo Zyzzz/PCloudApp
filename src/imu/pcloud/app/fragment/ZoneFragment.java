@@ -35,21 +35,41 @@ public class ZoneFragment extends HttpFragment {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
         listView1 = (ListView) view.findViewById(R.id.zone_listView);
         get("getPlanCircleList");
-
+        initActionBar();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        initActionBar();
+        super.onResume();
+    }
+
+    private void initActionBar() {
+        View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
+                R.layout.actionbar_layout, null);
+        TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
+        textview.setText("计划圈");
+        getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
     public List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < planCircles.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("image", R.drawable.ic_launcher);
+            map.put("image", R.drawable.header);
             map.put("name",planCircles.get(i).getName());
             map.put("id",planCircles.get(i).getId());
             // map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
         return list;
+    }
+
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden == false)
+            initActionBar();
+        super.onHiddenChanged(hidden);
     }
 
     private void  init(){

@@ -2,9 +2,7 @@ package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -39,14 +37,21 @@ public class PersonalFragment extends HttpFragment {
         ListAdapter listAdapter=new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content});
         listView.setAdapter(listAdapter);
+        setHasOptionsMenu(true);
         setActionBar();
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.personal, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     private void setActionBar() {
         myActionBar=getActivity().getActionBar();
-        myActionBar.setDisplayShowTitleEnabled(false);
-
+        myActionBar.setDisplayShowTitleEnabled(true);
         // 返回箭头（默认不显示）
         myActionBar.setDisplayHomeAsUpEnabled(false);
         // 左侧图标点击事件使能
@@ -59,9 +64,21 @@ public class PersonalFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText("个人计划");
+        textview.setText(SPACE + "个人计划");
         myActionBar.setCustomView(actionbarLayout);
+    }
 
+    @Override
+    public void onResume() {
+        setActionBar();
+        super.onResume();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden == false)
+            setActionBar();
+        super.onHiddenChanged(hidden);
     }
 
     @Override

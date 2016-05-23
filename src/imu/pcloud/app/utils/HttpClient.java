@@ -10,7 +10,7 @@ import com.loopj.android.http.RequestParams;
  */
 public class HttpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-   /* private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
+    private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
     //*/private static final String BASE_URL = "http://183.175.17.33:8080/PCloudServer/";
 
     public HttpClient() {
