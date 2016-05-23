@@ -20,6 +20,7 @@ public class PlanCircleActivity extends HttpActivity{
         Bundle bundle = intent_accept.getExtras();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         int planCircleID = bundle.getInt("planCircleID");
+
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

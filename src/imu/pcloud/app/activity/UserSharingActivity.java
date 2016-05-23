@@ -43,10 +43,7 @@ public class UserSharingActivity extends HttpActivity{
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < sharingRecords.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
-           // map.put("image", R.drawable.header);
             map.put("name",sharingRecords.get(i).getId());
-            //map.put("id",planCircles.get(i).getId());
-            // map.put("info", "这是一个详细信息" + i);
             list.add(map);
         }
         return list;
