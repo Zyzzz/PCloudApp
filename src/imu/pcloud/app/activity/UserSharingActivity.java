@@ -29,7 +29,8 @@ public class UserSharingActivity extends HttpActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_sharing_layout);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        setActionBar("我的分享");
         listView1 = (ListView)findViewById(R.id.user_sharing_listView);
         get("getUserSharingList","cookies",getCookie());
     }
