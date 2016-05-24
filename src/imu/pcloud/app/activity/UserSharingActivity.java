@@ -6,7 +6,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
+import imu.pcloud.app.model.PlanSharingListModel;
 import imu.pcloud.app.model.UserSharingList;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class UserSharingActivity extends HttpActivity{
     private ListView listView1;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
+    private List<PersonalPlan> personalPlens;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,19 +44,24 @@ public class UserSharingActivity extends HttpActivity{
     }
     private List<Map<String, Object>> getData(){
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
         for (int i = 0; i < sharingRecords.size(); i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("name",sharingRecords.get(i).getId());
-            list.add(map);
+            for(int j = 0;j<personalPlens.size();j++) {
+                if(sharingRecords.get(i).getId().getPersonalPlanId()==personalPlens.get(j).getId()){
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("name", personalPlens.get(j).getName());
+                    list.add(map);
+                }
+            }
         }
         return list;
     }
-
     @Override
     protected void onSuccess() {
-        UserSharingList userSharingList = getObject(UserSharingList.class);
-        if(userSharingList.getStatus() == 303){
+        PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
+        if(userSharingList.getStatus() == 400){
             sharingRecords = userSharingList.getSharingRecords();
+            personalPlens = userSharingList.getPersonalPlans();
             list = getData();
             ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
                     new String[]{"name"}, new int[]{ R.id.user_sharing_name});
