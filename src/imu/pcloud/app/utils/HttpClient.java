@@ -8,10 +8,10 @@ import com.loopj.android.http.RequestParams;
 /**
  * Created by guyu on 2016/5/10.
  */
-public class HttpClient {
+    public class HttpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
     /*private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
-    //*/private static final String BASE_URL = "http://183.175.10.115:8080/PCloudServer/";
+    //*/private static final String BASE_URL = "http://183.175.17.67:8080/PCloudServer/";
 
     public HttpClient() {
         client.setConnectTimeout(500);

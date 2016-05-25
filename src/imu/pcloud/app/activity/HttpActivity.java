@@ -1,21 +1,26 @@
 package imu.pcloud.app.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.view.*;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
 import imu.pcloud.app.utils.ViewFinder;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by guyu on 2016/5/11.
@@ -27,6 +32,8 @@ abstract public class HttpActivity extends Activity {
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
     protected ViewFinder finder;
+    protected ActionBar myActionBar;
+    final public static String SPACE = "         ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,18 @@ abstract public class HttpActivity extends Activity {
         sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         finder = new ViewFinder(this);
+        setOverflowShowingAlways();
+    }
+
+    private void setOverflowShowingAlways() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public <V extends View> V find(final int id) {
@@ -112,4 +131,34 @@ abstract public class HttpActivity extends Activity {
             HttpActivity.this.onFailure();
         }
     }
+
+    public void setActionBar(String title, String space) {
+        myActionBar = getActionBar();
+        // 返回箭头（默认不显示）
+        myActionBar.setDisplayHomeAsUpEnabled(true);
+        // 左侧图标点击事件使能
+        myActionBar.setHomeButtonEnabled(true);
+        // 使左上角图标(系统)是否显示
+        myActionBar.setDisplayShowHomeEnabled(false);
+       // myActionBar.setTitle("返回");
+        // 显示标题
+        myActionBar.setDisplayShowTitleEnabled(true);
+        myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
+        View actionbarLayout = LayoutInflater.from(this).inflate(
+                R.layout.actionbar_layout, null);
+        TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
+        textview.setText(space + title);
+        myActionBar.setCustomView(actionbarLayout);
+    }
+
+    public void setActionBar(String title) {
+        setActionBar(title, "");
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.clear();
+//        getMenuInflater().inflate(R.menu.personal, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 }
