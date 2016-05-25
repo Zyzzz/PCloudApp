@@ -18,9 +18,12 @@ public class PlanCircleActivity extends HttpActivity{
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent_accept = getIntent();
         Bundle bundle = intent_accept.getExtras();
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
+        String planCirleName = bundle.getString("planCircleName");
+        setActionBar(planCirleName);
         int planCircleID = bundle.getInt("planCircleID");
-       // get()
+        get("getSharingList","planCircleId",planCircleID);
+        //get()s
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
