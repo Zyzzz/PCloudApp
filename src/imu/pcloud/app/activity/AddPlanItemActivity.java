@@ -3,6 +3,7 @@ package imu.pcloud.app.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -17,7 +18,7 @@ import java.util.Map;
 /**
  * Created by guyu on 2016/5/23.
  */
-public class AddPlanItemActivity extends HttpActivity {
+public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
@@ -43,12 +44,14 @@ public class AddPlanItemActivity extends HttpActivity {
         ListAdapter listAdapter=new SimpleAdapter(this, pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content});
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(this);
     }
     public void pushPlan() {
         planArrayList.add(newPlan); getData(pList);
         ListAdapter listAdapter=new SimpleAdapter(this, pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content});
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(this);
     }
     @Override
     protected void onSuccess() {
@@ -65,5 +68,11 @@ public class AddPlanItemActivity extends HttpActivity {
             map.put("content", plan.getContent());
             pList.add(map);
         }
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

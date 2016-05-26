@@ -6,15 +6,19 @@
 
                 >
 
-
     <TextView
             android:id="@+id/acText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:textColor="#FFFFFFFF"
             android:textSize="25dp"
             android:gravity="center"
+            android:text="title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:layout_alignParentTop="true" android:text="title"/>
+            android:layout_marginLeft="250dp"
+    />
+
 </RelativeLayout>
