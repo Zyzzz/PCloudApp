@@ -13,4 +13,7 @@
     <string name="sex">性别</string>
     <string name="repassword">修改登录密码</string>
     <string name="logout">退出登录</string>
+    <string name="oldpassword">原密码</string>
+    <string name="newpassword">新密码</string>
+    <string name="confirm">确认</string>
 </resources>

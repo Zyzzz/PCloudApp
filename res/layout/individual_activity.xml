@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:background="#f5f5f5">
+              android:background="@color/gray_m">
     <LinearLayout android:id="@+id/personal_info"
             android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
                    android:layout_height="80dp"
                    android:background="@drawable/header"
                    android:layout_marginLeft="10dp"
-                   android:layout_marginTop="3dp" android:layout_marginRight="10dp"
+                   android:layout_marginRight="10dp"
                    android:id="@+id/personal_header" android:layout_gravity="center_vertical"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="match_parent"
@@ -25,11 +25,13 @@
                       android:layout_height="wrap_content"
                       android:hint="@string/nick_name"
                       android:layout_weight="1" android:id="@+id/nick_name" android:textIsSelectable="false"
-                      android:gravity="fill_vertical"/>
+                      android:gravity="fill_vertical" android:textAppearance="@android:style/TextAppearance.Medium"
+                      android:layout_marginRight="5dp"/>
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/register_name"
-                      android:layout_weight="1" android:id="@+id/register_name" android:gravity="fill_vertical"/>
+                      android:layout_weight="1" android:id="@+id/register_name" android:gravity="fill_vertical"
+                      android:textAppearance="@android:style/TextAppearance.Medium" android:layout_marginRight="5dp"/>
         </LinearLayout>
         <ImageView
                 android:layout_width="14dp"
@@ -66,7 +68,7 @@
             <TextView android:layout_width="match_parent" android:layout_height="match_parent"
                       android:hint="@string/personal_sharing" android:layout_weight="1" android:id="@+id/textView6"
                       android:gravity="fill_vertical" android:textColorHint="@android:color/black"
-                      android:textSize="20dp"/>
+                      android:textAppearance="@android:style/TextAppearance.Large"/>
             <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView4"
                        android:background="@drawable/arrow" android:layout_marginRight="10dp"
                        android:layout_gravity="center_vertical"/>
@@ -91,10 +93,11 @@
                 android:layout_gravity="center_vertical"/>
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:layout_weight="15"
-                  android:textSize="20dp" android:autoText="false" android:layout_marginTop="3dp"
+                  android:autoText="false" android:layout_marginTop="3dp"
                   android:layout_marginBottom="3dp" android:layout_gravity="center_vertical"
                   android:id="@+id/textView5" android:clickable="false" android:gravity="fill_vertical"
-                  android:hint="@string/account" android:textColorHint="@android:color/black"/>
+                  android:hint="@string/account" android:textColorHint="@android:color/black"
+                  android:textAppearance="@android:style/TextAppearance.Large"/>
         <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView3"
                    android:background="@drawable/arrow" android:layout_marginRight="10dp"
                    android:layout_gravity="center_vertical"/>

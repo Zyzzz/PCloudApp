@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:background="#f5f5f5"
+              android:layout_height="match_parent" android:background="@color/gray_m"
               android:baselineAligned="true">
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginTop="30dp"
-            android:background="@android:color/white" android:layout_weight="0.5">
+            android:background="@android:color/white" android:layout_weight="0.5" android:id="@+id/header">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -34,7 +34,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:background="@android:color/white"
-            android:layout_marginTop="1dp" android:layout_weight="0.5">
+            android:layout_marginTop="1dp" android:layout_weight="0.5" android:id="@+id/mail">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView8" android:hint="@string/register_name" android:layout_marginTop="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:id="@+id/mymail" android:hint="@string/register_name" android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" android:gravity="fill_vertical"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" android:textColor="@color/gray_l"/>
         <ImageView
                 android:layout_width="14dp"
                 android:layout_height="17dp"
@@ -57,17 +57,11 @@
                 android:layout_gravity="center_vertical" android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
     </LinearLayout>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView13" android:layout_gravity="right" android:layout_weight="0.5"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:background="@android:color/white"
-            android:layout_marginTop="1dp" android:layout_weight="0.5">
+            android:layout_marginTop="1dp" android:layout_weight="0.5" android:id="@+id/nickname">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,10 +72,10 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView9" android:hint="@string/nick_name" android:layout_marginTop="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:id="@+id/mynickname" android:hint="@string/nick_name" android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" android:gravity="fill_vertical"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" android:textColor="@color/gray_l"/>
         <ImageView
                 android:layout_width="14dp"
                 android:layout_height="17dp"
@@ -93,7 +87,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:background="@android:color/white"
-            android:layout_marginTop="1dp" android:layout_weight="0.5">
+            android:layout_marginTop="1dp" android:layout_weight="0.5" android:id="@+id/sex">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,10 +98,10 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView10" android:hint="@string/sex" android:layout_marginTop="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:id="@+id/mysex" android:hint="@string/sex" android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" android:gravity="fill_vertical"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" android:textColor="@color/gray_l"/>
         <ImageView
                 android:layout_width="14dp"
                 android:layout_height="17dp"
@@ -118,6 +112,6 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="10">
+            android:layout_height="wrap_content" android:layout_weight="12">
     </LinearLayout>
 </LinearLayout>
