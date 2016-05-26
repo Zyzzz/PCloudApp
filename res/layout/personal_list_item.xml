@@ -8,34 +8,43 @@
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:background="@color/gray_s"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" android:background="@color/gray_m"
             android:layout_marginRight="1dp">
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="7:00"
                 android:id="@+id/start_time" android:layout_weight="1" android:textColor="@android:color/black"
-                android:gravity="fill_vertical" android:textSize="40dp" android:layout_marginBottom="1dp"
-                android:background="@android:color/white" android:textStyle="italic"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="9:00"
+                android:textSize="30dp" android:layout_marginBottom="1dp"
+                android:background="@android:color/white" android:textStyle="italic" android:gravity="center"
+                android:text="7:222"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
                   android:id="@+id/end_time" android:layout_weight="1" android:textColor="@android:color/black"
-                  android:gravity="fill_vertical" android:textSize="40dp" android:background="@android:color/white"
-                  android:textStyle="italic"/>
+                  android:textSize="30dp" android:background="@android:color/white"
+                  android:textStyle="italic" android:gravity="center" android:text="7:393"/>
     </LinearLayout>
     <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:background="@android:color/white"
-            android:layout_weight="1">
+            android:layout_height="match_parent" android:background="@color/gray_m"
+            android:layout_weight="7">
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="content"
-                android:id="@+id/plan_content" android:textColor="@android:color/black" android:textSize="23dp"
-                android:background="@android:color/white" android:gravity="center" android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp"/>
+                android:id="@+id/plan_title" android:textColor="@android:color/black" android:textSize="18dp"
+                android:background="@android:color/white"
+                android:layout_marginBottom="1dp" android:layout_weight="1" android:paddingLeft="10dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/gray_m">
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="content"
+                  android:id="@+id/plan_content" android:textColor="@android:color/black" android:textSize="20dp"
+                  android:background="@android:color/white" android:gravity="center"
+                  android:layout_weight="20"/>
     </LinearLayout>
 </LinearLayout>
