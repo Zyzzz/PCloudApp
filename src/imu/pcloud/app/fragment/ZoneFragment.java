@@ -82,6 +82,7 @@ public class ZoneFragment extends HttpFragment {
                 Intent intent = new Intent();
                 intent.setClass(getActivity().getApplicationContext(),PlanCircleActivity.class);
                 intent.putExtra("planCircleID",(Integer) list.get(position).get("id"));
+                intent.putExtra("planCircleName",(String) list.get(position).get("name"));
                 startActivity(intent);
             }
         });
