@@ -24,10 +24,11 @@ import java.util.Map;
 /**
  * Created by guyu on 2016/5/23.
  */
-public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnItemClickListener, OnPlanInputListener {
+public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnItemClickListener, OnPlanInputListener, DialogInterface.OnClickListener {
 
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
+    private EditText text;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     private Plan newPlan= new Plan("", "", "点击添加新内容", "");
     private Plan nowPlan;
@@ -166,21 +167,21 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
                     ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                     pal.remove(pal.size() - 1);
                     plans.setPlans(pal);
-                    EditText text = new EditText(this);
+                    text = new EditText(this);
                     text.setText(planName);
                     new AlertDialog.Builder(this).setTitle("请输入计划名").
                             setView(text).
-                            setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    planName = text.getText().toString();
-                                    get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
-                                }
-                            }).
+                            setPositiveButton("确定", this).
                             setNegativeButton("取消", null).show();
                 }
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int id) {
+        planName = text.getText().toString();
+        get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
     }
 }
