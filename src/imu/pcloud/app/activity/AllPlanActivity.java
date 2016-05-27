@@ -62,7 +62,11 @@ public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        PersonalPlan plan = personalPlanArrayList.get(position);
+        String planString = plan.getContent();
+        Bundle data = new Bundle();
+        data.putString("planString", planString);
+        startActivity(AddPlanItemActivity.class, data);
     }
 
     public void putPlans() {

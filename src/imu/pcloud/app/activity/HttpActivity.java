@@ -109,6 +109,12 @@ abstract public class HttpActivity extends Activity {
         startActivity(new Intent(getApplicationContext(), targetActivity));
     }
 
+    protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
+        Intent intent = new Intent(getApplicationContext(), targetActivity);
+        intent.putExtras(savedInstanceState);
+        startActivity(intent);
+    }
+
     protected UserModel relogin() {
         RequestParams prams = new RequestParams();
         prams.put("cookies", getCookie());

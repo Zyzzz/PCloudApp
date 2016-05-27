@@ -29,13 +29,14 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
-    private Plan newPlan= new Plan("", "", "点击此处新建", "");
+    private Plan newPlan= new Plan("", "", "点击添加新内容", "");
     private Plan nowPlan;
     SimpleAdapter listAdapter;
     Plans plans = new Plans();
     PersonalPlan personalPlan = new PersonalPlan();
     String planName = "新计划";
     int addFlag = 0;
+    int editFlag = 0;
 
     public Plan getNowPlan() {
         return nowPlan;
@@ -48,7 +49,17 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null) {
+            editFlag = 1;
+            initEdit(savedInstanceState);
+        }
         init();
+    }
+
+    private void initEdit(Bundle saveInstanceState) {
+        Plans plans = new Plans();
+        plans.setByJsonString(saveInstanceState.getString("planString", ""));
+        planArrayList = plans.getPlans();
     }
 
     protected void init() {
@@ -151,23 +162,23 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirm:
-                ArrayList<Plan> pal = new ArrayList<>(planArrayList);
-                pal.remove(pal.size() - 1);
-                plans.setPlans(pal);
-                EditText text = new EditText(this);
-                text.setText(planName);
-                new AlertDialog.Builder(this).setTitle("请输入计划名").
-                        setView(text).
-                        setPositiveButton("确定", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id)
-                            {
-                                planName = text.getText().toString();
-                                get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
-                            }
-                        }).
-                        setNegativeButton("取消", null).show();
+                if(editFlag == 0) {
+                    ArrayList<Plan> pal = new ArrayList<>(planArrayList);
+                    pal.remove(pal.size() - 1);
+                    plans.setPlans(pal);
+                    EditText text = new EditText(this);
+                    text.setText(planName);
+                    new AlertDialog.Builder(this).setTitle("请输入计划名").
+                            setView(text).
+                            setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    planName = text.getText().toString();
+                                    get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
+                                }
+                            }).
+                            setNegativeButton("取消", null).show();
+                }
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
