@@ -22,7 +22,7 @@ import java.util.Map;
 public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemClickListener
 {
 
-    ArrayList<PersonalPlan> personalPlanArrayList = new ArrayList<>();
+    ArrayList<PersonalPlan> personalPlanArrayList = new ArrayList<PersonalPlan>();
     private ListView listView;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     SimpleAdapter listAdapter;
