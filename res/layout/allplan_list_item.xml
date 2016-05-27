@@ -15,8 +15,15 @@
             android:layout_height="match_parent" android:background="@color/gray_m">
     </LinearLayout>
     <TextView
-            android:id="@+id/content1"
+            android:id="@+id/plan_name"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:layout_weight="1" android:background="@android:color/white"/>
+            android:layout_height="match_parent" android:layout_weight="1" android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" android:gravity="center"/>
+    <ImageView
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView10" android:background="@drawable/arrow" android:adjustViewBounds="false"
+            android:layout_gravity="center_vertical"/>
 
 </LinearLayout>

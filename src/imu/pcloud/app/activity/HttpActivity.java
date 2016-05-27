@@ -92,8 +92,17 @@ abstract public class HttpActivity extends Activity {
         editor.commit();
     }
 
+    protected void setUserId(int userId) {
+        editor.putInt("userId", userId);
+        editor.commit();
+    }
+
     protected String getCookie() {
         return sharedPreferences.getString("cookie", "");
+    }
+
+    protected int getUserId() {
+        return sharedPreferences.getInt("userId", -1);
     }
 
     protected <T> void startActivity(Class<T> targetActivity) {
