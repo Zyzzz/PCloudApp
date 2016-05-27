@@ -24,6 +24,7 @@ public class AllPlanActivity extends HttpActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allplan);
+
         init();
     }
 

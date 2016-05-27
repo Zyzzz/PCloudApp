@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.model.UserModel;
 
 /**
  * Created by guyu on 2016/5/27.
@@ -43,7 +44,14 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
 
     @Override
     protected void onSuccess() {
-
+        UserModel result = getObject(UserModel.class);
+        if(result.getStatus() == 0) {
+            toast("修改成功");
+            finish();
+        }
+        else {
+            toast(result.getResult());
+        }
     }
 
     private void init() {
@@ -76,7 +84,10 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirm:
-               // get()
+                get("setInformation", "cookies", getCookie(),
+                        "sex", tvSex.getText(), "birthday", "",
+                        "education", "", "working", "",
+                        "signature", "", "name", tvNickname.getText());
         }
         return super.onMenuItemSelected(featureId, item);
     }
