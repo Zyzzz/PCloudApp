@@ -8,25 +8,30 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp">
-        <EditText android:layout_width="match_parent"
+        <EditText android:layout_width="wrap_content"
                   android:layout_height="match_parent" android:text="@string/men"
                   android:textColor="@android:color/black"
-                  android:textAppearance="@android:style/TextAppearance.Large"/>
+                  android:textAppearance="@android:style/TextAppearance.Large"
+                  android:background="@null"
+                  android:layout_marginLeft="15dp" android:layout_weight="1"/>
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView7"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView7" android:background="@drawable/tick"
+                android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="1dp">
-        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
+        <EditText android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:text="@string/women" android:textColor="@android:color/black"
-                  android:textAppearance="@android:style/TextAppearance.Large"/>
+                  android:textAppearance="@android:style/TextAppearance.Large"
+                  android:background="@null" android:layout_marginLeft="15dp" android:layout_weight="1"/>
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView15"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView15" android:background="@drawable/tick"
+                android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </LinearLayout>

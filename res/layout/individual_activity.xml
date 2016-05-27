@@ -6,10 +6,9 @@
               android:background="@color/gray_m">
     <LinearLayout android:id="@+id/personal_info"
             android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="100dp"
                   android:orientation="horizontal"
                   android:background="@drawable/item_select"
-                  android:layout_weight="1"
                   android:layout_marginTop="30dp">
         <ImageView android:layout_width="80dp"
                    android:layout_height="80dp"
@@ -43,16 +42,16 @@
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:layout_weight="1">
+                  android:orientation="horizontal">
     </LinearLayout>
 
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="50dp"
                   android:orientation="horizontal" android:focusableInTouchMode="false"
-                  android:background="@drawable/item_select" android:layout_weight="0.5"
+                  android:background="@drawable/item_select"
                   android:layout_gravity="center_vertical" android:id="@+id/my_sharing"
-                  android:layoutMode="opticalBounds">
+                  android:layoutMode="opticalBounds" android:layout_marginTop="50dp">
         <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -77,11 +76,10 @@
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="50dp"
                   android:orientation="horizontal"
                   android:focusableInTouchMode="false"
                   android:background="@drawable/item_select"
-                  android:layout_weight="0.5"
                   android:layout_marginTop="1dp" android:layout_gravity="center_vertical" android:id="@+id/my_account">
         <ImageView
                 android:layout_width="40dp"
@@ -105,9 +103,9 @@
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:orientation="horizontal"
-                  android:layout_weight="12" android:layout_gravity="center_vertical">
+                  android:layout_gravity="center_vertical">
     </LinearLayout>
 
 
