@@ -16,4 +16,11 @@
     <string name="oldpassword">原密码</string>
     <string name="newpassword">新密码</string>
     <string name="confirm">确认</string>
+   <string name="newname">我的昵称</string>
+    <string name="birthday">生日</string>
+    <string name="education">教育信息</string>
+    <string name="signature">个性签名</string>
+    <string name="work">工作信息</string>
+    <string name="men">男</string>
+    <string name="women">女</string>
 </resources>
