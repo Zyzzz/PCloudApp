@@ -163,7 +163,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         switch (item.getItemId()) {
             case R.id.confirm:
                 if(editFlag == 0) {
-                    ArrayList<Plan> pal = new ArrayList<>(planArrayList);
+                    ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                     pal.remove(pal.size() - 1);
                     plans.setPlans(pal);
                     EditText text = new EditText(this);
