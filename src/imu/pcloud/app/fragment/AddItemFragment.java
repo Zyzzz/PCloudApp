@@ -20,12 +20,13 @@ import java.util.Calendar;
 /**
  * Created by guyu on 2016/5/26.
  */
-public class AddItemFragment extends DialogFragment implements View.OnClickListener{
+public class AddItemFragment extends DialogFragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener{
 
     EditText title;
     EditText startTime;
     EditText endTime;
     EditText content;
+    View touched;
     TimePickerDialog timePickerDialog;
     OnPlanInputListener onPlanInputListener;
 
@@ -87,26 +88,27 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        touched = v;
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog.Builder builder = new TimePickerDialog.Builder(getActivity());
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hour, int minute) {
-                        // TODO Auto-generated method stub
-                        String sMinute = minute < 10 ? "0" + minute : "" + minute;
-                        String sHour = hour < 10 ? "0" + hour : "" + hour;
-                        switch (v.getId()) {
-                            case R.id.start_time:
-                                startTime.setText(sHour + ":" + sMinute);
-                                break;
-                            case R.id.end_time:
-                                endTime.setText(sHour + ":" + sMinute);
-                                break;
-                        }
-                    }
-                }, calendar.get(Calendar.HOUR_OF_DAY),
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), this,
+                calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE), true);
         timePickerDialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hour, int minute) {
+        // TODO Auto-generated method stub
+        String sMinute = minute < 10 ? "0" + minute : "" + minute;
+        String sHour = hour < 10 ? "0" + hour : "" + hour;
+        switch (touched.getId()) {
+            case R.id.start_time:
+                startTime.setText(sHour + ":" + sMinute);
+                break;
+            case R.id.end_time:
+                endTime.setText(sHour + ":" + sMinute);
+                break;
+        }
     }
 }
