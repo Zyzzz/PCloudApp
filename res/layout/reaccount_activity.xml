@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_m">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="30dp"
+            android:background="@android:color/white" android:layout_weight="0.5" android:id="@+id/mail">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/register_name"
+                android:id="@+id/textView11" android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp" android:layout_weight="10"
+                android:layout_gravity="center_vertical"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/mymail" android:hint="@string/register_name" android:gravity="fill_vertical"
+                android:textColor="@color/gray_l" android:layout_marginRight="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@android:color/white"
+            android:layout_marginTop="1dp" android:layout_weight="0.5" android:id="@+id/password">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/repassword"
+                android:id="@+id/textView12" android:textColor="@android:color/black" android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:layout_gravity="center_vertical"/>
+        <ImageView
+                android:layout_width="14dp"
+                android:layout_height="17dp"
+                android:id="@+id/imageView11" android:background="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:layout_marginRight="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="8">
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    >
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:id="@+id/logout" android:background="@drawable/button_select" android:textStyle="bold"
+                android:layout_weight="1.5" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
+                android:textAppearance="@android:style/TextAppearance.Large" android:textColor="@android:color/white"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1">
+    </LinearLayout>
+</LinearLayout>

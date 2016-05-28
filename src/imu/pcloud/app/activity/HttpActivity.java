@@ -92,12 +92,27 @@ abstract public class HttpActivity extends Activity {
         editor.commit();
     }
 
+    protected void setUserId(int userId) {
+        editor.putInt("userId", userId);
+        editor.commit();
+    }
+
     protected String getCookie() {
         return sharedPreferences.getString("cookie", "");
     }
 
+    protected int getUserId() {
+        return sharedPreferences.getInt("userId", -1);
+    }
+
     protected <T> void startActivity(Class<T> targetActivity) {
         startActivity(new Intent(getApplicationContext(), targetActivity));
+    }
+
+    protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
+        Intent intent = new Intent(getApplicationContext(), targetActivity);
+        intent.putExtras(savedInstanceState);
+        startActivity(intent);
     }
 
     protected UserModel relogin() {
@@ -140,7 +155,7 @@ abstract public class HttpActivity extends Activity {
         myActionBar.setHomeButtonEnabled(true);
         // 使左上角图标(系统)是否显示
         myActionBar.setDisplayShowHomeEnabled(false);
-       // myActionBar.setTitle("返回");
+        myActionBar.setTitle("返回");
         // 显示标题
         myActionBar.setDisplayShowTitleEnabled(true);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图

@@ -10,6 +10,7 @@ import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.PlanSharingListModel;
 import imu.pcloud.app.model.UserSharingList;
+import imu.pcloud.app.utils.SlideListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.Map;
  */
 public class UserSharingActivity extends HttpActivity{
 
-    private ListView listView1;
+    private SlideListView listView1;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlens;
@@ -31,7 +32,8 @@ public class UserSharingActivity extends HttpActivity{
         setContentView(R.layout.user_sharing_layout);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         setActionBar("我的分享");
-        listView1 = (ListView)findViewById(R.id.user_sharing_listView);
+        listView1 = (SlideListView)findViewById(R.id.user_sharing_listView);
+        listView1.initSlideMode(2);
         get("getUserSharingList","cookies",getCookie());
     }
 

@@ -3,6 +3,7 @@ package imu.pcloud.app.fragment;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.*;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.activity.ManagePlanActivity;
 import imu.pcloud.app.been.Image;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.utils.WidgetController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +70,8 @@ public class PersonalFragment extends HttpFragment {
 
 
     private void setActionBar() {
+        WindowManager wm = getActivity().getWindowManager();
+        int width = wm.getDefaultDisplay().getWidth();
         myActionBar=getActivity().getActionBar();
         myActionBar.setDisplayShowTitleEnabled(true);
         // 返回箭头（默认不显示）
@@ -83,6 +87,7 @@ public class PersonalFragment extends HttpFragment {
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
         textview.setText(SPACE + "个人计划");
+        int leftnum = width  - WidgetController.getWidth(textview);
         myActionBar.setCustomView(actionbarLayout);
     }
 
@@ -116,5 +121,12 @@ public class PersonalFragment extends HttpFragment {
             map.put("content", plan.getContent());
             pList.add(map);
         }
+    }
+
+        @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menu.clear();
+        menuInflater.inflate(R.menu.personal, menu);
+        return ;
     }
 }

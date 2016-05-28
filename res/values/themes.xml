@@ -9,5 +9,9 @@
         <item name="android:background">#48B2EF</item>
         <item name="android:layout">@layout/actionbar_layout</item>
     </style>
+    <style name="newTheme.TimePicker"
+           parent="newTheme">
+        <item name="android:buttonStyle">@color/blue_m</item>
+    </style>
 
 </resources>

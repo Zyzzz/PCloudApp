@@ -63,4 +63,16 @@ public class Plan {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public int compareTo(Plan right) {
+        Time leftStart = DateTool.stringToTime(startTimeString);
+        Time leftEnd = DateTool.stringToTime(endTimeString);
+        Time rightStart = DateTool.stringToTime(right.startTimeString);
+        Time rightEnd = DateTool.stringToTime(right.endTimeString);
+        if(leftStart.equals(rightStart)) {
+            return leftEnd.compareTo(rightEnd);
+        }else {
+            return leftStart.compareTo(rightStart);
+        }
+    }
 }
