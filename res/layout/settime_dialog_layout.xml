@@ -5,7 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent" >
     <RadioGroup android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+    android:paddingTop="20dp">
 
 
     <RadioButton
@@ -13,24 +15,28 @@
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="一天"/>
     <RadioButton
             android:id="@+id/threeday"
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="三天"/>
     <RadioButton
         android:id="@+id/oneweek"
         android:textColor="#000000"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="七天"/>
     <RadioButton
             android:id="@+id/onemonth"
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="三十天"/>
     </RadioGroup>
     <TextView
@@ -40,6 +46,8 @@
             android:textColorHint="@color/gray_l"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:layout_weight="0.3"
+            android:layout_marginBottom="200dp"
             />
 
 
