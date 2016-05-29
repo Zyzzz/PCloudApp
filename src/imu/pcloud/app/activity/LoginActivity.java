@@ -24,11 +24,9 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
 
     private Button register;
     private Button login;
-    private CheckBox isshowpsd;
     private TextView email;
     private TextView password;
     private UserModel user;
-    private boolean flag=true;
     private int loginFlag = 0;
     private SharedPreferences spf;
     private Context context;
@@ -47,20 +45,9 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         login = find(R.id.login);
         email = find(R.id.email_text);
         password = find(R.id.password_text);
-        isshowpsd=find(R.id.isshow);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
-        isshowpsd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-                else {
-                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-            }
-        });
+
 
     }
 
