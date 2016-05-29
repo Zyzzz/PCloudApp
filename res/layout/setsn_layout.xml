@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_m">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" android:background="@android:color/white" android:layout_marginTop="30dp">
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@null"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:maxLength="40"
+
+                  android:id="@+id/setsignatrue"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" android:background="@android:color/white">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="40"
+                android:id="@+id/textView13" android:textColor="@color/gray_l" android:gravity="right"
+                android:paddingRight="10dp" android:paddingLeft="10dp"/>
+    </LinearLayout>
+</LinearLayout>

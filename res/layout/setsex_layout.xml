@@ -7,7 +7,8 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp">
+            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp"
+            android:id="@+id/men">
         <EditText android:layout_width="wrap_content"
                   android:layout_height="match_parent" android:text="@string/men"
                   android:textColor="@android:color/black"
@@ -23,7 +24,8 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="1dp">
+            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="1dp"
+            android:id="@+id/women">
         <EditText android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:text="@string/women" android:textColor="@android:color/black"
                   android:textAppearance="@android:style/TextAppearance.Large"
