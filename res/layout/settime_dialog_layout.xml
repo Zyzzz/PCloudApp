@@ -21,12 +21,20 @@
         android:textColor="#000000"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="一周"/>
+        android:text="七天"/>
     <RadioButton
             android:id="@+id/onemonth"
             android:textColor="#000000"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="一个月"/>
+            android:text="三十天"/>
+    <TextView
+            android:hint="自定义"
+            android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/gray_l"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            />
 
 </LinearLayout>
