@@ -1,6 +1,7 @@
 package imu.pcloud.app.activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
     }
 
     private void init() {
+        setActionBar("注册", "    ");
         setContentView(R.layout.register_activity);
         username = find(R.id.username);
         email = find(R.id.email);
@@ -52,5 +54,15 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
         } else {
             toast(user.getResult());
         }
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onMenuItemSelected(featureId, item);
     }
 }

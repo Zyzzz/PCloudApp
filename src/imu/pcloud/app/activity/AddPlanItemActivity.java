@@ -38,6 +38,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     String planName = "新计划";
     int addFlag = 0;
     int editFlag = 0;
+    int planId = 0;
 
     public Plan getNowPlan() {
         return nowPlan;
@@ -50,16 +51,19 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null) {
+        Bundle data = getIntent().getExtras();
+        if(data.getInt("status", -1) == 1) {
             editFlag = 1;
-            initEdit(savedInstanceState);
+            initEdit(data);
         }
         init();
     }
 
     private void initEdit(Bundle saveInstanceState) {
         Plans plans = new Plans();
-        plans.setByJsonString(saveInstanceState.getString("planString", ""));
+        plans.setByJsonString(getIntent().getExtras().getString("planString", ""));
+        planName = saveInstanceState.getString("planName", "新计划");
+        planId = saveInstanceState.getInt("planId", -1);
         planArrayList = plans.getPlans();
     }
 
@@ -96,7 +100,11 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         BaseModel result = getObject(BaseModel.class);
         if(result.getStatus() == 200) {
             toast("创建成功");
-            //this.finish();
+            this.finish();
+        }
+        else if(result.getStatus() == 205) {
+            toast("修改成功");
+            this.finish();
         }
         else {
             toast(result.getResult());
@@ -163,7 +171,6 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirm:
-                if(editFlag == 0) {
                     ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                     pal.remove(pal.size() - 1);
                     plans.setPlans(pal);
@@ -173,7 +180,9 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
                             setView(text).
                             setPositiveButton("确定", this).
                             setNegativeButton("取消", null).show();
-                }
+                break;
+            case android.R.id.home:
+                finish();
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
@@ -181,7 +190,13 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
 
     @Override
     public void onClick(DialogInterface dialog, int id) {
-        planName = text.getText().toString();
-        get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
+        if(editFlag == 0) {
+            planName = text.getText().toString();
+            get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
+        }
+        else {
+            planName = text.getText().toString();
+            get("modifyPlan", "content", plans.getJsonString(), "name", planName, "id", planId);
+        }
     }
 }

@@ -5,24 +5,29 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.activity.HttpActivity;
+import org.apache.http.protocol.HTTP;
 
 /**
  * Created by guyu on 2016/5/10.
  */
-    public abstract class HttpClient {
+public abstract class HttpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
     private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
-    //*/private static final String BASE_URL = "http://183.175.17.67:8080/PCloudServer/";
+    //*/private static final String BASE_URL = "http://10.0.2.2:8080/PCloudServer/";
 
     public HttpClient() {
-        client.setConnectTimeout(500);
+        client.setConnectTimeout(200);
     }
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        params.setContentEncoding(HTTP.UTF_8);
+        client.setConnectTimeout(1000);
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        params.setContentEncoding(HTTP.UTF_8);
+        client.setConnectTimeout(1000);
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
