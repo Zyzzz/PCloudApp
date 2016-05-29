@@ -4,6 +4,10 @@
               android:background="@color/gray_m"
               android:layout_width="match_parent"
               android:layout_height="match_parent" >
+    <RadioGroup android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+
     <RadioButton
             android:id="@+id/oneday"
             android:textColor="#000000"
@@ -28,6 +32,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="三十天"/>
+    </RadioGroup>
     <TextView
             android:hint="自定义"
             android:background="#FFFFFF"
@@ -36,5 +41,6 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             />
+
 
 </LinearLayout>
