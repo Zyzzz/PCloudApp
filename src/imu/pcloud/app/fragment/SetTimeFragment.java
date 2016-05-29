@@ -3,6 +3,7 @@ package imu.pcloud.app.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,15 @@ public class SetTimeFragment extends DialogFragment {
         oneWeek= (RadioButton) view.findViewById(R.id.oneweek);
         oneMonth= (RadioButton) view.findViewById(R.id.onemonth);
         GetChoose();
+        builder.setView(view).setPositiveButton("确定",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+
+
+        }).setNegativeButton("取消", null);
         return super.onCreateDialog(savedInstanceState);
     }
 
