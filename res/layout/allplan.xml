@@ -4,11 +4,16 @@
               android:background="#f5f5f5"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <ListView
+    <imu.pcloud.app.utils.RefreshableView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/refreshview">
+    ``<ListView
             android:id="@+id/allplan_listview"
             android:divider="#87CEFF"
             android:dividerHeight="1dp"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"/>
+    </imu.pcloud.app.utils.RefreshableView>
 
 </LinearLayout>

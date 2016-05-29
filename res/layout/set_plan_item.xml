@@ -24,7 +24,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="起始"
                 android:id="@+id/textView8" android:gravity="center_vertical" android:textColor="@color/gray_xl"/>
-        <EditText
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:inputType="time"
@@ -55,7 +55,7 @@
         <TextView android:layout_width="wrap_content" android:layout_height="fill_parent"
                   android:textAppearance="?android:attr/textAppearanceLarge" android:text="结束"
                   android:id="@+id/textView9" android:gravity="center_vertical" android:textColor="@color/gray_xl"/>
-        <EditText android:layout_width="wrap_content" android:layout_height="match_parent" android:inputType="time"
+        <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:inputType="time"
                   android:ems="10" android:id="@+id/end_time" android:layout_weight="1"
                   android:layout_marginLeft="10dp" android:gravity="center"
                   android:background="@null" android:editable="false"/>

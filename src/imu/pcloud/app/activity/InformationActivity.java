@@ -55,6 +55,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     }
 
     private void init() {
+        setActionBar("个人信息");
         sex = find(R.id.sex);
         nickname = find(R.id.nickname);
         tvNickname = find(R.id.mynickname);
@@ -88,6 +89,10 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                         "sex", tvSex.getText(), "birthday", "",
                         "education", "", "working", "",
                         "signature", "", "name", tvNickname.getText());
+                break;
+            case android.R.id.home:
+                finish();
+                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }

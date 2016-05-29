@@ -16,6 +16,7 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
+import imu.pcloud.app.utils.SysApplication;
 import imu.pcloud.app.utils.ViewFinder;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
@@ -97,6 +98,16 @@ abstract public class HttpActivity extends Activity {
         editor.commit();
     }
 
+    protected void setUserMoodel(UserModel userMoodel) {
+        editor.putString("usermodel", gson.toJson(userMoodel));
+        editor.commit();
+    }
+
+    protected UserModel getUserModel() {
+        String userModelString = sharedPreferences.getString("usermodel", "");
+        return gson.fromJson(userModelString, UserModel.class);
+    }
+
     protected String getCookie() {
         return sharedPreferences.getString("cookie", "");
     }
@@ -106,10 +117,12 @@ abstract public class HttpActivity extends Activity {
     }
 
     protected <T> void startActivity(Class<T> targetActivity) {
+        SysApplication.getInstance().addActivity(this);
         startActivity(new Intent(getApplicationContext(), targetActivity));
     }
 
     protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
+        SysApplication.getInstance().addActivity(this);
         Intent intent = new Intent(getApplicationContext(), targetActivity);
         intent.putExtras(savedInstanceState);
         startActivity(intent);
@@ -170,10 +183,4 @@ abstract public class HttpActivity extends Activity {
         setActionBar(title, "");
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.clear();
-//        getMenuInflater().inflate(R.menu.personal, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
 }

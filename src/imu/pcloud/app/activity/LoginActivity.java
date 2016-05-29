@@ -22,30 +22,17 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     private Button login;
     private TextView email;
     private TextView password;
-    private static UserModel user;
+    private UserModel user;
     private int loginFlag = 0;
-    private Timer timer = new Timer();
     private SharedPreferences spf;
     private Context context;
-
-    public static UserModel getUser() {
-        return user;
-    }
-
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_layout);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                get("relogin", "cookies", getCookie());
-            }
-        }, 2000);
-
+        init();
     }
 
     protected void init() {
@@ -62,16 +49,12 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     protected void onSuccess() {
         user = getObject(UserModel.class);
         if (user.getStatus() == 0) {
-            if(loginFlag != 0)
-                setCookie(user.getCookies());
-                setUserId(user.getId());
-                startActivity(MainActivity.class);
-                finish();
+            setCookie(user.getCookies());
+            setUserId(user.getId());
+            setUserMoodel(user);
+            startActivity(MainActivity.class);
+            finish();
         } else {
-            if (loginFlag == 0) {
-                init();
-                loginFlag = 1;
-            }
             toast(user.getResult());
             setCookie("");
         }
@@ -80,11 +63,6 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     @Override
     protected void onFailure() {
         super.onFailure();
-        if (loginFlag == 0) {
-            startActivity(MainActivity.class);
-            finish();
-            loginFlag = 1;
-        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package imu.pcloud.app.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.activity.HttpActivity;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
+import imu.pcloud.app.utils.SysApplication;
 import org.apache.http.Header;
 
 import java.util.jar.Attributes;
@@ -30,7 +32,7 @@ abstract public class HttpFragment extends Fragment {
     protected SharedPreferences.Editor editor;
     private  String UserName;
     private  String UserPassword;
-    final public static String SPACE = "         ";
+    final public static String SPACE = "           ";
 
     @Override
     public void onAttach(Activity activity) {
@@ -85,5 +87,17 @@ abstract public class HttpFragment extends Fragment {
             toast("网络连接失败");
             HttpFragment.this.onFailure();
         }
+    }
+
+    protected <T> void startActivity(Class<T> targetActivity) {
+        SysApplication.getInstance().addActivity((Activity) getActivity());
+        startActivity(new Intent(getActivity(), targetActivity));
+    }
+
+    protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
+        SysApplication.getInstance().addActivity((Activity) getActivity());
+        Intent intent = new Intent(getActivity(), targetActivity);
+        intent.putExtras(savedInstanceState);
+        startActivity(intent);
     }
 }

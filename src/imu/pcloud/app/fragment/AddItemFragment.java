@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AddPlanItemActivity;
@@ -23,8 +24,8 @@ import java.util.Calendar;
 public class AddItemFragment extends DialogFragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener{
 
     EditText title;
-    EditText startTime;
-    EditText endTime;
+    TextView startTime;
+    TextView endTime;
     EditText content;
     View touched;
     TimePickerDialog timePickerDialog;
@@ -52,8 +53,8 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.set_plan_item, null);
-        startTime = (EditText) view.findViewById(R.id.start_time);
-        endTime = (EditText) view.findViewById(R.id.end_time);
+        startTime = (TextView) view.findViewById(R.id.start_time);
+        endTime = (TextView) view.findViewById(R.id.end_time);
         title = (EditText) view.findViewById(R.id.title);
         content = (EditText) view.findViewById(R.id.content);
         Plan plan = ((AddPlanItemActivity)getActivity()).getNowPlan();
