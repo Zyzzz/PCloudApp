@@ -46,12 +46,12 @@
                     android:textColorHint="@color/gray_l"
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"/>
-                <CheckBox android:layout_width="30dp"
-                          android:background="@drawable/icon"
+                <CheckBox android:layout_width="50dp"
+                          android:background="@drawable/eye"
                           android:id="@+id/isshow"
                           android:layout_centerInParent="true"
                           android:layout_height="match_parent"
-                          android:layout_alignParentEnd="true"/>
+                          android:layout_alignParentEnd="true" android:layout_alignParentStart="false"/>
                 />
             </RelativeLayout>
         </LinearLayout>
