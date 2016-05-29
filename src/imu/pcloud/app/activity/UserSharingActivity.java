@@ -2,6 +2,8 @@ package imu.pcloud.app.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -10,8 +12,10 @@ import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.PlanSharingListModel;
 import imu.pcloud.app.model.UserSharingList;
+import imu.pcloud.app.utils.AdspterHide;
+import imu.pcloud.app.utils.MyAdspter;
+import imu.pcloud.app.utils.MyAdspterhasButton;
 import imu.pcloud.app.utils.SlideListView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +38,12 @@ public class UserSharingActivity extends HttpActivity{
         setActionBar("我的分享");
         listView1 = (SlideListView)findViewById(R.id.user_sharing_listView);
         listView1.initSlideMode(2);
+//      listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                toast("aaaaaaaaaaaa");
+//            }
+//        });
         get("getUserSharingList","cookies",getCookie());
     }
 
@@ -66,8 +76,10 @@ public class UserSharingActivity extends HttpActivity{
             sharingRecords = userSharingList.getSharingRecords();
             personalPlens = userSharingList.getPersonalPlans();
             list = getData();
-            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
-                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
+           AdspterHide listAdapter = new AdspterHide(this,this,list);
+
+//            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
+//                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
             listView1.setAdapter(listAdapter);
         } else {
             toast("得到用户列表失败，请重新登录");
