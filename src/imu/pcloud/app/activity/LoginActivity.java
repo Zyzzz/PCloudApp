@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
@@ -20,9 +24,11 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
 
     private Button register;
     private Button login;
+    private CheckBox isshowpsd;
     private TextView email;
     private TextView password;
     private UserModel user;
+    private boolean flag=true;
     private int loginFlag = 0;
     private SharedPreferences spf;
     private Context context;
@@ -41,8 +47,21 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         login = find(R.id.login);
         email = find(R.id.email_text);
         password = find(R.id.password_text);
+        isshowpsd=find(R.id.isshow);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+        isshowpsd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                else {
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -74,6 +93,8 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
             case R.id.register:
                 startActivity(RegisterActivity.class);
                 break;
+
+
         }
     }
     private void saveLoginInfo(Context context,String email,String password){

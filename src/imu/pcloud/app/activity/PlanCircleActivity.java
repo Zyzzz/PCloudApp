@@ -68,7 +68,7 @@ public class PlanCircleActivity extends HttpActivity{
                     new String[]{"name"}, new int[]{ R.id.plancircle_name});
             listView1.setAdapter(listAdapter);
         } else {
-            toast("得到用户列表失败，请重新登录");
+            toast("网络连接出现问题");
         }
     }
 }

@@ -33,21 +33,13 @@
         <Button
                 android:id="@+id/btn_download"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@drawable/buttonshape"
                 android:textColor="@android:color/white"
                 android:layout_below="@id/usercode_layout"
-                android:text="加载" android:layout_gravity="bottom"/>
-        <!--
-       <Button
-               android:id="@+id/view"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/buttonshape"
-               android:textColor="@android:color/white"
-               android:layout_below="@id/usercode_layout"
-               android:text="详细"/>
-               -->
+                android:text="加载"
+                android:layout_gravity="bottom"/>
+
     </LinearLayout>
 
 </LinearLayout>
