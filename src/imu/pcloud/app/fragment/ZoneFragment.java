@@ -14,6 +14,7 @@ import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.PlanCircleList;
 import imu.pcloud.app.utils.MyAdspter;
+import imu.pcloud.app.utils.SysApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +25,6 @@ import java.util.Map;
  * Created by acer on 2016/5/11.
  */
 public class ZoneFragment extends HttpFragment {
-    //小鱼鱼
     private ListView listView1;
     private List<PlanCircle> planCircles;
     private List<Map<String, Object>> list;
@@ -49,7 +49,7 @@ public class ZoneFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText("计划圈");
+        textview.setText(SPACE + "计划圈");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

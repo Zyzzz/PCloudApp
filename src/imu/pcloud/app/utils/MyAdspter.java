@@ -68,7 +68,7 @@ public class MyAdspter extends BaseAdapter {
             zujian = new Zujian();
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.zone_list_item, null);
-            zujian.image = (ImageView) convertView.findViewById(R.id.image);
+          //  zujian.image = (ImageView) convertView.findViewById(R.id.image);
             zujian.title = (TextView) convertView.findViewById(R.id.title);
             //zujian.view=(Button)convertView.findViewById(R.id.view);
             //zujian.info = (TextView) convertView.findViewById(R.id.info);
@@ -77,7 +77,7 @@ public class MyAdspter extends BaseAdapter {
             zujian = (Zujian) convertView.getTag();
         }
         //绑定数据
-        zujian.image.setBackgroundResource((Integer) data.get(position).get("image"));
+        //zujian.image.setBackgroundResource((Integer) data.get(position).get("image"));
         zujian.title.setText((String) data.get(position).get("name"));
         //zujian.info.setText((String) data.get(position).get("info"));
         return convertView;

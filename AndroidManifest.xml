@@ -13,21 +13,11 @@
         <activity android:name=".activity.LoginActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".activity.PlanCircleActivity"
                   android:label="@string/app_name"
                   android:theme="@style/newTheme"
                  >
-        </activity>
-        <activity android:name=".activity.Findpad"
-                  android:label="@string/app_name"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/newTheme"
-        >
         </activity>
         <activity android:name=".activity.UserSharingActivity"
                   android:label="@string/app_name"
@@ -40,18 +30,28 @@
                   android:theme="@style/newTheme">
 
         </activity>
-        <activity android:name=".activity.ManagePlanActivity"
-                  android:label="@string/app_name"
-                  android:theme="@style/newTheme">
-
-        </activity>
         <activity android:name=".activity.AddPlanItemActivity"
                   android:theme="@style/newTheme">
+        </activity>
+        <activity android:name=".activity.InformationActivity"
+            android:theme="@style/newTheme"
+        />
+        <activity android:name=".activity.AllPlanActivity"
+                  android:label="@string/app_name"
+                  android:theme="@style/newTheme">
+        </activity>
+        <activity android:name=".activity.AccountActivity"
+                  android:theme="@style/newTheme">
+        </activity>
+        <activity android:name=".activity.WelcomeActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>>
+        <activity android:name=".activity.RepasswordActivity"
+                  android:theme="@style/newTheme">
         </activity>
-        <activity android:name=".activity.InformationActivity"/>
     </application>
 </manifest>

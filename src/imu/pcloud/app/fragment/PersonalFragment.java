@@ -1,17 +1,14 @@
 package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.*;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import imu.pcloud.app.R;
-import imu.pcloud.app.activity.ManagePlanActivity;
-import imu.pcloud.app.been.Image;
+import imu.pcloud.app.activity.AllPlanActivity;
 import imu.pcloud.app.model.Plan;
 import imu.pcloud.app.utils.WidgetController;
 
@@ -32,20 +29,13 @@ public class PersonalFragment extends HttpFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_manage:
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), ManagePlanActivity.class);
-                startActivity(intent); 
-                return true;
-
+                startActivity(AllPlanActivity.class);
+                break;
             case R.id.action_updatedays:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-
+                break;
         }
+        return true;
     }
 
 
@@ -58,14 +48,12 @@ public class PersonalFragment extends HttpFragment {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
         ListAdapter listAdapter=new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
-                new String[]{"start_time","end_time", "content"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content});
+                new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
         listView.setAdapter(listAdapter);
         setHasOptionsMenu(true);
         setActionBar();
         return view;
     }
-
-
 
 
 
@@ -119,6 +107,7 @@ public class PersonalFragment extends HttpFragment {
             map.put("start_time", plan.getStartTimeString());
             map.put("end_time", plan.getEndTimeString());
             map.put("content", plan.getContent());
+            map.put("title", plan.getTitle() + ":");
             pList.add(map);
         }
     }
@@ -128,5 +117,9 @@ public class PersonalFragment extends HttpFragment {
         menu.clear();
         menuInflater.inflate(R.menu.personal, menu);
         return ;
+    }
+
+    public void showSelectDaysDialog() {
+
     }
 }

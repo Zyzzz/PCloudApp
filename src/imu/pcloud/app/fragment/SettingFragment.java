@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.AccountActivity;
+import imu.pcloud.app.activity.InformationActivity;
 import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.activity.UserSharingActivity;
+import imu.pcloud.app.utils.Information;
 
 /**
  * Created by acer on 2016/5/11.
@@ -46,7 +49,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText("我");
+        textview.setText(SPACE + "    " + "我");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
@@ -60,13 +63,14 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.personal_info:
+                startActivity(InformationActivity.class);
+                break;
             case R.id.my_sharing:
-                Intent intent = new Intent();
-                intent.setClass(getActivity().getApplicationContext(),UserSharingActivity.class);
-                startActivity(intent);
+                startActivity(UserSharingActivity.class);
                 break;
             case R.id.my_account:
-                toast("hahah");
+                startActivity(AccountActivity.class);
+                break;
         }
     }
 }
