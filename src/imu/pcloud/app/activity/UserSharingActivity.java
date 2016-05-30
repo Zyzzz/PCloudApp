@@ -42,7 +42,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
 //                toast("aaaaaaaaaaaa");
 //            }
 //        });
-        get("getUserSharingList","cookies",getCookie());
+       listView1.setRefreshing();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
