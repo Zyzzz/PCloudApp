@@ -12,8 +12,8 @@ import org.apache.http.protocol.HTTP;
  */
 public abstract class HttpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-    private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
-    //*/private static final String BASE_URL = "http://10.0.2.2:8080/PCloudServer/";
+   /* private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
+    //*/private static final String BASE_URL = "http://183.175.10.117:8080/PCloudServer/";
 
     public HttpClient() {
         client.setConnectTimeout(200);
