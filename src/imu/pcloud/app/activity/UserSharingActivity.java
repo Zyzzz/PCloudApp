@@ -2,19 +2,12 @@ package imu.pcloud.app.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.PlanSharingListModel;
-import imu.pcloud.app.model.UserSharingList;
 import imu.pcloud.app.utils.AdspterHide;
-import imu.pcloud.app.utils.MyAdspter;
-import imu.pcloud.app.utils.MyAdspterhasButton;
 import imu.pcloud.app.utils.SlideListView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +19,7 @@ import java.util.Map;
  */
 public class UserSharingActivity extends HttpActivity{
 
-    private SlideListView listView1;
+    private ListView listView1;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlens;
@@ -36,8 +29,8 @@ public class UserSharingActivity extends HttpActivity{
         setContentView(R.layout.user_sharing_layout);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         setActionBar("我的分享");
-        listView1 = (SlideListView)findViewById(R.id.user_sharing_listView);
-        listView1.initSlideMode(2);
+        listView1 = (ListView)findViewById(R.id.user_sharing_listView);
+        //listView1.initSlideMode(2);
 //      listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -57,7 +50,6 @@ public class UserSharingActivity extends HttpActivity{
     }
     private List<Map<String, Object>> getData(){
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
         for (int i = 0; i < sharingRecords.size(); i++) {
             for(int j = 0;j<personalPlens.size();j++) {
                 if(sharingRecords.get(i).getId().getPersonalPlanId()==personalPlens.get(j).getId()){
@@ -77,7 +69,6 @@ public class UserSharingActivity extends HttpActivity{
             personalPlens = userSharingList.getPersonalPlans();
             list = getData();
            AdspterHide listAdapter = new AdspterHide(this,this,list);
-
 //            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
 //                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
             listView1.setAdapter(listAdapter);
