@@ -10,6 +10,8 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.PlanSharingListModel;
+import imu.pcloud.app.utils.AdspterHide;
+import imu.pcloud.app.utils.PlanCircleAdspter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,8 +66,9 @@ public class PlanCircleActivity extends HttpActivity{
             personalPlens=userSharingList.getPersonalPlans();
             sharingRecords = userSharingList.getSharingRecords();
             list = getData();
-            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
-                    new String[]{"name"}, new int[]{ R.id.plancircle_name});
+            PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
+//            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
+//                    new String[]{"name"}, new int[]{ R.id.plancircle_name});
             listView1.setAdapter(listAdapter);
         } else {
             toast("网络连接出现问题");

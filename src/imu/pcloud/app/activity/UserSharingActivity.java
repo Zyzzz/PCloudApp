@@ -72,7 +72,6 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         super.onFailure();
         listView1.onRefreshComplete();
     }
-
     @Override
     protected void onSuccess() {
         PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
