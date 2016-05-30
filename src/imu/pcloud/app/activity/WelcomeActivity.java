@@ -27,7 +27,7 @@ public class WelcomeActivity extends HttpActivity{
             public void run() {
                 get("relogin", "cookies", getCookie());
             }
-        }, 1000);
+        }, 800);
     }
 
     @Override

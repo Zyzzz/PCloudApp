@@ -16,7 +16,7 @@ public abstract class HttpClient {
     //*/private static final String BASE_URL = "http://183.175.10.117:8080/PCloudServer/";
 
     public HttpClient() {
-        client.setConnectTimeout(200);
+        client.setConnectTimeout(1000);
     }
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
