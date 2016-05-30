@@ -21,6 +21,7 @@ public class WelcomeActivity extends HttpActivity{
     }
 
     private void init() {
+
         setContentView(R.layout.welcome_layout);
         timer.schedule(new TimerTask() {
             @Override
