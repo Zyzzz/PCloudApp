@@ -14,7 +14,10 @@ import imu.pcloud.app.fragment.AddItemFragment;
 import imu.pcloud.app.listener.OnPlanInputListener;
 import imu.pcloud.app.model.BaseModel;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.model.PlanList;
 import imu.pcloud.app.model.Plans;
+import imu.pcloud.app.utils.DateTool;
+import imu.pcloud.app.utils.PlanListTool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +55,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle data = getIntent().getExtras();
-        if(data.getInt("status", -1) == 1) {
+        if(data != null) {
             editFlag = 1;
             initEdit(data);
         }
@@ -158,6 +161,15 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         else {
             setPlan(plan, addFlag);
         }
+        sortPlan();
+    }
+
+    public void sortPlan() {
+        planArrayList.remove(planArrayList.size() - 1);
+        PlanListTool.sort(planArrayList);
+        planArrayList.add(newPlan);
+        getData(pList);
+        listAdapter.notifyDataSetChanged();
     }
 
     @Override

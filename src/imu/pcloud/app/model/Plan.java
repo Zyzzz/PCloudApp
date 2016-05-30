@@ -69,7 +69,7 @@ public class Plan {
         Time leftEnd = DateTool.stringToTime(endTimeString);
         Time rightStart = DateTool.stringToTime(right.startTimeString);
         Time rightEnd = DateTool.stringToTime(right.endTimeString);
-        if(leftStart.equals(rightStart)) {
+        if(leftStart.compareTo(rightStart) == 0) {
             return leftEnd.compareTo(rightEnd);
         }else {
             return leftStart.compareTo(rightStart);

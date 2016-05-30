@@ -18,7 +18,7 @@ public class DateTool {
 
     public static Time stringToTime(String string) {
         try {
-            return (Time) timeFormat.parse(string);
+            return new Time(timeFormat.parse(string).getTime());
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

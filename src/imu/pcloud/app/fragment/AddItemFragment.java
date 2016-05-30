@@ -11,11 +11,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AddPlanItemActivity;
 import imu.pcloud.app.listener.OnPlanInputListener;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.utils.DateTool;
 
+import java.lang.reflect.Field;
+import java.sql.Time;
 import java.util.Calendar;
 
 /**
@@ -76,20 +80,36 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int id)
                             {
+                                if(judge() != true) {
+                                    setDialogStatus(false, dialog);
+                                    return;
+                                }
                                 Plan plan = new Plan(startTime.getText().toString(),
                                         endTime.getText().toString(),
                                         content.getText().toString(),
                                         title.getText().toString());
                                 if(onPlanInputListener != null)
                                     onPlanInputListener.onPlanInputed(plan);
+                                setDialogStatus(true, dialog);
                             }
-                        }).setNegativeButton("取消", null);
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setDialogStatus(true, dialog);
+            }
+        });
         return builder.create();
     }
 
     @Override
     public void onClick(View v) {
         touched = v;
+        if(v.getId() == R.id.end_time) {
+            if(startTime.getText().length() == 0){
+                Toast.makeText(getActivity(), "请先设置开始时间", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog.Builder builder = new TimePickerDialog.Builder(getActivity());
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), this,
@@ -112,4 +132,54 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
                 break;
         }
     }
+
+    public void setDialogStatus(Boolean opened, DialogInterface dialog) {
+        try
+        {
+            Field field = dialog.getClass()
+                    .getSuperclass().getDeclaredField(
+                            "mShowing" );
+            field.setAccessible( true );
+            // 将mShowing变量设为false，表示对话框已关闭
+            field.set(dialog, opened);
+            dialog.dismiss();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean judge() {
+        if(title.getText().length() == 0) {
+            toast("标题不能为空");
+            return false;
+        }
+        else if(startTime.getText().length() == 0) {
+            toast("开始时间不能为空");
+            return false;
+        }
+        else if (endTime.getText().length() == 0) {
+            toast("结束时间不能为空");
+            return false;
+        }
+        else if(content.getText().length() == 0) {
+            content.setText(title.getText());
+            return true;
+        }
+        else {
+            Time end = DateTool.stringToTime(endTime.getText().toString());
+            Time start = DateTool.stringToTime(startTime.getText().toString());
+            if(end.before(start)) {
+                toast("结束时间需要大于开始时间");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected void toast(String string) {
+        Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -1,6 +1,5 @@
 package imu.pcloud.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,85 +8,91 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshExpandableListView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.adapter.AllPlanAdapter;
 import imu.pcloud.app.been.PersonalPlan;
+import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
 import imu.pcloud.app.model.PlanList;
-import imu.pcloud.app.utils.RefreshableView;
+import imu.pcloud.app.model.Plans;
+import imu.pcloud.app.utils.PlanListTool;
 
 import java.util.*;
 
 /**
  * Created by acer on 2016/5/15.
  */
-public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemClickListener, RefreshableView.PullToRefreshListener
-{
+public class AllPlanActivity extends HttpActivity
+        implements AdapterView.OnItemClickListener,
+        PullToRefreshBase.OnRefreshListener<ListView>,AllPlanAdapter.MyOnClickListener {
 
     ArrayList<PersonalPlan> personalPlanArrayList = new ArrayList<PersonalPlan>();
-    private ListView listView;
-    private RefreshableView refreshableView;
-    private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
-    SimpleAdapter listAdapter;
+    ArrayList<Integer> selectedPlanId = new ArrayList<Integer>();
+    private PullToRefreshListView listView;
+    AllPlanAdapter allPlanAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allplan);
         init();
-        listAdapter.notifyDataSetChanged();
+        allPlanAdapter.notifyDataSetChanged();
     }
 
     private void init() {
         setActionBar("设置计划");
-        refreshableView = (RefreshableView) findViewById(R.id.refreshview);
-        refreshableView.setOnRefreshListener(this, 0);
-        listView = find(R.id.allplan_listview);
-        listAdapter=new SimpleAdapter(this, pList, R.layout.allplan_list_item,
-                new String[]{"plan_name"}, new int[]{R.id.plan_name});
-        listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener(this);
+        listView = (PullToRefreshListView) findViewById(R.id.allplan_listview);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
+        listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
+        listView.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
+        listView.setOnRefreshListener(this);
+        allPlanAdapter = new AllPlanAdapter(this, personalPlanArrayList, selectedPlanId);
+        allPlanAdapter.setMyOnClickListener(this);
+        listView.setAdapter(allPlanAdapter);
         setPlans();
         get("getPlanList", "cookies", getCookie());
-        getData(pList);
     }
 
     @Override
     protected void onSuccess() {
         PlanList planList =  getObject(PlanList.class);
         if(planList.getStatus() != 0) {
-            toast("获取云端计划失败");
+            toast(planList.getResult());
         }
         else {
             toast("获取云端计划成功");
             mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
         }
-        refreshableView.finishRefreshing();
-    }
-
-    public void getData(List<Map<String,Object>> pList) {
-        pList.clear();
-        for (PersonalPlan plan:personalPlanArrayList)
-        {
-            Map<String,Object> map = new HashMap<String, Object>();
-            map.put("plan_name", plan.getName());
-            pList.add(map);
-        }
+        listView.onRefreshComplete();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        PersonalPlan plan = personalPlanArrayList.get(position);
-        if(plan.getUserId() != getUserId()) {
-            toast("不可以修改他人的计划");
-            return;
-        }
-        String planString = plan.getContent();
-        Bundle data = new Bundle();
-        data.putString("planString", planString);
-        data.putInt("status", 1);
-        data.putString("planName", plan.getName());
-        data.putInt("planId", plan.getId());
-        startActivity(AddPlanItemActivity.class, data);
     }
+
+    public void setNowPlan() {
+        ArrayList<LocalPlan> localPlans = new ArrayList<LocalPlan>();
+        for(Integer selectedId:selectedPlanId) {
+            for(PersonalPlan plan:personalPlanArrayList) {
+                if(plan.getId() == selectedId) {
+                    String content = plan.getContent();
+                    Plans plans = new Plans();
+                    plans.setByJsonString(content);
+                    for(Plan p:plans.getPlans()) {
+                        LocalPlan localPlan = new LocalPlan(p.getStartTimeString(), p.getEndTimeString(), p.getContent(), p.getTitle(), plan.getName());
+                        localPlans.add(localPlan);
+                    }
+                }
+            }
+        }
+        PlanListTool.sort(localPlans);
+        editor.putString("nowPlan" + getUserId(), gson.toJson(localPlans));
+    }
+
+
 
     public void putPlans() {
         String plansString = gson.toJson(personalPlanArrayList);
@@ -116,7 +121,7 @@ public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemC
 
     @Override
     protected void onResume() {
-        listAdapter.notifyDataSetChanged();
+        allPlanAdapter.notifyDataSetChanged();
         get("getPlanList", "cookies", getCookie());
         super.onResume();
     }
@@ -131,24 +136,13 @@ public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemC
         personalPlanArrayList.clear();
         personalPlanArrayList.addAll(cloud);
         putPlans();
-        getData(pList);
-        listAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onRefresh() {
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                get("getPlanList", "cookies", getCookie());
-            }
-        }, 800);
+        allPlanAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onFailure() {
         super.onFailure();
-        refreshableView.finishRefreshing();
+        listView.onRefreshComplete();
     }
 
     @Override
@@ -169,5 +163,52 @@ public class AllPlanActivity extends HttpActivity implements AdapterView.OnItemC
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                get("getPlanList", "cookies", getCookie());
+            }
+        }, 1000);
+    }
+
+    @Override
+    public void onClickItem(View view, int position) {
+        PersonalPlan plan = personalPlanArrayList.get(position);
+        if(view.getId() == R.id.item) {
+            if (plan.getUserId() != getUserId()) {
+                toast("不可以修改他人的计划");
+                return;
+            }
+            String planString = plan.getContent();
+            Bundle data = new Bundle();
+            data.putString("planString", planString);
+            data.putInt("status", 1);
+            data.putString("planName", plan.getName());
+            data.putInt("planId", plan.getId());
+            startActivity(AddPlanItemActivity.class, data);
+        }
+        else {
+            int i = 0;
+            int length = selectedPlanId.size();
+            for(i = 0; i < length; i++){
+                int selectId = selectedPlanId.get(i);
+                if(selectId == plan.getId()) {
+                    view.setSelected(false);
+                    selectedPlanId.remove(i);
+                    break;
+                }
+            }
+            if(i == length) {
+                selectedPlanId.add(plan.getId());
+                view.setSelected(true);
+            }
+        }
+    }
+    public void getData() {
+        allPlanAdapter.getData();
     }
 }

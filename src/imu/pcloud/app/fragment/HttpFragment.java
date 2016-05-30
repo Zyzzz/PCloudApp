@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import imu.pcloud.app.R;
 import imu.pcloud.app.activity.HttpActivity;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
@@ -100,4 +101,5 @@ abstract public class HttpFragment extends Fragment {
         intent.putExtras(savedInstanceState);
         startActivity(intent);
     }
+
 }
