@@ -9,33 +9,35 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.activity.UserSharingActivity;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2016/5/29.
+ * Created by Administrator on 2016/5/30.
  */
-public class AdspterHide extends BaseAdapter{
-    private  List<Map<String, Object>> arrays = null;
+public class PlanCircleAdspter extends BaseAdapter {
+
+    private List<Map<String, Object>> arrays = null;
     private Context mContext;
     private Button curDel_btn;
     private float x,ux;
-    private UserSharingActivity mActivity;
-    public AdspterHide(UserSharingActivity activity, Context mContext,  List<Map<String, Object>> arrays) {
+    private PlanCircleActivity mActivity;
+    public PlanCircleAdspter(PlanCircleActivity activity, Context mContext,  List<Map<String, Object>> arrays) {
         this.mContext = mContext;
         this.arrays = arrays;
         mActivity = activity;
-  }
+    }
 
-   public int getCount() {
+    public int getCount() {
         return this.arrays.size();
-   }
+    }
 
     public Object getItem(int position) {
-     return null;
-      }
+        return null;
+    }
     public long getItemId(int position) {
         return position;
     }
@@ -44,22 +46,22 @@ public class AdspterHide extends BaseAdapter{
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.user_sharing_list_item, null);
-            viewHolder.tvTitle = (TextView) view.findViewById(R.id.user_sharing_name);
-            viewHolder.btnDel = (Button) view.findViewById(R.id.btn_delete);
+            view = LayoutInflater.from(mContext).inflate(R.layout.plancircle_item, null);
+            viewHolder.tvTitle = (TextView) view.findViewById(R.id.plancircle_name);
+            viewHolder.btnDel = (Button) view.findViewById(R.id.btn_download);
             view.setTag(viewHolder);
-          } else {
-                  viewHolder = (ViewHolder) view.getTag();
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
         }
-      //换掉了原来listview中的onItemClick
+        //换掉了原来listview中的onItemClick
         view.setOnClickListener(new View.OnClickListener() {
-                     public void onClick(View v) {
-                                 // TODO Auto-generated method stub
-                                //mActivity.openActivity();
-                           }
-         });
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //mActivity.openActivity();
+            }
+        });
         //viewHolder.tvTitle.setText((String); data.get(position).get("name"));
-          //为每一个view项设置触控监听
+        //为每一个view项设置触控监听
         view.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 final ViewHolder holder = (ViewHolder) v.getTag();
@@ -76,8 +78,8 @@ public class AdspterHide extends BaseAdapter{
                             return true;
                         }
                     }
-                 } else if (event.getAction() == MotionEvent.ACTION_UP) {// 松开处理
-                     //设置背景为未选中正常状态
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {// 松开处理
+                    //设置背景为未选中正常状态
                     //v.setBackgroundResource(R.drawable.mm_listitem_simple);
                     //获取松开时的x坐标
                     ux = event.getX();
@@ -96,26 +98,25 @@ public class AdspterHide extends BaseAdapter{
                 } else {//其他模式
                     //设置背景为未选中正常状态
                     //v.setBackgroundResource(R.drawable.mm_listitem_simple);
-                             }
-
+                }
                 return false;
             }
         });
         viewHolder.tvTitle.setText((String)this.arrays.get(position).get("name"));
-             //为删除按钮添加监听事件，实现点击删除按钮时删除该项
+        //为删除按钮添加监听事件，实现点击删除按钮时删除该项
         viewHolder.btnDel.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                     if(curDel_btn!=null)
-                         curDel_btn.setVisibility(View.GONE);
-                         arrays.remove(position);
-                      //notifyDataSetChanged();
-                     }
-         });
-          return view;
+            public void onClick(View v) {
+                if(curDel_btn!=null)
+                    curDel_btn.setVisibility(View.GONE);
+                arrays.remove(position);
+                //notifyDataSetChanged();
+            }
+        });
+        return view;
 
     }
-         final static class ViewHolder {
-             TextView tvTitle;
-             Button btnDel;
-        }
- }
+    final static class ViewHolder {
+        TextView tvTitle;
+        Button btnDel;
+    }
+}
