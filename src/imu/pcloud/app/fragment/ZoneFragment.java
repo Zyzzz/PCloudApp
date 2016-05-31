@@ -87,7 +87,6 @@ public class ZoneFragment extends HttpFragment {
             }
         });
     }
-
     @Override
     protected void onFailure() {
         toast("网络连接失败");

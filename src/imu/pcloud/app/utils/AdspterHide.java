@@ -107,12 +107,12 @@ public class AdspterHide extends BaseAdapter{
                 public void onClick(View v) {
                      if(curDel_btn!=null)
                          curDel_btn.setVisibility(View.GONE);
+                         mActivity.deleteUserSharing(position);
                          arrays.remove(position);
                       //notifyDataSetChanged();
                      }
          });
           return view;
-
     }
          final static class ViewHolder {
              TextView tvTitle;
