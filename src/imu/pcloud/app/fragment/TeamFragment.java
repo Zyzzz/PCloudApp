@@ -21,7 +21,7 @@ public class TeamFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "群计划");
+        textview.setText("群计划");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

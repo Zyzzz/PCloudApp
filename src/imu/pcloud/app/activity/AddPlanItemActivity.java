@@ -103,7 +103,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         BaseModel result = getObject(BaseModel.class);
         if(result.getStatus() == 200) {
             toast("创建成功");
-            this.finish();
+            //this.finish();
         }
         else if(result.getStatus() == 205) {
             toast("修改成功");
@@ -183,6 +183,10 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirm:
+                    if(planArrayList.size() < 2) {
+                        toast("请至少输入一条计划");
+                        return false;
+                    }
                     ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                     pal.remove(pal.size() - 1);
                     plans.setPlans(pal);

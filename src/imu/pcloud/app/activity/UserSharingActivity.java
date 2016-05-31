@@ -8,9 +8,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
+import imu.pcloud.app.model.BaseModel;
 import imu.pcloud.app.model.PlanSharingListModel;
-import imu.pcloud.app.utils.AdspterHide;
-import imu.pcloud.app.utils.SlideListView;
+import imu.pcloud.app.adapter.AdspterHide;
 
 import java.util.*;
 
@@ -20,13 +20,16 @@ import java.util.*;
 public class UserSharingActivity extends HttpActivity implements PullToRefreshBase.OnRefreshListener<ListView>{
 
     private PullToRefreshListView listView1;
+    private boolean falg;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlens;
+    AdspterHide listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_sharing_layout);
+        falg = true;
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         setActionBar("我的分享");
         listView1 = (PullToRefreshListView)findViewById(R.id.user_sharing_listView);
@@ -35,6 +38,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         listView1.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
         listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         listView1.setOnRefreshListener(this);
+        get("getUserSharingList","cookies",getCookie());
         //listView1.initSlideMode(2);
 //      listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -66,6 +70,13 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         }
         return list;
     }
+    public void deleteUserSharing(int position){
+        falg = false;
+        Integer personalPlanId = sharingRecords.get(position).getId().getPersonalPlanId();
+        Integer planCircleId = sharingRecords.get(position).getId().getPlanCircleId();
+        get("deleteSharing","personalPlanId",personalPlanId,"planCircleId",planCircleId);
+    }
+
 
     @Override
     protected void onFailure() {
@@ -74,17 +85,27 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     }
     @Override
     protected void onSuccess() {
-        PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
-        if(userSharingList.getStatus() == 400){
-            sharingRecords = userSharingList.getSharingRecords();
-            personalPlens = userSharingList.getPersonalPlans();
-            list = getData();
-           AdspterHide listAdapter = new AdspterHide(this,this,list);
+        if(falg) {
+            PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
+            if (userSharingList.getStatus() == 400) {
+                sharingRecords = userSharingList.getSharingRecords();
+                personalPlens = userSharingList.getPersonalPlans();
+                list = getData();
+                listAdapter = new AdspterHide(this, this, list);
 //            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
 //                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
-            listView1.setAdapter(listAdapter);
-        } else {
-            toast("得到用户分享列表失败，请重新登录");
+                listView1.setAdapter(listAdapter);
+            } else {
+                toast("得到用户分享列表失败，请重新登录");
+            }
+        }else {
+            BaseModel baseModel = getObject(BaseModel.class);
+            if(baseModel.getStatus()==302) {
+                toast(baseModel.getResult());
+            }else {
+                toast("删除失败");
+            }
+            falg = true;
         }
         listView1.onRefreshComplete();
     }

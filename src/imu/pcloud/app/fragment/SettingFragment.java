@@ -49,7 +49,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "    " + "我");
+        textview.setText("我");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

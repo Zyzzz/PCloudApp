@@ -22,12 +22,24 @@ public class WelcomeActivity extends HttpActivity{
 
     private void init() {
         setContentView(R.layout.welcome_layout);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                get("relogin", "cookies", getCookie());
-            }
-        }, 800);
+        if(getCookie().length() < 3) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                   // get("relogin", "cookies", getCookie());
+                    startActivity(LoginActivity.class);
+                    finish();
+                }
+            }, 1500);
+
+        }else {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    get("relogin", "cookies", getCookie());
+                }
+            }, 800);
+        }
     }
 
     @Override

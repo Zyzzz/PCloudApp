@@ -6,10 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshExpandableListView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.adapter.AllPlanAdapter;
@@ -49,11 +47,12 @@ public class AllPlanActivity extends HttpActivity
         listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
         listView.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         listView.setOnRefreshListener(this);
-        allPlanAdapter = new AllPlanAdapter(this, personalPlanArrayList, selectedPlanId);
+        allPlanAdapter = new AllPlanAdapter(this, personalPlanArrayList, getUserId());
         allPlanAdapter.setMyOnClickListener(this);
         listView.setAdapter(allPlanAdapter);
+        allPlanAdapter.notifyDataSetChanged();
         setPlans();
-        get("getPlanList", "cookies", getCookie());
+        listView.setRefreshing();
     }
 
     @Override
@@ -75,6 +74,7 @@ public class AllPlanActivity extends HttpActivity
 
     public void setNowPlan() {
         ArrayList<LocalPlan> localPlans = new ArrayList<LocalPlan>();
+        setSelectedPlanId();
         for(Integer selectedId:selectedPlanId) {
             for(PersonalPlan plan:personalPlanArrayList) {
                 if(plan.getId() == selectedId) {
@@ -90,6 +90,7 @@ public class AllPlanActivity extends HttpActivity
         }
         PlanListTool.sort(localPlans);
         editor.putString("nowPlan" + getUserId(), gson.toJson(localPlans));
+        editor.commit();
     }
 
 
@@ -119,11 +120,31 @@ public class AllPlanActivity extends HttpActivity
         putPlans();
     }
 
+    public void putSelectedPlanId() {
+        String selectorIdsString = gson.toJson(selectedPlanId);
+        editor.putString("selectedPlanId" + getUserId(),selectorIdsString);
+        editor.commit();
+    }
+
+    public void setSelectedPlanId() {
+        selectedPlanId = gson.fromJson(
+                sharedPreferences.getString("selectedPlanId" + getUserId(), ""),
+                new TypeToken<ArrayList<Integer>>() {
+                }.getType());
+        if(selectedPlanId == null)
+            selectedPlanId = new ArrayList<Integer>();
+    }
+
     @Override
     protected void onResume() {
-        allPlanAdapter.notifyDataSetChanged();
-        get("getPlanList", "cookies", getCookie());
+        listView.setRefreshing();
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        setNowPlan();
+        super.onStop();
     }
 
     protected void mergeCloudPlanToLocal(ArrayList<PersonalPlan> cloud) {
@@ -173,6 +194,7 @@ public class AllPlanActivity extends HttpActivity
                 get("getPlanList", "cookies", getCookie());
             }
         }, 1000);
+        setSelectedPlanId();
     }
 
     @Override
@@ -206,9 +228,8 @@ public class AllPlanActivity extends HttpActivity
                 selectedPlanId.add(plan.getId());
                 view.setSelected(true);
             }
+            putSelectedPlanId();
+            setNowPlan();
         }
-    }
-    public void getData() {
-        allPlanAdapter.getData();
     }
 }
