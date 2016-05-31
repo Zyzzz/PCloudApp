@@ -6,38 +6,45 @@ import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.PlanSharingListModel;
+import imu.pcloud.app.utils.AdspterHide;
+import imu.pcloud.app.utils.PlanCircleAdspter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/5/17.
  */
-public class PlanCircleActivity extends HttpActivity{
+public class PlanCircleActivity extends HttpActivity implements PullToRefreshBase.OnRefreshListener<ListView>{
 
-    private ListView listView1;
+    private PullToRefreshListView listView1;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlens;
+    private int planCircleID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plancircle_layout);
-        listView1 = find(R.id.plancircle_listView);
+        listView1 = (PullToRefreshListView)findViewById(R.id.plancircle_listView);
+        listView1.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        listView1.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
+        listView1.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
+        listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
+        listView1.setOnRefreshListener(this);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent_accept = getIntent();
         Bundle bundle = intent_accept.getExtras();
        // getActionBar().setDisplayHomeAsUpEnabled(true);
         String planCirleName = bundle.getString("planCircleName");
         setActionBar(planCirleName);
-        int planCircleID = bundle.getInt("planCircleID");
-        get("getSharingList","planCircleId",planCircleID);
+        planCircleID = bundle.getInt("planCircleID");
+        listView1.setRefreshing();
         //get()s
     }
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,6 +64,13 @@ public class PlanCircleActivity extends HttpActivity{
         }
         return list;
     }
+
+    @Override
+    protected void onFailure() {
+        super.onFailure();
+        listView1.onRefreshComplete();
+    }
+
     @Override
     protected void onSuccess() {
         PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
@@ -64,11 +78,23 @@ public class PlanCircleActivity extends HttpActivity{
             personalPlens=userSharingList.getPersonalPlans();
             sharingRecords = userSharingList.getSharingRecords();
             list = getData();
-            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
-                    new String[]{"name"}, new int[]{ R.id.plancircle_name});
+            PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
+//            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
+//                    new String[]{"name"}, new int[]{ R.id.plancircle_name});
             listView1.setAdapter(listAdapter);
         } else {
             toast("网络连接出现问题");
         }
+        listView1.onRefreshComplete();
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                get("getSharingList","planCircleId",planCircleID);
+            }
+        }, 1000);
     }
 }
