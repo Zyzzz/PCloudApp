@@ -15,6 +15,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.HttpActivity;
+import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
 import imu.pcloud.app.utils.SysApplication;
@@ -74,6 +75,25 @@ abstract public class HttpFragment extends Fragment {
 
     protected String getCookie() {
         return sharedPreferences.getString("cookie", "");
+    }
+
+    protected void setUserId(int userId) {
+        editor.putInt("userId", userId);
+        editor.commit();
+    }
+
+    protected int getUserId() {
+        return sharedPreferences.getInt("userId", -1);
+    }
+
+    protected void setUserMoodel(UserModel userMoodel) {
+        editor.putString("usermodel", gson.toJson(userMoodel));
+        editor.commit();
+    }
+
+    protected UserModel getUserModel() {
+        String userModelString = sharedPreferences.getString("usermodel", "");
+        return gson.fromJson(userModelString, UserModel.class);
     }
 
     class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {

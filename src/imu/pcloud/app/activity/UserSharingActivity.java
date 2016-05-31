@@ -10,8 +10,7 @@ import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.SharingRecord;
 import imu.pcloud.app.model.BaseModel;
 import imu.pcloud.app.model.PlanSharingListModel;
-import imu.pcloud.app.utils.AdspterHide;
-import imu.pcloud.app.utils.SlideListView;
+import imu.pcloud.app.adapter.AdspterHide;
 
 import java.util.*;
 
@@ -25,6 +24,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlens;
+    AdspterHide listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +38,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         listView1.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
         listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         listView1.setOnRefreshListener(this);
+        get("getUserSharingList","cookies",getCookie());
         //listView1.initSlideMode(2);
 //      listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -90,7 +91,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
                 sharingRecords = userSharingList.getSharingRecords();
                 personalPlens = userSharingList.getPersonalPlans();
                 list = getData();
-                AdspterHide listAdapter = new AdspterHide(this, this, list);
+                listAdapter = new AdspterHide(this, this, list);
 //            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
 //                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
                 listView1.setAdapter(listAdapter);
@@ -104,6 +105,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             }else {
                 toast("删除失败");
             }
+            falg = true;
         }
         listView1.onRefreshComplete();
     }

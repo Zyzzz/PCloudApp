@@ -1,12 +1,16 @@
 package imu.pcloud.app.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 
@@ -25,11 +29,13 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener{
     ArrayList<PersonalPlan> personalPlanArrayList;
     ArrayList<Integer> selectedPlanId;
     MyOnClickListener myOnClickListener;
-
-    public AllPlanAdapter(Context context, ArrayList<PersonalPlan> personalPlanArrayList, ArrayList<Integer> selectedPlanId) {
+    int userId;
+    Context context;
+    public AllPlanAdapter(Context context, ArrayList<PersonalPlan> personalPlanArrayList, int userId) {
+        this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.personalPlanArrayList = personalPlanArrayList;
-        this.selectedPlanId = selectedPlanId;
+        this.userId = userId;
     }
 
     public void setMyOnClickListener(MyOnClickListener myOnClickListener) {
@@ -113,6 +119,19 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener{
     @Override
     public void notifyDataSetChanged() {
         getData();
+        setSelectedPlanId();
         super.notifyDataSetChanged();
+    }
+
+    public void setSelectedPlanId() {
+        Gson gson = new GsonBuilder().create();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userinfo", context.MODE_PRIVATE);
+        selectedPlanId = gson.fromJson(
+                sharedPreferences.getString("selectedPlanId" + userId, ""),
+                new TypeToken<ArrayList<Integer>>() {
+                }.getType());
+        if(selectedPlanId == null){
+            selectedPlanId = new ArrayList<Integer>();
+        }
     }
 }
