@@ -1,23 +1,25 @@
 package imu.pcloud.app.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.adapter.AllPlanAdapter;
 import imu.pcloud.app.been.PersonalPlan;
-import imu.pcloud.app.model.LocalPlan;
-import imu.pcloud.app.model.Plan;
-import imu.pcloud.app.model.PlanList;
-import imu.pcloud.app.model.Plans;
+import imu.pcloud.app.been.PlanCircle;
+import imu.pcloud.app.model.*;
 import imu.pcloud.app.utils.PlanListTool;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -31,6 +33,14 @@ public class AllPlanActivity extends HttpActivity
     ArrayList<Integer> selectedPlanId = new ArrayList<Integer>();
     private PullToRefreshListView listView;
     AllPlanAdapter allPlanAdapter;
+    AlertDialog shareDialog;
+    private List<PlanCircle> planCircles = new ArrayList<PlanCircle>();
+    private ArrayList<String> circleNames = new ArrayList<String>();
+    private ArrayList<HashMap<String, Object>> planCircleItemList = new ArrayList<HashMap<String, Object>>();
+    SimpleAdapter planCircleAdapter;
+    private PlanCircle sharedPLanCircle;
+    private PersonalPlan sharedPersonalPlan;
+    private int sharedFlag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,8 @@ public class AllPlanActivity extends HttpActivity
 
     private void init() {
         setActionBar("设置计划");
+        setPlanCircles();
+        //initShareDialog();
         listView = (PullToRefreshListView) findViewById(R.id.allplan_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
@@ -55,17 +67,68 @@ public class AllPlanActivity extends HttpActivity
         listView.setRefreshing();
     }
 
+    public void initShareDialog() {
+        View view = getLayoutInflater().inflate(R.layout.share_plan_layout, null);
+        setPlanCircleItem();
+        shareDialog =
+                new AlertDialog.Builder(this).setView(view)
+                        .setTitle("要分享到哪个圈子")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                get("sharingPlan",
+                                        "personalPlanId", sharedPersonalPlan.getId(),
+                                        "planCircleId", sharedPLanCircle.getId(),
+                                        "cookies", getCookie());
+                                setDialogStatus(false, dialog);
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                setDialogStatus(true, dialog);
+                                sharedFlag = 0;
+                            }
+                        })
+                        .create();
+    }
+
+    public void setPlanCircleItem() {
+        for(PlanCircle planCircle: planCircles) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("plan_circle_name", planCircle.getName());
+            planCircleItemList.add(map);
+        }
+        if(planCircleAdapter == null)
+            planCircleAdapter = new SimpleAdapter(this, planCircleItemList, R.layout.share_item, new String[]{"plan_circle_name"}, new int[]{R.id.plan_circle_name});
+        else
+            planCircleAdapter.notifyDataSetChanged();
+    }
+
     @Override
     protected void onSuccess() {
-        PlanList planList =  getObject(PlanList.class);
-        if(planList.getStatus() != 0) {
-            toast(planList.getResult());
+        if(sharedFlag == 0) {
+            PlanList planList = getObject(PlanList.class);
+            if (planList.getStatus() != 0) {
+                toast(planList.getResult());
+            } else {
+                toast("获取云端计划成功");
+                mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
+            }
+            listView.onRefreshComplete();
         }
         else {
-            toast("获取云端计划成功");
-            mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
+            BaseModel result = getObject(BaseModel.class);
+            if(result.getStatus() == 301) {
+                toast("分享成功！");
+                setDialogStatus(false, shareDialog);
+                sharedFlag = 0;
+            }
+            else {
+                toast(result.getResult());
+                setDialogStatus(true, shareDialog);
+            }
         }
-        listView.onRefreshComplete();
     }
 
     @Override
@@ -109,15 +172,10 @@ public class AllPlanActivity extends HttpActivity
         mergeCloudPlanToLocal(personalPlanArrayList);
     }
 
-    public void putPlan(PersonalPlan plan) {
-        setPlans();
-        personalPlanArrayList.add(plan);
-        putPlans();
-    }
-
-    public void setPlan(PersonalPlan plan, int index) {
-        personalPlanArrayList.set(index, plan);
-        putPlans();
+    public void setPlanCircles () {
+        planCircles = gson.fromJson(sharedPreferences.getString("planCircle", ""),
+                new TypeToken<ArrayList<PlanCircle>>() {
+                }.getType());
     }
 
     public void putSelectedPlanId() {
@@ -182,6 +240,9 @@ public class AllPlanActivity extends HttpActivity
             case android.R.id.home:
                 finish();
                 break;
+//            case R.id.share_plan:
+//                sharedFlag = 1;
+//                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
@@ -213,7 +274,7 @@ public class AllPlanActivity extends HttpActivity
             data.putInt("planId", plan.getId());
             startActivity(AddPlanItemActivity.class, data);
         }
-        else {
+        else if(view.getId() == R.id.selector){
             int i = 0;
             int length = selectedPlanId.size();
             for(i = 0; i < length; i++){
@@ -230,6 +291,29 @@ public class AllPlanActivity extends HttpActivity
             }
             putSelectedPlanId();
             setNowPlan();
+        }
+        else if(view.getId() == R.id.conversationlist_delete) {
+            toast("deleted");
+        }
+        else if(view.getId() == R.id.conversationlist_share) {
+            toast("shared");
+        }
+    }
+
+    public void setDialogStatus(Boolean opened, DialogInterface dialog) {
+        try
+        {
+            Field field = dialog.getClass()
+                    .getSuperclass().getDeclaredField(
+                            "mShowing" );
+            field.setAccessible( true );
+            // 将mShowing变量设为false，表示对话框已关闭
+            field.set(dialog, opened);
+            dialog.dismiss();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }
