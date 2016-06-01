@@ -62,9 +62,8 @@ public class AllPlanActivity extends HttpActivity
         allPlanAdapter = new AllPlanAdapter(this, personalPlanArrayList, getUserId());
         allPlanAdapter.setMyOnClickListener(this);
         listView.setAdapter(allPlanAdapter);
-        allPlanAdapter.notifyDataSetChanged();
+        get("getPlanList", "cookies", getCookie());
         setPlans();
-        listView.setRefreshing();
     }
 
     public void initShareDialog() {
@@ -112,10 +111,13 @@ public class AllPlanActivity extends HttpActivity
             if (planList.getStatus() != 0) {
                 toast(planList.getResult());
             } else {
-                toast("获取云端计划成功");
+                //toast("获取云端计划成功");
                 mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
             }
-            listView.onRefreshComplete();
+            if(listView.isRefreshing()) {
+                toast("刷新成功");
+                listView.onRefreshComplete();
+            }
         }
         else {
             BaseModel result = getObject(BaseModel.class);

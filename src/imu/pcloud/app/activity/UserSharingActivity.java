@@ -98,16 +98,17 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             } else {
                 toast("得到用户分享列表失败，请重新登录");
             }
+            listView1.onRefreshComplete();
         }else {
             BaseModel baseModel = getObject(BaseModel.class);
             if(baseModel.getStatus()==302) {
                 toast(baseModel.getResult());
+                listView1.setRefreshing();
             }else {
                 toast("删除失败");
             }
             falg = true;
         }
-        listView1.onRefreshComplete();
     }
     @Override
     public void onRefresh(PullToRefreshBase<ListView> refreshView) {

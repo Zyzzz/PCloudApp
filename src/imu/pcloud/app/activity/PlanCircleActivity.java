@@ -41,8 +41,9 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
         String planCirleName = bundle.getString("planCircleName");
         setActionBar(planCirleName);
         planCircleID = bundle.getInt("planCircleID");
-        listView1.setRefreshing();
+        //listView1.setRefreshing();
         //get()s
+        get("getSharingList","planCircleId",planCircleID);
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
