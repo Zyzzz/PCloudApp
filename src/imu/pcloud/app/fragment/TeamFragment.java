@@ -1,9 +1,7 @@
 package imu.pcloud.app.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 
@@ -23,6 +21,13 @@ public class TeamFragment extends HttpFragment {
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
         textview.setText(SPACE + "群计划");
         getActivity().getActionBar().setCustomView(actionbarLayout);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.team,menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
