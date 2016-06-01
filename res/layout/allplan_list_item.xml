@@ -30,7 +30,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
-
     </LinearLayout>
     <LinearLayout
             android:id="@+id/conversatinListview_front"

@@ -76,8 +76,8 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
             holder.tick = (ImageView) convertView.findViewById(R.id.tick);
             holder.position = position;
             linearLayout = (LinearLayout) convertView.findViewById(R.id.conversatinListview_front);
-            Button btn_delete = (Button) convertView.findViewById(R.id.conversationlist_delete);
-            Button btn_share = (Button) convertView.findViewById(R.id.conversationlist_share);
+            final Button btn_delete = (Button) convertView.findViewById(R.id.conversationlist_delete);
+            final Button btn_share = (Button) convertView.findViewById(R.id.conversationlist_share);
             btn_delete.setOnClickListener(this);
             btn_share.setOnClickListener(this);
             final ViewHolder finalHolder = holder;
@@ -189,14 +189,12 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
         }
         return convertView;
     }
-
     @Override
     public void onClick(View v) {
         View view = (View) v.getParent().getParent();
         int position = ((ViewHolder)view.getTag()).position;
         myOnClickListener.onClickItem(v, position);
     }
-
     public final class ViewHolder {
         ImageView selector;
         View item;
@@ -204,7 +202,6 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
         ImageView tick;
         int position;
     }
-
     public List<Map<String,Object>> getData() {
         pList.clear();
         for (PersonalPlan plan:personalPlanArrayList)
@@ -215,7 +212,6 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
         }
         return pList;
     }
-
     public interface MyOnClickListener {
         void onClickItem(View v, int position);
     }
