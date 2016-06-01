@@ -12,11 +12,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.PersonalPlan;
+import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.fragment.PersonalFragment;
 import imu.pcloud.app.fragment.SettingFragment;
 import imu.pcloud.app.fragment.TeamFragment;
 import imu.pcloud.app.fragment.ZoneFragment;
+import imu.pcloud.app.model.PlanCircleList;
+
+import java.util.ArrayList;
+import java.util.List;
 /*
                    _ooOoo_
                   o8888888o
@@ -58,6 +65,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private Fragment mFragZone;
     private Fragment mFragTeam;
     private Fragment mFragSetting;
+    private List<PlanCircle> planCircles;
 
 
     @Override
@@ -67,11 +75,32 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         innitView();
         innitEvents();
         setSelcet(0);
+        setPlanCircles();
+        get("getPlanCircleList");
+    }
+
+    public void putPlanCircles() {
+        if(planCircles == null)
+            return;
+        else {
+            editor.putString("planCircle", gson.toJson(planCircles));
+            editor.commit();
+        }
+    }
+
+    public void setPlanCircles () {
+        planCircles = gson.fromJson(sharedPreferences.getString("planCircle", ""),
+                new TypeToken<ArrayList<PlanCircle>>() {
+                }.getType());
     }
 
     @Override
     protected void onSuccess() {
-
+        PlanCircleList planCircleList = getObject(PlanCircleList.class);
+        if(planCircleList.getStatus() ==0) {
+            planCircles = planCircleList.getPlanCircles();
+            putPlanCircles();
+        }
     }
 
     private void innitEvents() {
