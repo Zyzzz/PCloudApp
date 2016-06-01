@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -40,7 +41,13 @@ public class AllPlanActivity extends HttpActivity
     SimpleAdapter planCircleAdapter;
     private PlanCircle sharedPLanCircle;
     private PersonalPlan sharedPersonalPlan;
-    private int sharedFlag = 0;
+    private int clickFlag = 0;
+
+    final int DELETE = 2;
+    final int SHARE = 1;
+    final int DEFAULT = 0;
+    final int GETCIRCLE = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +59,7 @@ public class AllPlanActivity extends HttpActivity
     private void init() {
         setActionBar("设置计划");
         setPlanCircles();
-        //initShareDialog();
+        initShareDialog();
         listView = (PullToRefreshListView) findViewById(R.id.allplan_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
@@ -66,9 +73,21 @@ public class AllPlanActivity extends HttpActivity
         setPlans();
     }
 
+    public void getCloudPlan() {
+        clickFlag = DEFAULT;
+        get("getPlanList", "cookies", getCookie());
+    }
+
+    public void getPlanCircle() {
+        clickFlag = GETCIRCLE;
+        get("getPlanCircleList");
+    }
+
     public void initShareDialog() {
         View view = getLayoutInflater().inflate(R.layout.share_plan_layout, null);
         setPlanCircleItem();
+        Spinner spinner = (Spinner) view.findViewById(R.id.plancircles);
+        spinner.setAdapter(allPlanAdapter);
         shareDialog =
                 new AlertDialog.Builder(this).setView(view)
                         .setTitle("要分享到哪个圈子")
@@ -86,7 +105,7 @@ public class AllPlanActivity extends HttpActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 setDialogStatus(true, dialog);
-                                sharedFlag = 0;
+                                clickFlag = DEFAULT;
                             }
                         })
                         .create();
@@ -106,7 +125,7 @@ public class AllPlanActivity extends HttpActivity
 
     @Override
     protected void onSuccess() {
-        if(sharedFlag == 0) {
+        if(clickFlag == DEFAULT) {
             PlanList planList = getObject(PlanList.class);
             if (planList.getStatus() != 0) {
                 toast(planList.getResult());
@@ -119,18 +138,35 @@ public class AllPlanActivity extends HttpActivity
                 listView.onRefreshComplete();
             }
         }
-        else {
+        else if(clickFlag == SHARE){
             BaseModel result = getObject(BaseModel.class);
             if(result.getStatus() == 301) {
                 toast("分享成功！");
                 setDialogStatus(false, shareDialog);
-                sharedFlag = 0;
+                clickFlag = 0;
             }
             else {
                 toast(result.getResult());
                 setDialogStatus(true, shareDialog);
             }
         }
+        else if(clickFlag == DELETE) {
+            BaseModel result = getObject(BaseModel.class);
+            if(result.getStatus() == 203) {
+                toast("删除成功");
+                getCloudPlan();
+                setNowPlan();
+            }
+            else {
+                toast("删除失败:" + result.getResult());
+            }
+        }
+        else if(clickFlag == GETCIRCLE) {
+            editor.putString("planCircle", gson.toJson(planCircles));
+            editor.commit();
+            setPlanCircleItem();
+        }
+        clickFlag = DEFAULT;
     }
 
     @Override
@@ -197,7 +233,7 @@ public class AllPlanActivity extends HttpActivity
 
     @Override
     protected void onResume() {
-        listView.setRefreshing();
+        get("getPlanList", "cookies", getCookie());
         super.onResume();
     }
 
@@ -223,6 +259,7 @@ public class AllPlanActivity extends HttpActivity
     @Override
     protected void onFailure() {
         super.onFailure();
+        clickFlag = DEFAULT;
         listView.onRefreshComplete();
     }
 
@@ -254,7 +291,7 @@ public class AllPlanActivity extends HttpActivity
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                get("getPlanList", "cookies", getCookie());
+                getCloudPlan();
             }
         }, 1000);
         setSelectedPlanId();
@@ -295,10 +332,21 @@ public class AllPlanActivity extends HttpActivity
             setNowPlan();
         }
         else if(view.getId() == R.id.conversationlist_delete) {
-            toast("deleted");
+            clickFlag = DELETE;
+            if(plan.getUserId() != getUserId()) {
+                personalPlanArrayList.remove(position);
+                putPlans();
+                allPlanAdapter.notifyDataSetChanged();
+                setNowPlan();
+            }
+            else {
+                get("deletePlan", "id", plan.getId());
+            }
         }
         else if(view.getId() == R.id.conversationlist_share) {
-            toast("shared");
+            clickFlag = SHARE;
+            planCircleAdapter.notifyDataSetChanged();
+            shareDialog.show();
         }
     }
 

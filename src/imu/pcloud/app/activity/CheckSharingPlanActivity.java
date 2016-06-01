@@ -2,6 +2,8 @@ package imu.pcloud.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import imu.pcloud.app.R;
 
 /**
  * Created by Administrator on 2016/6/1.
@@ -23,5 +25,12 @@ public class CheckSharingPlanActivity extends HttpActivity{
     @Override
     protected void onSuccess() {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        getMenuInflater().inflate(R.menu.set_plan, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
