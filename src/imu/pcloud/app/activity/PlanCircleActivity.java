@@ -43,9 +43,10 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(),CheckSharingPlanActivity.class);
-                intent.putExtra("planName",(String)personalPlens.get(position).getName());
-                intent.putExtra("planContext",(String)personalPlens.get(position).getContent());
-                intent.putExtra("PlanId",(Integer)personalPlens.get(position).getId());
+               // System.out.print("ddddddddddddd"+position);
+                intent.putExtra("planName",personalPlens.get(position-1).getName());
+                intent.putExtra("planContext",personalPlens.get(position-1).getContent());
+                intent.putExtra("PlanId",personalPlens.get(position-1).getId());
                 startActivity(intent);
             }
         });

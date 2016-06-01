@@ -3,6 +3,7 @@ package imu.pcloud.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import imu.pcloud.app.R;
 
 /**
@@ -17,7 +18,7 @@ public class CheckSharingPlanActivity extends HttpActivity{
         Bundle bundle = intent_accept.getExtras();
         // getActionBar().setDisplayHomeAsUpEnabled(true);
         String planName = bundle.getString("planName");
-        setActionBar(planName);
+        setActionBar(""+planName);
     }
 
     @Override
@@ -30,5 +31,13 @@ public class CheckSharingPlanActivity extends HttpActivity{
         menu.clear();
         getMenuInflater().inflate(R.menu.comment_downloan, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
