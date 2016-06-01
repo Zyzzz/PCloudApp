@@ -162,8 +162,8 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
                 holder = (ViewHolder)convertView.getTag();
             }
           //  holder.selector.setOnClickListener(this);
-            holder.item.setOnClickListener(this);
-            holder.item.setClickable(false);
+           // holder.item.setOnClickListener(this);
+            //holder.item.setClickable(false);
             holder.user_sharing_name.setText((String)arrays.get(position).get("name"));
             return convertView;
         }
