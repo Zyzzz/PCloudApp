@@ -91,9 +91,8 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
             personalPlens=userSharingList.getPersonalPlans();
             sharingRecords = userSharingList.getSharingRecords();
             list = getData();
-            PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
-           //ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
-              //    new String[]{"name"}, new int[]{ R.id.plancircle_name});
+            //PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
+            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item, new String[]{"name"}, new int[]{ R.id.plancircle_name});
             listView1.setAdapter(listAdapter);
         } else {
             toast("网络连接出现问题");
