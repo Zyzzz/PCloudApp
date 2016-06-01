@@ -21,11 +21,12 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
     </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+            android:id="@+id/conversatinListview_front"
+            android:layout_width="match_parent"
                   android:layout_height="90dp"
                   android:orientation="horizontal"
-                  android:background="@drawable/item_select"
-                  android:id="@+id/usercode_layout" android:baselineAligned="false">
+                  android:background="@drawable/item_select" android:baselineAligned="false">
         <ImageView
                 android:id="@+id/user_sharing_image"
                 android:layout_width="80dp"

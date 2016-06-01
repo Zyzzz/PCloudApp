@@ -30,6 +30,7 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
         this.mContext = mContext;
         this.arrays = arrays;
         mActivity = activity;
+        layoutInflater = activity.getLayoutInflater();
   }
     public final class ViewHolder {
        /// ImageView selector;
