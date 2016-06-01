@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout1"
+              android:orientation="horizontal"
+              android:background="@color/gray_m"
+              android:layout_width="match_parent"
+              android:layout_height="90dp">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" android:background="@color/gray_m"
+            android:layout_marginRight="1dp">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/start_time" android:layout_weight="1" android:textColor="@android:color/black"
+                android:textSize="30dp" android:layout_marginBottom="1dp"
+                android:background="@android:color/white" android:textStyle="italic" android:gravity="center"
+                android:text="7:222"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:id="@+id/end_time" android:layout_weight="1" android:textColor="@android:color/black"
+                  android:textSize="30dp" android:background="@android:color/white"
+                  android:textStyle="italic" android:gravity="center" android:text="7:393"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:background="@color/gray_m"
+            android:layout_weight="7">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="content"
+                android:id="@+id/plan_title" android:textColor="@android:color/black" android:textSize="18dp"
+                android:background="@android:color/white"
+                android:layout_marginBottom="1dp" android:layout_weight="1" android:paddingLeft="10dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/gray_m">
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="content"
+                  android:id="@+id/plan_content" android:textColor="@android:color/black" android:textSize="20dp"
+                  android:background="@android:color/white" android:gravity="center"
+                  android:layout_weight="20"/>
+    </LinearLayout>
+</LinearLayout>
