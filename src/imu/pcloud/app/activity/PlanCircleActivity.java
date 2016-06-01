@@ -3,7 +3,11 @@ package imu.pcloud.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
@@ -34,6 +38,17 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
         listView1.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
         listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         listView1.setOnRefreshListener(this);
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),CheckSharingPlanActivity.class);
+                intent.putExtra("planName",(String)personalPlens.get(position).getName());
+                intent.putExtra("planContext",(String)personalPlens.get(position).getContent());
+                intent.putExtra("PlanId",(Integer)personalPlens.get(position).getId());
+                startActivity(intent);
+            }
+        });
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent_accept = getIntent();
         Bundle bundle = intent_accept.getExtras();
@@ -76,9 +91,8 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
             personalPlens=userSharingList.getPersonalPlans();
             sharingRecords = userSharingList.getSharingRecords();
             list = getData();
-            PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
-//            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item,
-//                    new String[]{"name"}, new int[]{ R.id.plancircle_name});
+            //PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
+            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item, new String[]{"name"}, new int[]{ R.id.plancircle_name});
             listView1.setAdapter(listAdapter);
         } else {
             toast("网络连接出现问题");

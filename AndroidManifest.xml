@@ -52,5 +52,8 @@
         <activity android:name=".activity.RepasswordActivity"
                   android:theme="@style/newTheme">
         </activity>
+        <activity android:name=".activity.CheckSharingPlanActivity"
+                  android:theme="@style/newTheme">
+        </activity>
     </application>
 </manifest>

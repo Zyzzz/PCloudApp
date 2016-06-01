@@ -88,13 +88,18 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         if(falg) {
             PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
             if (userSharingList.getStatus() == 400) {
-                sharingRecords = userSharingList.getSharingRecords();
-                personalPlens = userSharingList.getPersonalPlans();
-                list = getData();
-                listAdapter = new AdspterHide(this, this, list);
-//            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
+                if (!userSharingList.getSharingRecords().isEmpty()) {
+                    sharingRecords = userSharingList.getSharingRecords();
+                    personalPlens = userSharingList.getPersonalPlans();
+                    list = getData();
+                    listAdapter = new AdspterHide(this, this, list);
+//                  ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
 //                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
-                listView1.setAdapter(listAdapter);
+                    listView1.setAdapter(listAdapter);
+                }
+                else {
+                    toast("分享列表为空");
+                }
             } else {
                 toast("得到用户分享列表失败，请重新登录");
             }

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.AllPlanActivity;
 import imu.pcloud.app.been.PersonalPlan;
 
 import java.util.ArrayList;
@@ -79,7 +80,11 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
             final Button btn_delete = (Button) convertView.findViewById(R.id.conversationlist_delete);
             final Button btn_share = (Button) convertView.findViewById(R.id.conversationlist_share);
             btn_delete.setOnClickListener(this);
-            btn_share.setOnClickListener(this);
+            if(personalPlanArrayList.get(position).getUserId() != ((AllPlanActivity)context).getUserId()) {
+                btn_share.setBackgroundResource(R.color.blue_l);
+            } else {
+                btn_share.setOnClickListener(this);
+            }
             final ViewHolder finalHolder = holder;
             linearLayout.setOnTouchListener(new View.OnTouchListener() {
                 private Point pointDownPoint;

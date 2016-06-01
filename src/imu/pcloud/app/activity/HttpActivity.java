@@ -112,7 +112,7 @@ abstract public class HttpActivity extends Activity {
         return sharedPreferences.getString("cookie", "");
     }
 
-    protected int getUserId() {
+    public int getUserId() {
         return sharedPreferences.getInt("userId", -1);
     }
 
