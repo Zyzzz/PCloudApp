@@ -19,7 +19,7 @@
                 android:background="#ff9d02"
                 android:text="分享"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
          <Button
                 android:id="@+id/conversationlist_delete"
                 android:layout_width="120dip"
@@ -28,7 +28,7 @@
                 android:text="删除"
                 android:background="#f70c34"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
 
     </LinearLayout>
