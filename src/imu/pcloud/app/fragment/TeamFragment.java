@@ -23,12 +23,8 @@ public class TeamFragment extends HttpFragment {
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.team,menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
+
 
     @Override
     protected void onSuccess() {
