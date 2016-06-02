@@ -37,9 +37,14 @@ public class TPlanInformation extends HttpActivity {
                 startActivity(TeamMemberActivity.class);
                 break;
             case R.id.updateplan:
+                initDialog();
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    private void initDialog() {
+
     }
 
 
