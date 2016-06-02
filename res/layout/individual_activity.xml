@@ -25,12 +25,18 @@
                       android:hint="@string/nick_name"
                       android:layout_weight="1" android:id="@+id/nick_name" android:textIsSelectable="false"
                       android:gravity="fill_vertical" android:textAppearance="@android:style/TextAppearance.Medium"
-                      android:layout_marginRight="5dp"/>
+                      android:layout_marginRight="5dp" android:layout_marginLeft="5dp"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="@color/gray_m">
+            </LinearLayout>
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/register_name"
                       android:layout_weight="1" android:id="@+id/email" android:gravity="fill_vertical"
-                      android:textAppearance="@android:style/TextAppearance.Medium" android:layout_marginRight="5dp"/>
+                      android:textAppearance="@android:style/TextAppearance.Medium" android:layout_marginRight="5dp"
+                      android:layout_marginLeft="30dp"/>
         </LinearLayout>
         <ImageView
                 android:layout_width="14dp"
