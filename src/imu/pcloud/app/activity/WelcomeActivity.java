@@ -21,7 +21,9 @@ public class WelcomeActivity extends HttpActivity{
     }
 
     private void init() {
+
         setContentView(R.layout.welcome_layout);
+
         if(getCookie().length() < 3) {
             timer.schedule(new TimerTask() {
                 @Override

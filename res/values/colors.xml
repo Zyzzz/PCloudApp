@@ -3,7 +3,7 @@
     <color name="blue_s">#59C5EF</color>
     <color name="blue_m">#48B2E6</color>
     <color name="blue_l">#02ACED</color>
-    <!--<color name="xl_blue"></color>-->
+    <color name="blue_xl">#007cc3</color>
     <color name="gray_s">#F6F6F6</color>
     <color name="gray_m">#ececec</color>
     <color name="gray_l">#b9b9b9</color>
