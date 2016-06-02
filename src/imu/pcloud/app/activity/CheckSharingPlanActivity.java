@@ -4,14 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.model.LocalPlan;
+import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.model.Plans;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/6/1.
  */
 public class CheckSharingPlanActivity extends HttpActivity{
-
+    int planId;
+    private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
+    Plans plans =  new Plans();
+    ArrayList<Plan> planList = new ArrayList<Plan>();
     ListView planItemListView;
     ListView planComment;
     @Override
@@ -25,9 +39,24 @@ public class CheckSharingPlanActivity extends HttpActivity{
         // getActionBar().setDisplayHomeAsUpEnabled(true);
         String planName = bundle.getString("planName");
         String planContext = bundle.getString("planContext");
-        int planId = bundle.getInt("PlanId");
+        planId  = bundle.getInt("PlanId");
         setActionBar(""+planName);
-        get("","");
+        plans.setByJsonString(planContext);
+        planList = plans.getPlans();
+        for (int i = 0; i < planList.size(); i++)
+        {
+            Plan plan = planList.get(i);
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("start_time", plan.getStartTimeString());
+            map.put("end_time", plan.getEndTimeString());
+            map.put("content", plan.getContent());
+            map.put("title", plan.getTitle() + ":(来自:" + planName + ")");
+            pList.add(map);
+        }
+        SimpleAdapter listAdapter = new SimpleAdapter(this, pList, R.layout.personal_list_item,
+                new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
+        planItemListView.setAdapter(listAdapter);
+        //get("","");
     }
 
     @Override
