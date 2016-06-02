@@ -7,10 +7,11 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp" android:layout_marginTop="30dp">
+            android:layout_height="50dp" android:layout_marginTop="30dp" >
         <EditText android:layout_width="match_parent" android:layout_height="match_parent"
                   android:background="@android:color/white" android:hint="@string/newname"
                   android:textColor="@android:color/black" android:textColorHint="@color/gray_l"
-                  android:paddingLeft="10dp" android:textSize="20dp"/>
+                  android:paddingLeft="10dp" android:textSize="20dp" android:id="@+id/nickname"
+                  android:paddingRight="10dp"/>
     </LinearLayout>
 </LinearLayout>

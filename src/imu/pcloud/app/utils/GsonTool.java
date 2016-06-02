@@ -2,9 +2,9 @@ package imu.pcloud.app.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import imu.pcloud.app.adapter.TimestampTypeAdapter;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Created by Administrator on 2016/5/23.

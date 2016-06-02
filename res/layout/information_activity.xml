@@ -12,7 +12,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" android:layout_marginTop="30dp"
-                android:background="@android:color/white" android:id="@+id/header">
+                android:background="@drawable/item_select" android:id="@+id/header">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -29,51 +29,51 @@
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
-                    android:id="@+id/imageView6" android:background="@drawable/arrow"
+                    android:id="@+id/imageView6"
                     android:layout_gravity="center_vertical" android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/mail">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/register_name"
                     android:id="@+id/textView2" android:textColor="@android:color/black"
                     android:layout_marginLeft="15dp"
-                    android:layout_weight="9" android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mymail" android:hint="@string/register_name"
                     android:gravity="fill_vertical|right"
-                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l" android:layout_weight="3"
-                    android:layout_marginRight="35dp"/>
+                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l"
+                    android:layout_marginRight="35dp" android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/nickname">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/nick_name"
-                    android:id="@+id/textView3" android:textColor="@android:color/black" android:layout_weight="9"
+                    android:id="@+id/textView3" android:textColor="@android:color/black"
                     android:layout_gravity="center_vertical" android:layout_marginLeft="15dp"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mynickname" android:hint="@string/nick_name"
                     android:gravity="fill_vertical|right"
-                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l" android:layout_weight="3"/>
+                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l" android:layout_weight="1"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -85,22 +85,22 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="30dp" android:id="@+id/sex">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/sex"
-                    android:id="@+id/textView4" android:textColor="@android:color/black" android:layout_weight="9"
+                    android:id="@+id/textView4" android:textColor="@android:color/black"
                     android:layout_marginLeft="15dp" android:layout_gravity="center_vertical"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mysex" android:hint="@string/sex"
                     android:gravity="fill_vertical|right"
-                    android:textColor="@color/gray_l" android:layout_weight="3" android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/gray_l" android:layout_weight="1" android:layout_gravity="center_vertical"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -111,21 +111,21 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/birthday" android:layout_marginTop="1dp">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/birthday"
                     android:id="@+id/textView10" android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" android:layout_marginLeft="15dp" android:layout_weight="9"/>
+                    android:textColor="@android:color/black" android:layout_marginLeft="15dp"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/textView13" android:hint="@string/birthday" android:textColor="@color/gray_l"
-                    android:layout_gravity="center_vertical" android:layout_weight="3" android:gravity="fill_vertical|right"/>
+                    android:id="@+id/mybirthday" android:hint="@string/birthday" android:textColor="@color/gray_l"
+                    android:layout_gravity="center_vertical" android:layout_weight="1" android:gravity="fill_vertical|right"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -136,22 +136,22 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/signature" android:layout_marginTop="1dp">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/signature"
                     android:id="@+id/textView14" android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" android:layout_marginLeft="15dp" android:layout_weight="9"/>
+                    android:textColor="@android:color/black" android:layout_marginLeft="15dp"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/textView15" android:hint="@string/signature" android:textColor="@color/gray_l"
+                    android:id="@+id/mysignature" android:hint="@string/signature" android:textColor="@color/gray_l"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="4"/>
+                    android:layout_weight="1"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -162,22 +162,22 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/education" android:layout_marginTop="30dp">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/education"
                     android:id="@+id/textView16" android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" android:layout_marginLeft="15dp" android:layout_weight="9"/>
+                    android:textColor="@android:color/black" android:layout_marginLeft="15dp"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/textView17" android:hint="@string/education" android:textColor="@color/gray_l"
+                    android:id="@+id/myeducation" android:hint="@string/education" android:textColor="@color/gray_l"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="4"/>
+                    android:layout_weight="1"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -188,22 +188,22 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/work" android:layout_marginTop="1dp">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/work"
                     android:id="@+id/textView18" android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" android:layout_marginLeft="15dp" android:layout_weight="9"/>
+                    android:textColor="@android:color/black" android:layout_marginLeft="15dp" android:layout_weight="0"/>
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/textView19" android:hint="@string/work" android:textColor="@color/gray_l"
+                    android:id="@+id/mywork" android:hint="@string/work" android:textColor="@color/gray_l"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="4"/>
+                    android:layout_weight="1"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"

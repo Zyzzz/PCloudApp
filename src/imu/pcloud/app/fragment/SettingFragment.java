@@ -11,6 +11,7 @@ import imu.pcloud.app.activity.AccountActivity;
 import imu.pcloud.app.activity.InformationActivity;
 import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.activity.UserSharingActivity;
+import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.Information;
 
 /**
@@ -20,9 +21,13 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     View head;
     View mySharing;
     View myAccount;
+    TextView nickName;
+    TextView email;
+    UserModel userModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        userModel = getUserModel();
         View view = inflater.inflate(R.layout.individual_activity, container, false);
         head = view.findViewById(R.id.personal_info);
         mySharing = view.findViewById(R.id.my_sharing);
@@ -30,6 +35,10 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         head.setOnClickListener(this);
         mySharing.setOnClickListener(this);
         myAccount.setOnClickListener(this);
+        nickName = (TextView) view.findViewById(R.id.nick_name);
+        email = (TextView) view.findViewById(R.id.email);
+        nickName.setText(userModel.getUsername());
+        email.setText(userModel.getEmail());
         initActionBar();
         return view;
     }
@@ -42,6 +51,9 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     @Override
     public void onResume() {
         initActionBar();
+        userModel = getUserModel();
+        nickName.setText(userModel.getUsername());
+        email.setText(userModel.getEmail());
         super.onResume();
     }
 
@@ -49,7 +61,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "    " + "我");
+        textview.setText("我");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

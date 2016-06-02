@@ -7,8 +7,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AllPlanActivity;
+import imu.pcloud.app.been.PersonalPlan;
+import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
 import imu.pcloud.app.utils.WidgetController;
 
@@ -22,10 +25,10 @@ import java.util.Map;
  */
 public class PersonalFragment extends HttpFragment {
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
-    private Plan plan = new Plan("7:25", "9:25", "我要好好听课", "上课");
-    private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
+    private ArrayList<LocalPlan> planArrayList = new ArrayList<LocalPlan>();
     private ListView listView;
     private ActionBar myActionBar;
+    SimpleAdapter listAdapter;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -41,21 +44,31 @@ public class PersonalFragment extends HttpFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-       for(int i = 0; i < 10; i++)
-        planArrayList.add(plan);
-        getData(pList);
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
-        ListAdapter listAdapter=new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
+        listAdapter = new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
         listView.setAdapter(listAdapter);
+        init();
         setHasOptionsMenu(true);
         setActionBar();
         return view;
     }
 
+    public void init() {
+        initNowPlan();
+        getData(pList);
+        listAdapter.notifyDataSetChanged();
+    }
 
+    public void initNowPlan() {
+        String nowPlanString = sharedPreferences.getString("nowPlan" + getUserId(), "");
+        planArrayList = gson.fromJson(nowPlanString,
+                new TypeToken<ArrayList<LocalPlan>>() {}.getType());
+        if(planArrayList == null){
+            planArrayList = new ArrayList<LocalPlan>();
+        }
+    }
 
     private void setActionBar() {
         WindowManager wm = getActivity().getWindowManager();
@@ -74,7 +87,7 @@ public class PersonalFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "个人计划");
+        textview.setText("个人计划");
         int leftnum = width  - WidgetController.getWidth(textview);
         myActionBar.setCustomView(actionbarLayout);
     }
@@ -82,6 +95,7 @@ public class PersonalFragment extends HttpFragment {
     @Override
     public void onResume() {
         setActionBar();
+        init();
         super.onResume();
     }
 
@@ -100,14 +114,15 @@ public class PersonalFragment extends HttpFragment {
 
 
     public void getData(List<Map<String,Object>> pList) {
+        pList.clear();
         for (int i = 0; i < planArrayList.size(); i++)
         {
-            Plan plan = planArrayList.get(i);
+            LocalPlan plan = planArrayList.get(i);
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("start_time", plan.getStartTimeString());
             map.put("end_time", plan.getEndTimeString());
             map.put("content", plan.getContent());
-            map.put("title", plan.getTitle() + ":");
+            map.put("title", plan.getTitle() + ":(来自:" + plan.getName() + ")");
             pList.add(map);
         }
     }

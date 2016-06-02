@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PCloudApp.iml" filepath="$PROJECT_DIR$/PCloudApp.iml" />
-      <module fileurl="file://F:/git/PCloudApp/libs/Android-PullToRefresh-master/extras/PullToRefreshListFragment/PullToRefreshListFragment.iml" filepath="F:/git/PCloudApp/libs/Android-PullToRefresh-master/extras/PullToRefreshListFragment/PullToRefreshListFragment.iml" />
-      <module fileurl="file://F:/git/PCloudApp/libs/Android-PullToRefresh-master/extras/PullToRefreshViewPager/PullToRefreshViewPager.iml" filepath="F:/git/PCloudApp/libs/Android-PullToRefresh-master/extras/PullToRefreshViewPager/PullToRefreshViewPager.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" filepath="$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" />
-      <module fileurl="file://F:/git/PCloudApp/libs/Android-PullToRefresh-master/library/library1.iml" filepath="F:/git/PCloudApp/libs/Android-PullToRefresh-master/library/library1.iml" />
     </modules>
   </component>
 </project>

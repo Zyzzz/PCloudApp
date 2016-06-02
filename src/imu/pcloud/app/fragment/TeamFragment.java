@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
-import imu.pcloud.app.utils.MyAdspter;
+import imu.pcloud.app.adapter.MyAdspter;
 
 /**
  * Created by acer on 2016/5/11.
@@ -35,7 +35,7 @@ public class TeamFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "群计划");
+        textview.setText("群计划");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

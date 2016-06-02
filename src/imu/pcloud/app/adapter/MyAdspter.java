@@ -1,4 +1,4 @@
-package imu.pcloud.app.utils;
+package imu.pcloud.app.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

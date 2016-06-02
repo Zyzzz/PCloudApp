@@ -7,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.PlanCircleList;
-import imu.pcloud.app.utils.MyAdspter;
-import imu.pcloud.app.utils.SysApplication;
+import imu.pcloud.app.adapter.MyAdspter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +47,7 @@ public class ZoneFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "计划圈");
+        textview.setText("计划圈");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
@@ -87,7 +85,6 @@ public class ZoneFragment extends HttpFragment {
             }
         });
     }
-
     @Override
     protected void onFailure() {
         toast("网络连接失败");

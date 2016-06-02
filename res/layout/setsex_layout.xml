@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_m">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp"
+            android:id="@+id/men">
+        <EditText android:layout_width="wrap_content"
+                  android:layout_height="match_parent" android:text="@string/men"
+                  android:textColor="@android:color/black"
+                  android:textAppearance="@android:style/TextAppearance.Large"
+                  android:background="@null"
+                  android:layout_marginLeft="15dp" android:layout_weight="1"/>
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView7" android:background="@drawable/tick"
+                android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="1dp"
+            android:id="@+id/women">
+        <EditText android:layout_width="wrap_content" android:layout_height="match_parent"
+                  android:text="@string/women" android:textColor="@android:color/black"
+                  android:textAppearance="@android:style/TextAppearance.Large"
+                  android:background="@null" android:layout_marginLeft="15dp" android:layout_weight="1"/>
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView15" android:background="@drawable/tick"
+                android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+</LinearLayout>
