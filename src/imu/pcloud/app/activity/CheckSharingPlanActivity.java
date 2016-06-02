@@ -80,7 +80,7 @@ public class CheckSharingPlanActivity extends HttpActivity{
         for(Comment comment:comments){
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("userName", comment.getUser().getUsername());
-            map.put("context",":"+comment.getContent());
+            map.put("context",comment.getContent());
             cList.add(map);
         }
     }

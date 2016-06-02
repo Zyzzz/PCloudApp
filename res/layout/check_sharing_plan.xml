@@ -7,14 +7,29 @@
     <ListView
         android:id="@+id/plan_informationf"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight='1'
+        android:layout_height="wrap_content"
+        android:divider="@color/gray_m"
+        android:dividerHeight="1dp"
     >
     </ListView>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="1dp"
+                  android:background="@color/gray_m"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" android:background="@android:color/white">
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" android:background="@color/gray_m">
+    </LinearLayout>
     <ListView
             android:id="@+id/comment_listview"
+            android:divider="@color/gray_m"
+            android:dividerHeight="1dp"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight='3'>
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
     </ListView>
 </LinearLayout>

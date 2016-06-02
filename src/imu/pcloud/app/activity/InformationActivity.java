@@ -100,18 +100,25 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        int layoutId;
         switch (v.getId()) {
             case R.id.sex:
+                layoutId = R.layout.setsex_layout;
                 break;
             case R.id.nickname:
+                layoutId = R.layout.setname_activity;
                 break;
             case R.id.birthday:
+
                 break;
             case R.id.work:
+                layoutId = R.layout.setwork_layout;
                 break;
             case R.id.education:
+                layoutId = R.layout.seteducation_layout;
                 break;
             case R.id.signature:
+                layoutId = R.layout.setsn_layout;
                 break;
         }
     }

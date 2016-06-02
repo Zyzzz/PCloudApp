@@ -12,16 +12,19 @@
                 android:id="@+id/uer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="#007cc3"
+                android:textColor="@color/blue_xl"
                 android:textSize="30dp"
-                android:layout_weight="1" android:gravity="center_vertical"/>
+                android:gravity="center_vertical" android:layout_marginLeft="10dp"/>
+        <TextView android:id="@+id/textView13" android:layout_width="wrap_content" android:layout_height="match_parent"
+                  android:textColor="@android:color/black" android:textSize="30dp" android:gravity="center_vertical"
+                  android:text=":"/>
         <TextView
                 android:id="@+id/comment_context"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="#666872"
                 android:textSize="30dp"
-                android:layout_weight="1" android:gravity="center_vertical"/>
+                android:layout_weight="1" android:gravity="center_vertical" android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
 </LinearLayout>
