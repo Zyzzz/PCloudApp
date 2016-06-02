@@ -12,7 +12,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" android:layout_marginTop="30dp"
-                android:background="@android:color/white" android:id="@+id/header">
+                android:background="@drawable/item_select" android:id="@+id/header">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -29,14 +29,14 @@
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
-                    android:id="@+id/imageView6" android:background="@drawable/arrow"
+                    android:id="@+id/imageView6"
                     android:layout_gravity="center_vertical" android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/mail">
             <TextView
                     android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/nickname">
             <TextView
                     android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:layout_marginTop="30dp" android:id="@+id/sex">
             <TextView
                     android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/birthday" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/signature" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/education" android:layout_marginTop="30dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@android:color/white"
+                android:layout_height="50dp" android:background="@drawable/item_select"
                 android:id="@+id/work" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"

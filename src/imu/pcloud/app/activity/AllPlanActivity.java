@@ -87,7 +87,18 @@ public class AllPlanActivity extends HttpActivity
         View view = getLayoutInflater().inflate(R.layout.share_plan_layout, null);
         setPlanCircleItem();
         Spinner spinner = (Spinner) view.findViewById(R.id.plancircles);
-        spinner.setAdapter(allPlanAdapter);
+        spinner.setAdapter(planCircleAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                sharedPLanCircle = planCircles.get(pos);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
         shareDialog =
                 new AlertDialog.Builder(this).setView(view)
                         .setTitle("要分享到哪个圈子")
@@ -131,23 +142,23 @@ public class AllPlanActivity extends HttpActivity
                 toast(planList.getResult());
             } else {
                 //toast("获取云端计划成功");
+                if(listView.isRefreshing()) {
+                    toast("刷新成功");
+                }
                 mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
             }
-            if(listView.isRefreshing()) {
-                toast("刷新成功");
-                listView.onRefreshComplete();
-            }
+            listView.onRefreshComplete();
         }
         else if(clickFlag == SHARE){
             BaseModel result = getObject(BaseModel.class);
             if(result.getStatus() == 301) {
                 toast("分享成功！");
-                setDialogStatus(false, shareDialog);
                 clickFlag = 0;
+                setDialogStatus(true, shareDialog);
             }
             else {
                 toast(result.getResult());
-                setDialogStatus(true, shareDialog);
+                setDialogStatus(false, shareDialog);
             }
         }
         else if(clickFlag == DELETE) {
@@ -247,8 +258,10 @@ public class AllPlanActivity extends HttpActivity
         if(cloud == null)
             return;
         for (PersonalPlan plan: personalPlanArrayList) {
-           if(plan.getUserId() != getUserId())
+           if(plan.getUserId() != getUserId()) {
                cloud.add(plan);
+               continue;
+           }
         }
         personalPlanArrayList.clear();
         personalPlanArrayList.addAll(cloud);
@@ -346,6 +359,7 @@ public class AllPlanActivity extends HttpActivity
         else if(view.getId() == R.id.conversationlist_share) {
             clickFlag = SHARE;
             planCircleAdapter.notifyDataSetChanged();
+            sharedPersonalPlan = plan;
             shareDialog.show();
         }
     }

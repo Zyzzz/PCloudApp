@@ -81,7 +81,7 @@ abstract public class HttpActivity extends Activity {
     abstract protected void onSuccess();
 
     protected void onFailure(){
-
+        toast("SERVER ERROR");
     }
 
     protected void toast(String string) {
@@ -155,7 +155,7 @@ abstract public class HttpActivity extends Activity {
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-            toast("网络连接失败");
+            //toast(throwable.getMessage());
             HttpActivity.this.onFailure();
         }
     }

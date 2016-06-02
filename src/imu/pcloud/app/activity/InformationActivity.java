@@ -15,8 +15,18 @@ import imu.pcloud.app.model.UserModel;
 public class InformationActivity extends HttpActivity implements View.OnClickListener{
     private View nickname;
     private View sex;
+    private View birthday;
+    private View sign;
+    private View edu;
+    private View work;
     private TextView tvNickname;
     private TextView tvSex;
+    private TextView tvEmail;
+    private TextView tvBirthday;
+    private TextView tvSign;
+    private TextView tvEdu;
+    private TextView tvWork;
+    UserModel userModel;
 
     public TextView getTvNickname() {
         return tvNickname;
@@ -39,7 +49,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_activity);
         init();
-
+        initView();
     }
 
     @Override
@@ -55,13 +65,37 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     }
 
     private void init() {
+        userModel = getUserModel();
         setActionBar("个人信息");
         sex = find(R.id.sex);
         nickname = find(R.id.nickname);
+        birthday = find(R.id.birthday);
+        edu = find(R.id.education);
+        work = find(R.id.work);
+        sign = find(R.id.signature);
         tvNickname = find(R.id.mynickname);
         tvSex = find(R.id.mysex);
+        tvBirthday = find(R.id.mybirthday);
+        tvEmail = find(R.id.mymail);
+        tvEdu = find(R.id.myeducation);
+        tvWork = find(R.id.mywork);
+        tvSign = find(R.id.mysignature);
         sex.setOnClickListener(this);
         nickname.setOnClickListener(this);
+        birthday.setOnClickListener(this);
+        edu.setOnClickListener(this);
+        work.setOnClickListener(this);
+        sign.setOnClickListener(this);
+    }
+
+    public void initView() {
+        tvNickname.setText(userModel.getUsername());
+        tvSex.setText(userModel.getSex());
+        tvBirthday.setText(userModel.getBirthday());
+        tvEmail.setText(userModel.getEmail());
+        tvEdu.setText(userModel.getEducation());
+        tvWork.setText(userModel.getWorking());
+        tvSign.setText(userModel.getSignature());
     }
 
     @Override
@@ -70,6 +104,14 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
             case R.id.sex:
                 break;
             case R.id.nickname:
+                break;
+            case R.id.birthday:
+                break;
+            case R.id.work:
+                break;
+            case R.id.education:
+                break;
+            case R.id.signature:
                 break;
         }
     }

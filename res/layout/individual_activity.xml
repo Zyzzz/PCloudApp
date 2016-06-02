@@ -29,7 +29,7 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:hint="@string/register_name"
-                      android:layout_weight="1" android:id="@+id/register_name" android:gravity="fill_vertical"
+                      android:layout_weight="1" android:id="@+id/email" android:gravity="fill_vertical"
                       android:textAppearance="@android:style/TextAppearance.Medium" android:layout_marginRight="5dp"/>
         </LinearLayout>
         <ImageView
