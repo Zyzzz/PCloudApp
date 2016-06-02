@@ -7,14 +7,11 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp" android:background="@android:color/white" android:layout_marginTop="30dp">
+            android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp">
         <EditText android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:background="@null"
-                  android:paddingLeft="10dp"
-                  android:paddingRight="10dp"
-                  android:maxLength="40"
-
-                  android:id="@+id/setsignatrue"/>
+                  android:background="@null" android:paddingLeft="10dp" android:paddingRight="10dp"
+                  android:textColor="@android:color/black" android:id="@+id/setwork" android:hint="@string/work"
+                  android:textColorHint="@color/gray_l" android:textSize="20dp"/>
     </LinearLayout>
 </LinearLayout>
