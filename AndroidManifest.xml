@@ -53,5 +53,14 @@
         <activity android:name=".activity.RepasswordActivity"
                   android:theme="@style/newTheme">
         </activity>
+
+        <activity android:name=".activity.TeamMemberActivity"
+                  android:theme="@style/newTheme">
+        </activity>
+
+        <activity android:name=".activity.TPlanInformation"
+                  android:theme="@style/newTheme">
+        </activity>
+
     </application>
 </manifest>
