@@ -9,6 +9,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.Comment;
+import imu.pcloud.app.model.CommentList;
 import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
 import imu.pcloud.app.model.Plans;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class CheckSharingPlanActivity extends HttpActivity{
     int planId;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
+    private List<Map<String,Object>> cList =new ArrayList<Map<String, Object>>();
+    private List<Comment> comments = new ArrayList<Comment>();
     Plans plans =  new Plans();
     ArrayList<Plan> planList = new ArrayList<Plan>();
     ListView planItemListView;
@@ -56,12 +60,29 @@ public class CheckSharingPlanActivity extends HttpActivity{
         SimpleAdapter listAdapter = new SimpleAdapter(this, pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
         planItemListView.setAdapter(listAdapter);
-        //get("","");
+        get("getCommentList","personalPlanId",planId);
     }
-
     @Override
     protected void onSuccess() {
+        CommentList commentList = getObject(CommentList.class);
+        if(commentList.getStatus()==0){
+            comments = commentList.getComments();
+            getDate();
+            SimpleAdapter listAdapter = new SimpleAdapter(this, cList, R.layout.comment_item,
+                    new String[]{"userName","context"}, new int[]{R.id.uer_name, R.id.comment_context});
+            planComment.setAdapter(listAdapter);
+        }else {
+            toast(commentList.getResult());
+        }
+    }
 
+    private void getDate(){
+        for(Comment comment:comments){
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("userName", comment.getUser().getUsername());
+            map.put("context",":"+comment.getContent());
+            cList.add(map);
+        }
     }
 
     @Override
@@ -78,6 +99,7 @@ public class CheckSharingPlanActivity extends HttpActivity{
             case R.id.downloan_plan:
                 break;
             case R.id.comment_plan:
+
                 break;
         }
         return super.onOptionsItemSelected(item);
