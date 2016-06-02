@@ -119,7 +119,7 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
                                 int nowY = (int) event.getRawY();
                                 // 判断打开还是关闭
                                 if(ddx == 0  && Math.abs(nowY - downY) < 5) {
-                                    finalHolder.item.performClick();
+                                    //finalHolder.item.performClick();
                                     return result;
                                 }
                                 if (ddx <= 0 && ddx > -(bottomWidth / 2)) {
