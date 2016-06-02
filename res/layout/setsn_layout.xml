@@ -15,6 +15,6 @@
                   android:paddingRight="10dp"
                   android:maxLength="40"
 
-                  android:id="@+id/setsignatrue"/>
+                  android:id="@+id/setsignatrue" android:gravity="start"/>
     </LinearLayout>
 </LinearLayout>

@@ -52,7 +52,7 @@
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mymail" android:hint="@string/register_name"
                     android:gravity="fill_vertical|right"
-                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l"
+                    android:layout_gravity="center_vertical" android:textColor="@color/gray_m"
                     android:layout_marginRight="35dp" android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
@@ -73,7 +73,7 @@
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mynickname" android:hint="@string/nick_name"
                     android:gravity="fill_vertical|right"
-                    android:layout_gravity="center_vertical" android:textColor="@color/gray_l" android:layout_weight="1"/>
+                    android:layout_gravity="center_vertical" android:textColor="@color/gray_m" android:layout_weight="1"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -100,7 +100,7 @@
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:id="@+id/mysex" android:hint="@string/sex"
                     android:gravity="fill_vertical|right"
-                    android:textColor="@color/gray_l" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/gray_m" android:layout_weight="1" android:layout_gravity="center_vertical"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mybirthday" android:hint="@string/birthday" android:textColor="@color/gray_l"
+                    android:id="@+id/mybirthday" android:hint="@string/birthday" android:textColor="@color/gray_m"
                     android:layout_gravity="center_vertical" android:layout_weight="1" android:gravity="fill_vertical|right"/>
             <ImageView
                     android:layout_width="14dp"
@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mysignature" android:hint="@string/signature" android:textColor="@color/gray_l"
+                    android:id="@+id/mysignature" android:hint="@string/signature" android:textColor="@color/gray_m"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
                     android:layout_weight="1"/>
             <ImageView
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/myeducation" android:hint="@string/education" android:textColor="@color/gray_l"
+                    android:id="@+id/myeducation" android:hint="@string/education" android:textColor="@color/gray_m"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
                     android:layout_weight="1"/>
             <ImageView
@@ -201,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mywork" android:hint="@string/work" android:textColor="@color/gray_l"
+                    android:id="@+id/mywork" android:hint="@string/work" android:textColor="@color/gray_m"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
                     android:layout_weight="1"/>
             <ImageView
