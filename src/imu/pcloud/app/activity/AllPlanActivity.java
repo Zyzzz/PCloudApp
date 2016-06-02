@@ -292,9 +292,6 @@ public class AllPlanActivity extends HttpActivity
             case android.R.id.home:
                 finish();
                 break;
-//            case R.id.share_plan:
-//                sharedFlag = 1;
-//                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }

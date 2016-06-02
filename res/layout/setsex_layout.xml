@@ -9,16 +9,17 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="30dp"
             android:id="@+id/men">
-        <EditText android:layout_width="wrap_content"
+        <TextView android:layout_width="wrap_content"
                   android:layout_height="match_parent" android:text="@string/men"
                   android:textColor="@android:color/black"
                   android:textAppearance="@android:style/TextAppearance.Large"
                   android:background="@null"
-                  android:layout_marginLeft="15dp" android:layout_weight="1"/>
+                  android:layout_marginLeft="15dp" android:layout_weight="1" android:gravity="center_vertical"
+                  android:id="@+id/mentext"/>
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/imageView7" android:background="@drawable/tick"
+                android:id="@+id/men_selector" android:background="@drawable/personal_plan_select"
                 android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <LinearLayout
@@ -26,14 +27,15 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" android:background="@android:color/white" android:layout_marginTop="1dp"
             android:id="@+id/women">
-        <EditText android:layout_width="wrap_content" android:layout_height="match_parent"
+        <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:text="@string/women" android:textColor="@android:color/black"
                   android:textAppearance="@android:style/TextAppearance.Large"
-                  android:background="@null" android:layout_marginLeft="15dp" android:layout_weight="1"/>
+                  android:background="@null" android:layout_marginLeft="15dp" android:layout_weight="1"
+                  android:gravity="center_vertical" android:id="@+id/womentext"/>
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/imageView15" android:background="@drawable/tick"
+                android:id="@+id/women_selector" android:background="@drawable/personal_plan_select"
                 android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </LinearLayout>

@@ -63,8 +63,10 @@ abstract public class HttpActivity extends Activity {
     void get(String url, Object... prams) {
         RequestParams requestParams = new RequestParams();
         for (int i = 0; i < prams.length; i += 2) {
-            requestParams.put((String) prams[i],
-                    prams[i + 1].getClass().cast(prams[i + 1]));
+            if(prams[i + 1] == null)
+                requestParams.put((String) prams[i], "");
+            else
+                requestParams.put((String) prams[i],  prams[i + 1].getClass().cast(prams[i + 1]));
         }
         HttpClient.get(url, requestParams, myHandler);
     }

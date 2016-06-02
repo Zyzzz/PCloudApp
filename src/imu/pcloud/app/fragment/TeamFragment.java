@@ -18,16 +18,16 @@ public class TeamFragment extends HttpFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initActionBar();
-        listview= (ListView) getActivity().findViewById(R.id.teammember_list);
-        listview.setAdapter(myAdspter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent();
-
-
-            }
-        });
+//        listview= (ListView) getActivity().findViewById(R.id.teammember_list);
+//        listview.setAdapter(myAdspter);
+//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent=new Intent();
+//
+//
+//            }
+//        });
         return inflater.inflate(R.layout.team_layout, container, false);
     }
 

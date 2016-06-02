@@ -64,6 +64,8 @@
         <activity android:name=".activity.CheckSharingPlanActivity"
                   android:theme="@style/newTheme">
         </activity>
-
+        <activity android:name=".activity.SetInformationActivity"
+                  android:theme="@style/newTheme"
+        />
     </application>
 </manifest>

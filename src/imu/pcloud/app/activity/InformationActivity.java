@@ -27,6 +27,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     private TextView tvEdu;
     private TextView tvWork;
     UserModel userModel;
+    String layoutName;
 
     public TextView getTvNickname() {
         return tvNickname;
@@ -49,7 +50,6 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_activity);
         init();
-        initView();
     }
 
     @Override
@@ -65,7 +65,6 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     }
 
     private void init() {
-        userModel = getUserModel();
         setActionBar("个人信息");
         sex = find(R.id.sex);
         nickname = find(R.id.nickname);
@@ -86,9 +85,11 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         edu.setOnClickListener(this);
         work.setOnClickListener(this);
         sign.setOnClickListener(this);
+        initView();
     }
 
     public void initView() {
+        userModel = getUserModel();
         tvNickname.setText(userModel.getUsername());
         tvSex.setText(userModel.getSex());
         tvBirthday.setText(userModel.getBirthday());
@@ -100,49 +101,59 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        int layoutId;
+        int layoutId = 0;
         switch (v.getId()) {
             case R.id.sex:
                 layoutId = R.layout.setsex_layout;
+                layoutName = "性别";
                 break;
             case R.id.nickname:
                 layoutId = R.layout.setname_activity;
+                layoutName = "昵称";
                 break;
             case R.id.birthday:
-
-                break;
+                layoutName = "生日";
+                return;
             case R.id.work:
                 layoutId = R.layout.setwork_layout;
+                layoutName = "工作信息";
                 break;
             case R.id.education:
                 layoutId = R.layout.seteducation_layout;
+                layoutName = "教育信息";
                 break;
             case R.id.signature:
                 layoutId = R.layout.setsn_layout;
+                layoutName = "个性签名";
                 break;
         }
+        Bundle data = new Bundle();
+        data.putInt("layoutId", layoutId);
+        data.putInt("itemId", v.getId());
+        data.putString("layoutName", layoutName);
+        startActivity(SetInformationActivity.class, data);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.add_plan, menu);
+        //menu.clear();
+        //getMenuInflater().inflate(R.menu.add_plan, menu);
         return true;
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.confirm:
-                get("setInformation", "cookies", getCookie(),
-                        "sex", tvSex.getText(), "birthday", "",
-                        "education", "", "working", "",
-                        "signature", "", "name", tvNickname.getText());
-                break;
             case android.R.id.home:
                 finish();
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    protected void onResume() {
+        initView();
+        super.onResume();
     }
 }
