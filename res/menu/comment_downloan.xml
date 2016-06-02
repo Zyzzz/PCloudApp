@@ -4,7 +4,9 @@
             android:id="@+id/downloan_plan"
             android:showAsAction="always"
             android:icon="@drawable/download"
-            android:title=""></item>
+            android:title="">
+        
+    </item>
     <item
             android:id="@+id/comment_plan"
             android:showAsAction="always"
