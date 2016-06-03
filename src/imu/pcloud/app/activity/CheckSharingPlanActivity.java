@@ -1,14 +1,18 @@
 package imu.pcloud.app.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.*;
 import android.widget.*;
+import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Comment;
+import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +21,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/6/1.
  */
-public class CheckSharingPlanActivity extends HttpActivity{
+public class CheckSharingPlanActivity extends HttpActivity {
     private  int planId;
     private  int loadingTime;
     private  int mode;
@@ -33,6 +37,8 @@ public class CheckSharingPlanActivity extends HttpActivity{
     private TextView loadingTextView;
     private String planName;
     private String planContext;
+    private AlertDialog CommentDialog;
+    private PersonalPlan plan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +81,7 @@ public class CheckSharingPlanActivity extends HttpActivity{
         loadingTextView.setText(loadingTime+"次");
         planName = bundle.getString("planName");
         planContext = bundle.getString("planContext");
+        plan = gson.fromJson(bundle.getString("plan", ""), PersonalPlan.class);
     }
 
     @Override
@@ -90,19 +97,40 @@ public class CheckSharingPlanActivity extends HttpActivity{
             } else {
                 toast(commentList.getResult());
             }
-        }
-        else if(mode == 2){
+        } else if(mode == 2){
                 BaseModel baseModel = getObject(BaseModel.class);
                 if (baseModel.getStatus() == 0) {
+                    downloadPlan(plan);
                     toast("加载计划成功");
+                    loadingTime++;
+                    loadingTextView.setText(loadingTime + "次");
                 } else {
                     toast(baseModel.getResult());
                 }
                 falg = false;
                 mode = 1;
+            }else {
+            BaseModel baseModel = getObject(BaseModel.class);
+            if (baseModel.getStatus() == 0) {
+                toast("评论计划成功");
+                setDialogStatus(false, CommentDialog);
+            } else {
+                toast(baseModel.getResult());
             }
+            mode = 1;
         }
+    }
 
+    private void downloadPlan(PersonalPlan plan) {
+        ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
+                sharedPreferences.getString("plansString" + getUserId(), ""),
+                new TypeToken<ArrayList<PersonalPlan>>() {
+                }.getType());
+        personalPlanArrayList.add(plan);
+        String plansString = gson.toJson(personalPlanArrayList);
+        editor.putString("plansString" + getUserId(), plansString);
+        editor.commit();
+    }
 
     private void getDate(){
         for(Comment comment:comments){
@@ -128,16 +156,50 @@ public class CheckSharingPlanActivity extends HttpActivity{
                 if(falg) {
                     mode = 2;
                     get("increaseLoadingTime", "personalPlanId", planId, "planCircleId", planCircleID);
-                    loadingTime++;
-                    loadingTextView.setText(loadingTime + "次");
                 }else {
                     toast("你已经加载过了");
                 }
                 break;
             case R.id.comment_plan:
-                mode = 3;
+                LayoutInflater inflater = getLayoutInflater();
+                final View layout = inflater.inflate(R.layout.text_dialog, null);
+                CommentDialog = new AlertDialog.Builder(CheckSharingPlanActivity.this).create();
+                CommentDialog.setTitle("请输入评论内容");
+                CommentDialog.setView(layout);
+                CommentDialog.setButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mode = 3;
+                        EditText comment = (EditText)layout.findViewById(R.id.text);
+                        get("addComment","cookies",getCookie(),"personalPlanId",planId,"content",comment.getText().toString());
+                        //setDialogStatus(false, dialog);
+                    }
+                });
+                CommentDialog .setButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setDialogStatus(true, dialog);
+                    }
+                });
+                CommentDialog.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void setDialogStatus(Boolean opened, DialogInterface dialog) {
+        try
+        {
+            Field field = dialog.getClass()
+                    .getSuperclass().getDeclaredField(
+                            "mShowing" );
+            field.setAccessible( true );
+            // 将mShowing变量设为false，表示对话框已关闭
+            field.set(dialog, opened);
+            dialog.dismiss();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

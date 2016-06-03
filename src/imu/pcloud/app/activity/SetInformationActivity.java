@@ -62,7 +62,7 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
             case R.id.birthday:
                 textView = (TextView) findViewById(R.id.setbirth);
                 textView.setOnClickListener(this);
-                textView.setText(DateTool.getRealDate(userModel.getBirthday()));
+                textView.setText(userModel.getBirthday());
                 break;
             case R.id.work:
                 editText = (EditText) findViewById(R.id.setwork);
@@ -167,20 +167,21 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
         else
             birthday = DateTool.stringToDate(this.birthday);
         if(birthday != null)
-            calendar.setTimeInMillis(birthday.getTime());
+            calendar.setTime(birthday);
         DatePickerDialog timePickerDialog = new DatePickerDialog(this, this,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_YEAR));
+                calendar.get(Calendar.DAY_OF_MONTH));
         timePickerDialog.show();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        monthOfYear++;
         String yearStr = year + "";
-        String monthStr = monthOfYear < 10 ? "0" + monthOfYear : "" + monthOfYear;
+        String monthStr = monthOfYear < 10 ? "0" + monthOfYear: "" + monthOfYear;
         String dayStr = dayOfMonth < 10 ? "0" + dayOfMonth : "" + dayOfMonth;
         birthday = yearStr + "-" + monthStr + "-" + dayStr;
-        textView.setText(DateTool.getRealDate(birthday));
+        textView.setText(birthday);
     }
 }

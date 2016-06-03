@@ -53,6 +53,7 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
                 intent.putExtra("PlanId",personalPlens.get(position-1).getId());
                 intent.putExtra("PlandownLoan",sharingRecords.get(position-1).getLoadingTime());
                 intent.putExtra("PlanCircleId",planCircleID);
+                intent.putExtra("plan", gson.toJson(personalPlens.get(position - 1)));
                 startActivity(intent);
             }
         });

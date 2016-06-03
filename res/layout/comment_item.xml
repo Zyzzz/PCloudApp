@@ -24,7 +24,8 @@
                 android:layout_height="match_parent"
                 android:textColor="#666872"
                 android:textSize="30dp"
-                android:layout_weight="1" android:gravity="center_vertical" android:layout_marginLeft="5dp"/>
+                android:layout_weight="1" android:gravity="center_vertical" android:layout_marginLeft="5dp"
+                android:singleLine="false"/>
     </LinearLayout>
 
 </LinearLayout>
