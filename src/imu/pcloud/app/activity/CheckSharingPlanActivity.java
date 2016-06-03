@@ -130,6 +130,8 @@ public class CheckSharingPlanActivity extends HttpActivity {
                 sharedPreferences.getString("plansString" + getUserId(), ""),
                 new TypeToken<ArrayList<PersonalPlan>>() {
                 }.getType());
+        if(personalPlanArrayList == null)
+            personalPlanArrayList = new ArrayList<PersonalPlan>();
         personalPlanArrayList.add(plan);
         String plansString = gson.toJson(personalPlanArrayList);
         editor.putString("plansString" + getUserId(), plansString);
