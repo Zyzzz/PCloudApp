@@ -113,4 +113,10 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
             }
         }, 1000);
     }
+
+    @Override
+    protected void onResume() {
+        get("getSharingList","planCircleId",planCircleID);
+        super.onResume();
+    }
 }

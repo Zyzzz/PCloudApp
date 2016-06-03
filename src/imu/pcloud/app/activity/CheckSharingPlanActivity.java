@@ -113,15 +113,16 @@ public class CheckSharingPlanActivity extends HttpActivity {
             BaseModel baseModel = getObject(BaseModel.class);
             if (baseModel.getStatus() == 0) {
                 toast("评论计划成功");
-                setDialogStatus(false, CommentDialog);
+                setDialogStatus(true, CommentDialog);
             } else {
                 toast(baseModel.getResult());
+                setDialogStatus(false, CommentDialog);
             }
             mode = 1;
         }
     }
 
-    private void downloadPlan(PersonalPlan plan) {
+    private boolean downloadPlan(PersonalPlan plan) {
         ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
                 sharedPreferences.getString("plansString" + getUserId(), ""),
                 new TypeToken<ArrayList<PersonalPlan>>() {
@@ -130,6 +131,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
         String plansString = gson.toJson(personalPlanArrayList);
         editor.putString("plansString" + getUserId(), plansString);
         editor.commit();
+        return true;
     }
 
     private void getDate(){
@@ -154,6 +156,16 @@ public class CheckSharingPlanActivity extends HttpActivity {
                 break;
             case R.id.downloan_plan:
                 if(falg) {
+                    ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
+                            sharedPreferences.getString("plansString" + getUserId(), ""),
+                            new TypeToken<ArrayList<PersonalPlan>>() {
+                            }.getType());
+                    for(PersonalPlan var:personalPlanArrayList) {
+                        if(var.getId() == plan.getId()) {
+                            toast("你已经加载过了");
+                            return false;
+                        }
+                    }
                     mode = 2;
                     get("increaseLoadingTime", "personalPlanId", planId, "planCircleId", planCircleID);
                 }else {
@@ -163,24 +175,23 @@ public class CheckSharingPlanActivity extends HttpActivity {
             case R.id.comment_plan:
                 LayoutInflater inflater = getLayoutInflater();
                 final View layout = inflater.inflate(R.layout.text_dialog, null);
-                CommentDialog = new AlertDialog.Builder(CheckSharingPlanActivity.this).create();
-                CommentDialog.setTitle("请输入评论内容");
-                CommentDialog.setView(layout);
-                CommentDialog.setButton("确定", new DialogInterface.OnClickListener() {
+                CommentDialog = new AlertDialog.Builder(CheckSharingPlanActivity.this).
+                        setTitle("请输入评论内容").
+                        setView(layout).
+                        setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mode = 3;
                         EditText comment = (EditText)layout.findViewById(R.id.text);
                         get("addComment","cookies",getCookie(),"personalPlanId",planId,"content",comment.getText().toString());
-                        //setDialogStatus(false, dialog);
+                        setDialogStatus(false, dialog);
                     }
-                });
-                CommentDialog .setButton("取消", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setDialogStatus(true, dialog);
                     }
-                });
+                }).create();
                 CommentDialog.show();
                 break;
         }
