@@ -39,6 +39,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
     private String planContext;
     private AlertDialog CommentDialog;
     private PersonalPlan plan;
+    private EditText comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,15 +111,17 @@ public class CheckSharingPlanActivity extends HttpActivity {
                 falg = false;
                 mode = 1;
             }else {
+            mode = 1;
             BaseModel baseModel = getObject(BaseModel.class);
             if (baseModel.getStatus() == 0) {
                 toast("评论计划成功");
                 setDialogStatus(true, CommentDialog);
+                get("getCommentList","personalPlanId",planId);
             } else {
                 toast(baseModel.getResult());
                 setDialogStatus(false, CommentDialog);
             }
-            mode = 1;
+
         }
     }
 
@@ -182,8 +185,9 @@ public class CheckSharingPlanActivity extends HttpActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mode = 3;
-                        EditText comment = (EditText)layout.findViewById(R.id.text);
+                        comment = (EditText)layout.findViewById(R.id.text);
                         get("addComment","cookies",getCookie(),"personalPlanId",planId,"content",comment.getText().toString());
+
                         setDialogStatus(false, dialog);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
