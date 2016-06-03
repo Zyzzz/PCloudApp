@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateTool {
 	static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
 	static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+	static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static String timeToString(Time time) {
 		if(time == null)
 			return null;
@@ -59,15 +59,15 @@ public class DateTool {
 		}
 	}
 
-	public static String getRealDate(String dateString) {
-		if(dateString == null)
-			return null;
-		String monthStr = dateString.substring(5, 7);
-		int month = Integer.parseInt(monthStr);
-		month++;
-		monthStr = month < 10 ? "0" + month : "" + month;
-		String result = dateString.substring(0, 5)  + monthStr + dateString.substring(7);
-		return result;
-	}
+//	public static String getRealDate(String dateString) {
+//		if(dateString == null)
+//			return null;
+//		String monthStr = dateString.substring(5, 7);
+//		int month = Integer.parseInt(monthStr);
+//		month++;
+//		monthStr = month < 10 ? "0" + month : "" + month;
+//		String result = dateString.substring(0, 5)  + monthStr + dateString.substring(7);
+//		return result;
+//	}
 	
 }

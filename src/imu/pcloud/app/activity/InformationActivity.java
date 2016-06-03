@@ -93,12 +93,11 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         userModel = getUserModel();
         tvNickname.setText(userModel.getUsername());
         tvSex.setText(userModel.getSex());
-        tvBirthday.setText(DateTool.getRealDate(userModel.getBirthday()));
+        tvBirthday.setText(userModel.getBirthday());
         tvEmail.setText(userModel.getEmail());
         tvEdu.setText(userModel.getEducation());
         tvWork.setText(userModel.getWorking());
         tvSign.setText(userModel.getSignature());
-        tvSex.setText(userModel.getSignature());
     }
 
     @Override

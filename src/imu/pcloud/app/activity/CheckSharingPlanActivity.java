@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
+import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Comment;
+import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.*;
 
 import java.lang.reflect.Field;
@@ -36,6 +38,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
     private String planName;
     private String planContext;
     private AlertDialog CommentDialog;
+    private PersonalPlan plan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
         loadingTextView.setText(loadingTime+"次");
         planName = bundle.getString("planName");
         planContext = bundle.getString("planContext");
+        plan = gson.fromJson(bundle.getString("plan", ""), PersonalPlan.class);
     }
 
     @Override
@@ -96,7 +100,10 @@ public class CheckSharingPlanActivity extends HttpActivity {
         } else if(mode == 2){
                 BaseModel baseModel = getObject(BaseModel.class);
                 if (baseModel.getStatus() == 0) {
+                    downloadPlan(plan);
                     toast("加载计划成功");
+                    loadingTime++;
+                    loadingTextView.setText(loadingTime + "次");
                 } else {
                     toast(baseModel.getResult());
                 }
@@ -114,6 +121,16 @@ public class CheckSharingPlanActivity extends HttpActivity {
         }
     }
 
+    private void downloadPlan(PersonalPlan plan) {
+        ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
+                sharedPreferences.getString("plansString" + getUserId(), ""),
+                new TypeToken<ArrayList<PersonalPlan>>() {
+                }.getType());
+        personalPlanArrayList.add(plan);
+        String plansString = gson.toJson(personalPlanArrayList);
+        editor.putString("plansString" + getUserId(), plansString);
+        editor.commit();
+    }
 
     private void getDate(){
         for(Comment comment:comments){
@@ -139,23 +156,19 @@ public class CheckSharingPlanActivity extends HttpActivity {
                 if(falg) {
                     mode = 2;
                     get("increaseLoadingTime", "personalPlanId", planId, "planCircleId", planCircleID);
-                    loadingTime++;
-                    loadingTextView.setText(loadingTime + "次");
                 }else {
                     toast("你已经加载过了");
                 }
                 break;
             case R.id.comment_plan:
                 LayoutInflater inflater = getLayoutInflater();
-                final View layout = inflater.inflate(R.layout.text_dialog,
-                        (ViewGroup) findViewById(R.id.text));
+                final View layout = inflater.inflate(R.layout.text_dialog, null);
                 CommentDialog = new AlertDialog.Builder(CheckSharingPlanActivity.this).create();
                 CommentDialog.setTitle("请输入评论内容");
                 CommentDialog.setView(layout);
                 CommentDialog.setButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            //get("","");
                         mode = 3;
                         EditText comment = (EditText)layout.findViewById(R.id.text);
                         get("addComment","cookies",getCookie(),"personalPlanId",planId,"content",comment.getText().toString());

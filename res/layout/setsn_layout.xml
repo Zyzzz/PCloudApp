@@ -15,7 +15,7 @@
                   android:paddingRight="10dp"
                   android:maxLength="40"
 
-                  android:id="@+id/setsignatrue" android:gravity="start" android:paddingTop="10dp"
+                  android:id="@+id/setsignatrue" android:gravity="left|start" android:paddingTop="10dp"
                   android:paddingBottom="10dp" android:textAppearance="@android:style/TextAppearance.Holo.Medium"
                   android:textColor="@android:color/black"/>
     </LinearLayout>
