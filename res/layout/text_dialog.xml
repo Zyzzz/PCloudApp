@@ -5,7 +5,7 @@
               android:layout_height="wrap_content">
     <EditText android:layout_width="match_parent"
               android:layout_height="wrap_content" android:background="@null" android:textColor="@android:color/black"
-              android:textAppearance="@android:style/TextAppearance.Holo.Medium" android:inputType="textMultiLine"
+              android:textAppearance="@android:style/TextAppearance.Medium" android:inputType="textMultiLine"
               android:gravity="top" android:singleLine="true"
               android:id="@+id/text" android:paddingLeft="10dp" android:paddingTop="1dp" android:paddingBottom="1dp"
               android:paddingRight="10dp" android:layout_marginTop="0dp" android:layout_marginBottom="0dp"/>
