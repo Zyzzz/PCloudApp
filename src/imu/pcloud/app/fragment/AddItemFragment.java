@@ -133,6 +133,8 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
         }
     }
 
+    //opened:false 不关
+    //       true 关
     public void setDialogStatus(Boolean opened, DialogInterface dialog) {
         try
         {

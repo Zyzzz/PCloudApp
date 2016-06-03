@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
+import imu.pcloud.app.utils.DateTool;
 
 /**
  * Created by guyu on 2016/5/27.
@@ -92,11 +93,12 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         userModel = getUserModel();
         tvNickname.setText(userModel.getUsername());
         tvSex.setText(userModel.getSex());
-        tvBirthday.setText(userModel.getBirthday());
+        tvBirthday.setText(DateTool.getRealDate(userModel.getBirthday()));
         tvEmail.setText(userModel.getEmail());
         tvEdu.setText(userModel.getEducation());
         tvWork.setText(userModel.getWorking());
         tvSign.setText(userModel.getSignature());
+        tvSex.setText(userModel.getSignature());
     }
 
     @Override
@@ -113,7 +115,8 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                 break;
             case R.id.birthday:
                 layoutName = "生日";
-                return;
+                layoutId = R.layout.setbirth_layout;
+                break;
             case R.id.work:
                 layoutId = R.layout.setwork_layout;
                 layoutName = "工作信息";

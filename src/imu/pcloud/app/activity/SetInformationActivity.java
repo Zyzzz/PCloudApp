@@ -1,24 +1,34 @@
 package imu.pcloud.app.activity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
+import imu.pcloud.app.utils.DateTool;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by guyu on 2016/6/2.
  */
-public class SetInformationActivity extends HttpActivity implements View.OnClickListener{
+public class SetInformationActivity extends HttpActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
 
     private int layoutId = 0;
     private int itemId = 0;
     EditText editText;
+    TextView textView;
     View editor1;
     View editor2;
     UserModel userModel;
+    String birthday = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +60,9 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
                 editText.setText(userModel.getUsername());
                 break;
             case R.id.birthday:
+                textView = (TextView) findViewById(R.id.setbirth);
+                textView.setOnClickListener(this);
+                textView.setText(DateTool.getRealDate(userModel.getBirthday()));
                 break;
             case R.id.work:
                 editText = (EditText) findViewById(R.id.setwork);
@@ -96,6 +109,7 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
                     userModel.setUsername(editText.getText().toString());
                     break;
                 case R.id.birthday:
+                    userModel.setBirthday(birthday);
                     break;
                 case R.id.work:
                     userModel.setWorking(editText.getText().toString());
@@ -139,6 +153,34 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
                 find(R.id.men_selector).setSelected(false);
                 find(R.id.women_selector).setSelected(true);
                 break;
+            case R.id.setbirth:
+                showDateDialog();
+                break;
         }
+    }
+
+    public void showDateDialog() {
+        Calendar calendar = Calendar.getInstance();
+        Date birthday;
+        if(this.birthday == null)
+            birthday = DateTool.stringToDate(userModel.getBirthday());
+        else
+            birthday = DateTool.stringToDate(this.birthday);
+        if(birthday != null)
+            calendar.setTimeInMillis(birthday.getTime());
+        DatePickerDialog timePickerDialog = new DatePickerDialog(this, this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_YEAR));
+        timePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        String yearStr = year + "";
+        String monthStr = monthOfYear < 10 ? "0" + monthOfYear : "" + monthOfYear;
+        String dayStr = dayOfMonth < 10 ? "0" + dayOfMonth : "" + dayOfMonth;
+        birthday = yearStr + "-" + monthStr + "-" + dayStr;
+        textView.setText(DateTool.getRealDate(birthday));
     }
 }
