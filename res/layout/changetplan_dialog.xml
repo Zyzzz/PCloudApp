@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="#ffffff"
+              android:layout_height="match_parent">
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <EditText
+                android:id="@+id/newplancontent"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="fill_parent"
+                  android:layout_height="match_parent"
+            android:layout_marginBottom="250dp"
+                android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_marginLeft="10dp"
+            android:text="更改"
+            android:background="#48B2E6"
+            android:textSize="40dp"
+            android:layout_height="fill_parent"
+        />
+        <Button
+                android:layout_width="150dp"
+                android:text="取消"
+                android:textSize="40dp"
+                android:background="#48B2E6"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="60dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

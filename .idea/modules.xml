@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PCloudApp.iml" filepath="$PROJECT_DIR$/PCloudApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" filepath="$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" filepath="$PROJECT_DIR$/libs/Android-PullToRefresh-master/library/library.iml" />
     </modules>
   </component>
 </project>
