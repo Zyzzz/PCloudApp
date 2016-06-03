@@ -138,6 +138,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
     }
 
     private void getDate(){
+        cList.clear();
         for(Comment comment:comments){
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("userName", comment.getUser().getUsername());
