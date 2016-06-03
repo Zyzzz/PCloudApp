@@ -32,6 +32,11 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plancircle_layout);
+        Intent intent_accept = getIntent();
+        Bundle bundle = intent_accept.getExtras();
+        planCircleID = bundle.getInt("planCircleID");
+        String planCirleName = bundle.getString("planCircleName");
+        setActionBar(planCirleName);
         listView1 = (PullToRefreshListView)findViewById(R.id.plancircle_listView);
         listView1.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listView1.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
@@ -43,23 +48,14 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(),CheckSharingPlanActivity.class);
-               // System.out.print("ddddddddddddd"+position);
                 intent.putExtra("planName",personalPlens.get(position-1).getName());
                 intent.putExtra("planContext",personalPlens.get(position-1).getContent());
                 intent.putExtra("PlanId",personalPlens.get(position-1).getId());
                 intent.putExtra("PlandownLoan",sharingRecords.get(position-1).getLoadingTime());
+                intent.putExtra("PlanCircleId",planCircleID);
                 startActivity(intent);
             }
         });
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent intent_accept = getIntent();
-        Bundle bundle = intent_accept.getExtras();
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
-        String planCirleName = bundle.getString("planCircleName");
-        setActionBar(planCirleName);
-        planCircleID = bundle.getInt("planCircleID");
-        //listView1.setRefreshing();
-        //get()s
         get("getSharingList","planCircleId",planCircleID);
     }
     public boolean onOptionsItemSelected(MenuItem item) {
