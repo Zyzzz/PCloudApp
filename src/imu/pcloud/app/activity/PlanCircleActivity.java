@@ -47,6 +47,7 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
                 intent.putExtra("planName",personalPlens.get(position-1).getName());
                 intent.putExtra("planContext",personalPlens.get(position-1).getContent());
                 intent.putExtra("PlanId",personalPlens.get(position-1).getId());
+                intent.putExtra("PlandownLoan",sharingRecords.get(position-1).getLoadingTime());
                 startActivity(intent);
             }
         });
@@ -89,12 +90,17 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
     protected void onSuccess() {
         PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
         if(userSharingList.getStatus() == 400){
-            personalPlens=userSharingList.getPersonalPlans();
-            sharingRecords = userSharingList.getSharingRecords();
-            list = getData();
-            //PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
-            ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.plancircle_item, new String[]{"name"}, new int[]{ R.id.plancircle_name});
-            listView1.setAdapter(listAdapter);
+            if(!userSharingList.getPersonalPlans().isEmpty()) {
+                personalPlens = userSharingList.getPersonalPlans();
+                sharingRecords = userSharingList.getSharingRecords();
+                list = getData();
+                //PlanCircleAdspter listAdapter = new PlanCircleAdspter(this,this,list);
+                ListAdapter listAdapter = new SimpleAdapter(this, list, R.layout.plancircle_item, new String[]{"name"}, new int[]{R.id.plancircle_name});
+                listView1.setAdapter(listAdapter);
+            }
+            else {
+                toast("该计划圈列表为空");
+            }
         } else {
             toast("网络连接出现问题");
         }

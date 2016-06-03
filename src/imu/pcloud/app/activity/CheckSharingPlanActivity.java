@@ -25,6 +25,7 @@ import java.util.Map;
  */
 public class CheckSharingPlanActivity extends HttpActivity{
     int planId;
+    int LoadingTime;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     private List<Map<String,Object>> cList =new ArrayList<Map<String, Object>>();
     private List<Comment> comments = new ArrayList<Comment>();
