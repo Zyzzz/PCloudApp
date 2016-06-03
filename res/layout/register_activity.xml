@@ -18,7 +18,7 @@
                   android:background="@null"
                   android:inputType="text" android:textColor="@android:color/black"
                   android:textColorHint="@color/gray_l"
-                  android:paddingLeft="10dp" android:textSize="20dp"
+                  android:paddingLeft="10dp"
                   android:textAppearance="@android:style/TextAppearance.Holo.Medium"/>
     </LinearLayout>
 
@@ -35,7 +35,7 @@
                   android:layout_height="match_parent"
                   android:background="@null"
                   android:inputType="text" android:textColor="@android:color/black"
-                  android:textColorHint="@color/gray_l" android:paddingLeft="10dp" android:textSize="20dp"
+                  android:textColorHint="@color/gray_l" android:paddingLeft="10dp"
                   android:textAppearance="@android:style/TextAppearance.Holo.Medium"/>
     </LinearLayout>
 
@@ -52,7 +52,7 @@
                   android:layout_height="match_parent"
                   android:background="@null"
                   android:inputType="textPassword" android:textColor="@android:color/black"
-                  android:textColorHint="@color/gray_l" android:paddingLeft="10dp" android:textSize="20dp"
+                  android:textColorHint="@color/gray_l" android:paddingLeft="10dp"
                   android:textAppearance="@android:style/TextAppearance.Holo.Medium"/>
     </LinearLayout>
 
@@ -70,7 +70,7 @@
                   android:background="@null"
                   android:inputType="textPassword"
                   android:textColor="@android:color/black" android:textColorHint="@color/gray_l"
-                  android:paddingLeft="10dp" android:textSize="20dp"
+                  android:paddingLeft="10dp"
                   android:textAppearance="@android:style/TextAppearance.Holo.Medium"/>
     </LinearLayout>
 

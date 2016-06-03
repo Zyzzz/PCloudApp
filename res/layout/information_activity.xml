@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mymail" android:hint="@string/register_name"
+                    android:id="@+id/mymail"
                     android:gravity="fill_vertical|right"
                     android:layout_gravity="center_vertical" android:textColor="@color/gray_xl"
                     android:layout_marginRight="35dp" android:layout_weight="1"/>
@@ -71,9 +71,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mynickname" android:hint="@string/nick_name"
+                    android:id="@+id/mynickname"
                     android:gravity="fill_vertical|right"
-                    android:layout_gravity="center_vertical" android:textColor="@color/gray_xl" android:layout_weight="1"/>
+                    android:layout_gravity="center_vertical" android:textColor="@color/gray_xl" android:layout_weight="1"
+                    android:hint="@string/unset"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -98,9 +99,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mysex" android:hint="@string/sex"
+                    android:id="@+id/mysex"
                     android:gravity="fill_vertical|right"
-                    android:textColor="@color/gray_xl" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/gray_xl" android:layout_weight="1" android:layout_gravity="center_vertical"
+                    android:hint="@string/unset"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -124,38 +126,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mybirthday" android:hint="@string/birthday" android:textColor="@color/gray_xl"
-                    android:layout_gravity="center_vertical" android:layout_weight="1" android:gravity="fill_vertical|right"/>
+                    android:id="@+id/mybirthday" android:textColor="@color/gray_xl"
+                    android:layout_gravity="center_vertical" android:layout_weight="1" android:gravity="fill_vertical|right"
+                    android:hint="@string/unset"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
                     android:id="@+id/imageView10" android:background="@drawable/arrow" android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
-                    android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
-                android:id="@+id/signature" android:layout_marginTop="1dp">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/signature"
-                    android:id="@+id/textView14" android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" android:layout_marginLeft="15dp"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mysignature" android:hint="@string/signature" android:textColor="@color/gray_xl"
-                    android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="1"/>
-            <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="17dp"
-                    android:id="@+id/imageView12" android:background="@drawable/arrow" android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
                     android:layout_gravity="center_vertical"/>
         </LinearLayout>
@@ -175,9 +152,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/myeducation" android:hint="@string/education" android:textColor="@color/gray_xl"
+                    android:id="@+id/myeducation" android:textColor="@color/gray_xl"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" android:hint="@string/unset"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -201,13 +178,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="@android:style/TextAppearance.Large"
-                    android:id="@+id/mywork" android:hint="@string/work" android:textColor="@color/gray_xl"
+                    android:id="@+id/mywork" android:textColor="@color/gray_xl"
                     android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" android:hint="@string/unset"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
                     android:id="@+id/imageView14" android:background="@drawable/arrow" android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" android:background="@drawable/item_select"
+                android:id="@+id/signature" android:layout_marginTop="1dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/signature"
+                    android:id="@+id/textView14" android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black" android:layout_marginLeft="15dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@android:style/TextAppearance.Large"
+                    android:id="@+id/mysignature" android:textColor="@color/gray_xl"
+                    android:layout_gravity="center_vertical" android:gravity="fill_vertical|right"
+                    android:layout_weight="1" android:hint="@string/unset"/>
+            <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="17dp"
+                    android:id="@+id/imageView12" android:background="@drawable/arrow" android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
                     android:layout_gravity="center_vertical"/>
         </LinearLayout>

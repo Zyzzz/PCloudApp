@@ -71,10 +71,11 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
             <Button
                     android:id="@+id/register"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/login"
                     android:layout_below="@id/login"
@@ -83,11 +84,10 @@
                     android:textColor="@color/blue_l"
                     android:textSize="16sp"
                     android:visibility="visible"
-                    android:layout_marginLeft="15dp" android:layout_weight="2" android:paddingRight="120dp"
-                    android:layout_marginTop="10dp"/>
+                    android:gravity="left" android:layout_weight="2"/>
             <Button
                     android:id="@+id/login_error"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@id/login"
                     android:layout_below="@id/login"
@@ -95,8 +95,7 @@
                     android:text="忘记密码"
                     android:textColor="@color/blue_l"
                     android:textSize="16sp"
-                    android:layout_marginRight="15dp" android:layout_weight="2" android:paddingLeft="100dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_weight="2" android:gravity="right"/>
         </LinearLayout>
 
     </LinearLayout>
