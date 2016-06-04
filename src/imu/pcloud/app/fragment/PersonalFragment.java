@@ -29,6 +29,7 @@ public class PersonalFragment extends HttpFragment {
     private ListView listView;
     private ActionBar myActionBar;
     SimpleAdapter listAdapter;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -94,7 +95,7 @@ public class PersonalFragment extends HttpFragment {
 
     @Override
     public void onResume() {
-        setActionBar();
+        //setActionBar();
         init();
         super.onResume();
     }
@@ -132,9 +133,5 @@ public class PersonalFragment extends HttpFragment {
         menu.clear();
         menuInflater.inflate(R.menu.personal, menu);
         return ;
-    }
-
-    public void showSelectDaysDialog() {
-
     }
 }

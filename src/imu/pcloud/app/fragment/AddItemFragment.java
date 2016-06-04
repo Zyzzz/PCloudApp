@@ -34,6 +34,7 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
     View touched;
     TimePickerDialog timePickerDialog;
     OnPlanInputListener onPlanInputListener;
+    int flag = 0;
 
     public void setOnPlanInputListener(OnPlanInputListener onPlanInputListener) {
         this.onPlanInputListener = onPlanInputListener;
@@ -61,14 +62,16 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
         endTime = (TextView) view.findViewById(R.id.end_time);
         title = (EditText) view.findViewById(R.id.title);
         content = (EditText) view.findViewById(R.id.content);
-        Plan plan = ((AddPlanItemActivity)getActivity()).getNowPlan();
+        Plan plan = null;
         endTime.setOnClickListener(this);
         startTime.setOnClickListener(this);
+        flag = 0;
         if(plan != null) {
             startTime.setText(plan.getStartTimeString());
             endTime.setText(plan.getEndTimeString());
             title.setText(plan.getTitle());
             content.setText(plan.getContent());
+            flag = 1;
         }
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
@@ -92,25 +95,37 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
                                     onPlanInputListener.onPlanInputed(plan);
                                 setDialogStatus(true, dialog);
                             }
-                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setDialogStatus(true, dialog);
-            }
-        });
+                        }).setNegativeButton("取消",
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setDialogStatus(true, dialog);
+                }
+            });
+        if(flag == 1) {
+            builder.setNeutralButton("删除",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setDialogStatus(true, dialog);
+                            onPlanInputListener.onPlanInputed(null);
+                        }
+                    });
+        }
         return builder.create();
     }
 
     @Override
     public void onClick(View v) {
+        Calendar calendar = Calendar.getInstance();
         touched = v;
         if(v.getId() == R.id.end_time) {
             if(startTime.getText().length() == 0){
                 Toast.makeText(getActivity(), "请先设置开始时间", Toast.LENGTH_SHORT).show();
                 return;
             }
+            calendar.setTime(DateTool.stringToTime(startTime.getText().toString()));
         }
-        Calendar calendar = Calendar.getInstance();
         TimePickerDialog.Builder builder = new TimePickerDialog.Builder(getActivity());
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), this,
                 calendar.get(Calendar.HOUR_OF_DAY),

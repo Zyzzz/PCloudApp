@@ -5,30 +5,55 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.activity.AddMultiPlanActivity;
+import imu.pcloud.app.activity.SearchMultiPlanActivity;
+import imu.pcloud.app.activity.ShowMultiPlanActivity;
 import imu.pcloud.app.adapter.MyAdspter;
+import imu.pcloud.app.been.MultiPlan;
+import imu.pcloud.app.model.MultiPlanList;
+
+import java.util.*;
 
 /**
  * Created by acer on 2016/5/11.
  */
-public class TeamFragment extends HttpFragment {
-    private ListView listview;
-    MyAdspter myAdspter;
+public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRefreshListener, AdapterView.OnItemClickListener{
+    private PullToRefreshListView listview;
+    SimpleAdapter adapter;
+    private ArrayList<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
+    private MultiPlanList multiPlanList = new MultiPlanList();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initActionBar();
-//        listview= (ListView) getActivity().findViewById(R.id.teammember_list);
-//        listview.setAdapter(myAdspter);
-//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent=new Intent();
-//
-//
-//            }
-//        });
-        return inflater.inflate(R.layout.team_layout, container, false);
+        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.allplan, container, false);
+        listview= (PullToRefreshListView) view.findViewById(R.id.allplan_listview);
+        adapter = new SimpleAdapter(getActivity(), pList, R.layout.plancircle_item,
+                new String[]{"name"}, new int[]{R.id.plancircle_name});
+        listview.setAdapter(adapter);
+        listview.setOnRefreshListener(this);
+        listview.setOnItemClickListener(this);
+        refreshData();
+        return view;
+    }
+
+    private void updateData() {
+        pList.clear();
+        for(MultiPlan multiPlan: multiPlanList.getMultiPlans()) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("name", multiPlan.getName());
+            pList.add(map);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    private void refreshData() {
+        get("getMultiPlanListByUserId", "cookies", getCookie());
     }
 
     private void initActionBar() {
@@ -39,23 +64,80 @@ public class TeamFragment extends HttpFragment {
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
-
-
-
     @Override
     protected void onSuccess() {
-
+        MultiPlanList result = getObject(MultiPlanList.class);
+        if(result.getStatus() == 0) {
+            multiPlanList = result;
+            updateData();
+            if(listview.isRefreshing())
+                listview.onRefreshComplete();
+        }
+        else {
+            toast(result.getResult());
+            if(listview.isRefreshing())
+                listview.onRefreshComplete();
+        }
     }
 
     public void onHiddenChanged(boolean hidden) {
-        if(hidden == false)
+        if(hidden == false) {
             initActionBar();
+            refreshData();
+        }
         super.onHiddenChanged(hidden);
     }
 
     @Override
     public void onResume() {
-        initActionBar();
+        //initActionBar();
+        refreshData();
         super.onResume();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menu.clear();
+        menuInflater.inflate(R.menu.multi_plan, menu);
+        return ;
+    }
+
+    @Override
+    protected void onFailure() {
+        super.onFailure();
+        if(listview.isRefreshing())
+            listview.onRefreshComplete();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_multi_plan:
+                startActivity(AddMultiPlanActivity.class);
+                break;
+            case R.id.join_multi_plan:
+                startActivity(SearchMultiPlanActivity.class);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase refreshView) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                refreshData();
+            }
+        }, 1000);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        MultiPlan multiPlan = multiPlanList.getMultiPlans().get(position - 1);
+        Bundle data = new Bundle();
+        data.putString("plan", gson.toJson(multiPlan));
+        data.putInt("flag", 0);
+        startActivity(ShowMultiPlanActivity.class, data);
     }
 }

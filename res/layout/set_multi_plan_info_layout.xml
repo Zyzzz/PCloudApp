@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_m">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/max_munber" android:background="@android:color/white" android:gravity="center"
+            android:textColor="@android:color/black" android:layout_marginTop="30dp" android:inputType="number"
+            android:hint="人数上限（小于100）" android:maxLength="2"/>
+    <EditText android:layout_width="match_parent" android:layout_height="50dp"
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              android:id="@+id/plan_name" android:background="@android:color/white" android:gravity="center"
+              android:textColor="@android:color/black" android:layout_marginTop="30dp"
+              android:layout_marginBottom="30dp" android:hint="群计划名"/>
+</LinearLayout>

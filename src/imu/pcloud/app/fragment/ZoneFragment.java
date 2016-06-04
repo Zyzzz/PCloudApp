@@ -39,8 +39,14 @@ public class ZoneFragment extends HttpFragment {
 
     @Override
     public void onResume() {
-        initActionBar();
+        //initActionBar();
+        refreshData();
         super.onResume();
+    }
+
+    private void refreshData() {
+        get("getPlanCircleList");
+        //init();
     }
 
     private void initActionBar() {
@@ -65,8 +71,10 @@ public class ZoneFragment extends HttpFragment {
     }
 
     public void onHiddenChanged(boolean hidden) {
-        if(hidden == false)
+        if(hidden == false) {
             initActionBar();
+            refreshData();
+        }
         super.onHiddenChanged(hidden);
     }
 

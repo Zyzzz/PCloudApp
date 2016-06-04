@@ -50,7 +50,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
 
     @Override
     public void onResume() {
-        initActionBar();
+        //initActionBar();
         userModel = getUserModel();
         nickName.setText(userModel.getUsername());
         email.setText(userModel.getEmail());
