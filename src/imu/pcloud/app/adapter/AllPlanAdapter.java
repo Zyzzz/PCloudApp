@@ -82,7 +82,7 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
             btn_delete.setOnClickListener(this);
             if(personalPlanArrayList.get(position).getUserId() != ((AllPlanActivity)context).getUserId()) {
                 btn_share.setBackgroundResource(R.color.gray_l);
-                btn_share.setText("无法分享");
+                btn_share.setText("他人计划\n无法分享");
             } else {
                 btn_share.setOnClickListener(this);
             }

@@ -45,7 +45,7 @@ public class ZoneFragment extends HttpFragment {
 
     private void initActionBar() {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
-                R.layout.actionbar_layout, null);
+                R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
         textview.setText("计划圈");
         getActivity().getActionBar().setCustomView(actionbarLayout);
