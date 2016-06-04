@@ -1,11 +1,13 @@
 package imu.pcloud.app.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.MultiPlan;
+import imu.pcloud.app.model.BaseModel;
 import imu.pcloud.app.model.Plan;
 import imu.pcloud.app.model.Plans;
 
@@ -25,6 +27,7 @@ public class ShowMultiPlanActivity extends HttpActivity {
     private SimpleAdapter adapter;
     private MultiPlan multiPlan;
     private int mode;
+    private int clickId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,18 +68,53 @@ public class ShowMultiPlanActivity extends HttpActivity {
 
     @Override
     protected void onSuccess() {
+        switch (clickId) {
+            case R.id.join:
+                BaseModel result = getObject(BaseModel.class);
+                if(result.getStatus() == 0) {
+                    toast("加入成功");
+                    finish();
+                }
+                else {
+                    toast(result.getResult());
+                }
+        }
+    }
 
+    private void joinPlan() {
+        get("joinMultiPlan", "cookies", getCookie(), "multiPlanId", multiPlan.getId());
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        clickId = item.getItemId();
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.join:
+                joinPlan();
+                break;
+            case R.id.lookmember:
+                break;
+            case R.id.updateplan:
+                break;
+
         }
         return super.onMenuItemSelected(featureId, item);
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        switch(mode) {
+            case 0:
+                getMenuInflater().inflate(R.menu.team, menu);
+                break;
+            case 1:
+                getMenuInflater().inflate(R.menu.overview_team, menu);
+                break;
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
 }
