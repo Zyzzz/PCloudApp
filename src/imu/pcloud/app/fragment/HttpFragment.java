@@ -60,7 +60,7 @@ abstract public class HttpFragment extends Fragment {
     abstract protected void onSuccess();
 
     protected  void  onFailure(){
-
+        toast("SERVER ERROR");
     }
 
 
@@ -105,7 +105,6 @@ abstract public class HttpFragment extends Fragment {
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-            toast("网络连接失败");
             HttpFragment.this.onFailure();
         }
     }

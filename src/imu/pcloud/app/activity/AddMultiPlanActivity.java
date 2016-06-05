@@ -36,7 +36,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     private Plan newPlan= new Plan("", "", "点击添加新内容", "");
     private Plan nowPlan;
-    private int maxmumber;
+    private int maxmumber = 0;
     SimpleAdapter listAdapter;
     Plans plans = new Plans();
     PersonalPlan personalPlan = new PersonalPlan();
@@ -70,6 +70,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         planName = saveInstanceState.getString("planName", "新多人计划");
         planId = saveInstanceState.getInt("planId", -1);
         planArrayList = plans.getPlans();
+        maxmumber = saveInstanceState.getInt("maxmumber", 0);
     }
 
     protected void init() {
@@ -104,11 +105,10 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     protected void onSuccess() {
         BaseModel result = getObject(BaseModel.class);
         if(result.getStatus() == 0) {
-            toast("创建成功");
-            this.finish();
-        }
-        else if(result.getStatus() == 205) {
-            toast("修改成功");
+            if(editFlag == 0)
+                toast("创建成功");
+            else
+                toast("修改成功");
             this.finish();
         }
         else {
@@ -153,6 +153,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         nowPlan = plan;
         AddItemFragment addItemFragment = new AddItemFragment();
         addItemFragment.setOnPlanInputListener(this);;
+        addItemFragment.setPlan(plan);
         addItemFragment.show(getFragmentManager(), "修改计划");
     }
 
@@ -195,6 +196,9 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
                 View view = getLayoutInflater().inflate(R.layout.set_multi_plan_info_layout, null);
                 etPlanName = (EditText) view.findViewById(R.id.plan_name);
                 etMaxmumber = (EditText) view.findViewById(R.id.max_munber);
+                etPlanName.setText(planName);
+                if(maxmumber != 0)
+                    etMaxmumber.setText("" + maxmumber);
                 new AlertDialog.Builder(this).setTitle("请输入计划信息").
                         setView(view).
                         setPositiveButton("确定", this).
@@ -220,7 +224,11 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         }
         else {
             planName = etPlanName.getText().toString();
-            //get("modifyPlan", "content", plans.getJsonString(), "name", planName, "id", planId);
+            get("modfiyMultiPlan",
+                    "content", plans.getJsonString(),
+                    "name", planName,
+                    "multiPlanId", planId,
+                    "maxmumber", maxmumber);
         }
     }
 }

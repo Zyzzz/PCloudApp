@@ -16,6 +16,7 @@ import imu.pcloud.app.activity.ShowMultiPlanActivity;
 import imu.pcloud.app.adapter.MyAdspter;
 import imu.pcloud.app.been.MultiPlan;
 import imu.pcloud.app.model.MultiPlanList;
+import imu.pcloud.app.utils.SpaceUtil;
 
 import java.util.*;
 
@@ -60,7 +61,7 @@ public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRe
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText("群计划");
+        textview.setText(SpaceUtil.getSpace(4) + "群计划");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 

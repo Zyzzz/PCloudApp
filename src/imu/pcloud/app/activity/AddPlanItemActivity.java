@@ -155,6 +155,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         addFlag = pos;
         nowPlan = plan;
         AddItemFragment addItemFragment = new AddItemFragment();
+        addItemFragment.setPlan(plan);
         addItemFragment.setOnPlanInputListener(this);;
         addItemFragment.show(getFragmentManager(), "修改计划");
     }

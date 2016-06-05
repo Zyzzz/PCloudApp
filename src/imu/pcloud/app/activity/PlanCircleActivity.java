@@ -95,11 +95,10 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
                 ListAdapter listAdapter = new SimpleAdapter(this, list, R.layout.plancircle_item, new String[]{"name"}, new int[]{R.id.plancircle_name});
                 listView1.setAdapter(listAdapter);
             }
-            else {
-                toast("该计划圈列表为空");
-            }
-        } else {
-            toast("网络连接出现问题");
+        } else if(userSharingList.getStatus() == 401){
+            ;toast("该计划圈分享为空");
+        } else{
+            toast(userSharingList.getResult());
         }
         listView1.onRefreshComplete();
     }

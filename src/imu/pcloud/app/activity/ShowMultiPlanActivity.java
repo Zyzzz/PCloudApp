@@ -96,12 +96,35 @@ public class ShowMultiPlanActivity extends HttpActivity {
                 joinPlan();
                 break;
             case R.id.lookmember:
+                lookMemeber();
                 break;
             case R.id.updateplan:
+                updatePlan();
                 break;
+            case R.id.check_multi_plan:
 
+                break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    public void lookMemeber() {
+        startActivity(TeamMemberActivity.class, getIntent().getExtras());
+    }
+
+    public void updatePlan() {
+        if (multiPlan.getUserId() != getUserId()) {
+            toast("您没有修改计划的权限");
+            return;
+        }
+        String planString = multiPlan.getContent();
+        Bundle data = new Bundle();
+        data.putString("planString", planString);
+        data.putInt("status", 1);
+        data.putString("planName", multiPlan.getName());
+        data.putInt("planId", multiPlan.getId());
+        data.putInt("maxmumber", multiPlan.getMaxmumber());
+        startActivity(AddMultiPlanActivity.class, data);
     }
 
     @Override

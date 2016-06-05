@@ -13,6 +13,7 @@ import imu.pcloud.app.activity.AllPlanActivity;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.utils.SpaceUtil;
 import imu.pcloud.app.utils.WidgetController;
 
 import java.util.ArrayList;
@@ -88,8 +89,7 @@ public class PersonalFragment extends HttpFragment {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "个人计划");
-        int leftnum = width  - WidgetController.getWidth(textview);
+        textview.setText(SpaceUtil.getSpace(4) + "个人计划");
         myActionBar.setCustomView(actionbarLayout);
     }
 

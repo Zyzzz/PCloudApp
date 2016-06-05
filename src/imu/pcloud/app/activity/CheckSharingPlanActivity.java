@@ -45,7 +45,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_sharing_plan);
         init();
-        setActionBar(""+planName);
+        setActionBar(R.layout.actionbar_check_layout, planName);
         getPlist();
         SimpleAdapter listAdapter = new SimpleAdapter(this, pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
@@ -63,7 +63,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
             map.put("start_time", plan.getStartTimeString());
             map.put("end_time", plan.getEndTimeString());
             map.put("content", plan.getContent());
-            map.put("title", plan.getTitle() + ":(来自:" + planName + ")");
+            map.put("title", plan.getTitle());
             pList.add(map);
         }
     }

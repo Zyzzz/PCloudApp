@@ -162,7 +162,7 @@ abstract public class HttpActivity extends Activity {
         }
     }
 
-    public void setActionBar(String title, String space) {
+    public void setActionBar(int layoutId, String title) {
         myActionBar = getActionBar();
         // 返回箭头（默认不显示）
         myActionBar.setDisplayHomeAsUpEnabled(true);
@@ -175,14 +175,13 @@ abstract public class HttpActivity extends Activity {
         myActionBar.setDisplayShowTitleEnabled(true);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this).inflate(
-                R.layout.actionbar_layout, null);
+                layoutId, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(space + title);
+        textview.setText(title);
         myActionBar.setCustomView(actionbarLayout);
     }
 
     public void setActionBar(String title) {
-        setActionBar(title, "");
+        setActionBar(R.layout.actionbar_layout, title);
     }
-
 }

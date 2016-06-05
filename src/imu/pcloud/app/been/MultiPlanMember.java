@@ -11,6 +11,7 @@ public class MultiPlanMember implements java.io.Serializable {
 	private Integer id;
 	private Integer multiPlanId;
 	private Integer userId;
+	private User user;
 
 	// Constructors
 
@@ -49,5 +50,15 @@ public class MultiPlanMember implements java.io.Serializable {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 
 }
