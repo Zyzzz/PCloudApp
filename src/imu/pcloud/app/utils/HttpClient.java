@@ -16,18 +16,18 @@ public abstract class HttpClient {
     //*/private static final String BASE_URL = "http://115.28.53.244:8080/PCloudServer/";
 
     public HttpClient() {
-        client.setConnectTimeout(1000);
+        client.setConnectTimeout(3000);
     }
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         params.setContentEncoding(HTTP.UTF_8);
-        client.setConnectTimeout(1000);
+        client.setConnectTimeout(3000);
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         params.setContentEncoding(HTTP.UTF_8);
-        client.setConnectTimeout(1000);
+        client.setConnectTimeout(3000);
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 

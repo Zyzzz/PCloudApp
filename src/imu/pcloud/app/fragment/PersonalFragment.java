@@ -37,8 +37,8 @@ public class PersonalFragment extends HttpFragment {
             case R.id.action_manage:
                 startActivity(AllPlanActivity.class);
                 break;
-            case R.id.action_updatedays:
-                break;
+//            case R.id.action_updatedays:
+//                break;
         }
         return true;
     }

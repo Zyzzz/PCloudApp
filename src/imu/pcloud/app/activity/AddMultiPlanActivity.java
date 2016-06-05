@@ -45,7 +45,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     int addFlag = 0;
     int editFlag = 0;
     int planId = 0;
-    Plans plans;
+    Plans plans = new Plans();
     MultiPlan multiPlan;
 
     public Plan getNowPlan() {
@@ -204,6 +204,8 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
                 }
                 ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                 pal.remove(pal.size() - 1);
+                if(plans == null)
+                    plans = new Plans();
                 plans.setPlans(pal);
                 View view = getLayoutInflater().inflate(R.layout.set_multi_plan_info_layout, null);
                 etPlanName = (EditText) view.findViewById(R.id.plan_name);

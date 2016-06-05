@@ -102,9 +102,9 @@ public class ShowMultiPlanActivity extends HttpActivity {
             case R.id.updateplan:
                 updatePlan();
                 break;
-            case R.id.check_multi_plan:
-
-                break;
+//            case R.id.check_multi_plan:
+//
+//                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
@@ -143,8 +143,10 @@ public class ShowMultiPlanActivity extends HttpActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(resultCode) {
             case 0:
-                multiPlan = gson.fromJson(data.getExtras().getString("multi_plan", ""), MultiPlan.class);
-                init();
+                if(data != null) {
+                    multiPlan = gson.fromJson(data.getExtras().getString("multi_plan", ""), MultiPlan.class);
+                    init();
+                }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

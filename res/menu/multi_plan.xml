@@ -15,11 +15,6 @@
                     android:showAsAction="always"
                     android:title="加入群计划">
             </item>
-            <item
-                    android:id="@+id/check_multi_plan"
-                    android:showAsAction="always"
-                    android:title="查看信息">
-            </item>
         </menu>
     </item>
 </menu>
