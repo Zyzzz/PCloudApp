@@ -2,6 +2,7 @@ package imu.pcloud.app.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.MultiPlan;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.fragment.AddItemFragment;
 import imu.pcloud.app.listener.OnPlanInputListener;
@@ -38,12 +40,13 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     private Plan nowPlan;
     private int maxmumber = 0;
     SimpleAdapter listAdapter;
-    Plans plans = new Plans();
     PersonalPlan personalPlan = new PersonalPlan();
     String planName = "新多人计划";
     int addFlag = 0;
     int editFlag = 0;
     int planId = 0;
+    Plans plans;
+    MultiPlan multiPlan;
 
     public Plan getNowPlan() {
         return nowPlan;
@@ -65,12 +68,13 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     }
 
     private void initEdit(Bundle saveInstanceState) {
-        Plans plans = new Plans();
-        plans.setByJsonString(getIntent().getExtras().getString("planString", ""));
-        planName = saveInstanceState.getString("planName", "新多人计划");
-        planId = saveInstanceState.getInt("planId", -1);
+        multiPlan = gson.fromJson(saveInstanceState.getString("multi_plan", ""), MultiPlan.class);
+        plans = new Plans();
+        plans.setByJsonString(multiPlan.getContent());
+        planName = multiPlan.getName();
+        planId = multiPlan.getId();
         planArrayList = plans.getPlans();
-        maxmumber = saveInstanceState.getInt("maxmumber", 0);
+        maxmumber = multiPlan.getMaxmumber();
     }
 
     protected void init() {
@@ -107,8 +111,16 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         if(result.getStatus() == 0) {
             if(editFlag == 0)
                 toast("创建成功");
-            else
+            else {
                 toast("修改成功");
+                plans.setPlans(planArrayList);
+                multiPlan.setContent(plans.getJsonString());
+                multiPlan.setName(planName);
+                multiPlan.setMaxmumber(maxmumber);
+                Intent data = new Intent();
+                data.putExtra("multi_plan", gson.toJson(multiPlan));
+                setResult(0, data);
+            }
             this.finish();
         }
         else {
