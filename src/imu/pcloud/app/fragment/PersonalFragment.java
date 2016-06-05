@@ -1,6 +1,7 @@
 package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.ListAdapter;
@@ -48,6 +49,7 @@ public class PersonalFragment extends HttpFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
+
         listAdapter = new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
         listView.setAdapter(listAdapter);
