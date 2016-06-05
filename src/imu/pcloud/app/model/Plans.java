@@ -32,7 +32,12 @@ public class Plans {
     }
 
     public void setByJsonString(String jsonString) {
-        plans = gson.fromJson(jsonString, new TypeToken<ArrayList<Plan>>() {
-        }.getType());
+        try {
+            plans = gson.fromJson(jsonString, new TypeToken<List<Plan>>(){}.getType());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            plans = new ArrayList<Plan>();
+            e.printStackTrace();
+        }
     }
 }

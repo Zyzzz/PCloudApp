@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/add"
+            android:showAsAction="always"
+            android:icon="@drawable/add_icon" android:title="">
+        <menu>
+            <item
+                    android:id="@+id/add_multi_plan"
+                    android:showAsAction="always"
+                    android:title="新建群计划">
+            </item>
+            <item
+                    android:id="@+id/join_multi_plan"
+                    android:showAsAction="always"
+                    android:title="加入群计划">
+            </item>
+        </menu>
+    </item>
+</menu>

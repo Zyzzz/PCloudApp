@@ -298,12 +298,6 @@ public class AllPlanActivity extends HttpActivity
 
     @Override
     public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                getCloudPlan();
-            }
-        }, 1000);
         setSelectedPlanId();
     }
 
@@ -325,6 +319,7 @@ public class AllPlanActivity extends HttpActivity
         }
         else if(view.getId() == R.id.selector){
             int i = 0;
+            setSelectedPlanId();
             int length = selectedPlanId.size();
             for(i = 0; i < length; i++){
                 int selectId = selectedPlanId.get(i);

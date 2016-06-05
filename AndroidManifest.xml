@@ -7,42 +7,52 @@
     <application android:icon="@drawable/logo" android:label="@string/app_name">
         <activity
                 android:name=".activity.RegisterActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/newTheme">
         </activity>
         <activity android:name=".activity.LoginActivity"
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity android:name=".activity.PlanCircleActivity"
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme"
                  >
         </activity>
         <activity android:name=".activity.UserSharingActivity"
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme"
         >
 
         </activity>
         <activity android:name=".activity.MainActivity"
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
 
         </activity>
         <activity android:name=".activity.AddPlanItemActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
         <activity android:name=".activity.InformationActivity"
-            android:theme="@style/newTheme"
+                    android:theme="@style/newTheme"
+                  android:screenOrientation="portrait"
         />
         <activity android:name=".activity.AllPlanActivity"
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
         <activity android:name=".activity.AccountActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
         <activity android:name=".activity.WelcomeActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
@@ -50,22 +60,36 @@
         </intent-filter>
         </activity>>
         <activity android:name=".activity.RepasswordActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
 
         <activity android:name=".activity.TeamMemberActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
 
         <activity android:name=".activity.TPlanInformation"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
 
         <activity android:name=".activity.CheckSharingPlanActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme">
         </activity>
         <activity android:name=".activity.SetInformationActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/newTheme"
         />
+        <activity android:name=".activity.AddMultiPlanActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/newTheme"/>
+        <activity android:name=".activity.SearchMultiPlanActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/newTheme"/>
+        <activity android:name=".activity.ShowMultiPlanActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/newTheme"/>
     </application>
 </manifest>

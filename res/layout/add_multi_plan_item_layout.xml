@@ -5,11 +5,12 @@
               android:background="#f5f5f5" android:orientation="vertical">
 
     <ListView
-        android:id="@+id/personal_listview"
+        android:id="@+id/multi_listview"
         android:divider="@color/gray_l"
         android:dividerHeight="1dp"
         android:layout_width="fill_parent"
         android:layout_height="match_parent">
+
     </ListView>
 
 </LinearLayout>

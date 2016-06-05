@@ -57,7 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" android:layout_weight="1" android:background="@android:color/white"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp" android:gravity="center"/>
+                    android:textSize="30dp" android:gravity="left|center" android:text="d"
+                    android:layout_marginLeft="10dp" android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="10dp"

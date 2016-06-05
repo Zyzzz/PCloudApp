@@ -39,13 +39,19 @@ public class ZoneFragment extends HttpFragment {
 
     @Override
     public void onResume() {
-        initActionBar();
+        //initActionBar();
+        refreshData();
         super.onResume();
+    }
+
+    private void refreshData() {
+        get("getPlanCircleList");
+        //init();
     }
 
     private void initActionBar() {
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
-                R.layout.actionbar_layout, null);
+                R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
         textview.setText("计划圈");
         getActivity().getActionBar().setCustomView(actionbarLayout);
@@ -65,8 +71,10 @@ public class ZoneFragment extends HttpFragment {
     }
 
     public void onHiddenChanged(boolean hidden) {
-        if(hidden == false)
+        if(hidden == false) {
             initActionBar();
+            refreshData();
+        }
         super.onHiddenChanged(hidden);
     }
 

@@ -1,22 +1,22 @@
 package imu.pcloud.app.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.fragment.AddItemFragment;
 import imu.pcloud.app.listener.OnPlanInputListener;
 import imu.pcloud.app.model.BaseModel;
 import imu.pcloud.app.model.Plan;
-import imu.pcloud.app.model.PlanList;
 import imu.pcloud.app.model.Plans;
-import imu.pcloud.app.utils.DateTool;
 import imu.pcloud.app.utils.PlanListTool;
 
 import java.util.ArrayList;
@@ -25,20 +25,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by guyu on 2016/5/23.
+ * Created by guyu on 2016/6/4.
  */
-public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnItemClickListener, OnPlanInputListener, DialogInterface.OnClickListener {
+public class AddMultiPlanActivity extends HttpActivity implements AdapterView.OnItemClickListener, OnPlanInputListener, DialogInterface.OnClickListener{
 
     private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private ListView listView;
-    private EditText text;
+    private EditText etPlanName;
+    private EditText etMaxmumber;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     private Plan newPlan= new Plan("", "", "点击添加新内容", "");
     private Plan nowPlan;
+    private int maxmumber;
     SimpleAdapter listAdapter;
     Plans plans = new Plans();
     PersonalPlan personalPlan = new PersonalPlan();
-    String planName = "新计划";
+    String planName = "新多人计划";
     int addFlag = 0;
     int editFlag = 0;
     int planId = 0;
@@ -65,13 +67,13 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     private void initEdit(Bundle saveInstanceState) {
         Plans plans = new Plans();
         plans.setByJsonString(getIntent().getExtras().getString("planString", ""));
-        planName = saveInstanceState.getString("planName", "新计划");
+        planName = saveInstanceState.getString("planName", "新多人计划");
         planId = saveInstanceState.getInt("planId", -1);
         planArrayList = plans.getPlans();
     }
 
     protected void init() {
-        setActionBar("编辑计划");
+        setActionBar("编辑群计划");
         setContentView(R.layout.add_plan_item_layout);
         listView = find(R.id.personal_listview);
         listAdapter=new SimpleAdapter(this, pList, R.layout.personal_list_item,
@@ -94,19 +96,14 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     }
 
     public void setPlan(Plan plan, int pos) {
-        if(plan == null) {
-            planArrayList.remove(pos);
-        }
-        else {
-            planArrayList.set(pos, plan);
-        }
+        planArrayList.set(pos, plan);
         getData(pList);
         listAdapter.notifyDataSetChanged();
     }
     @Override
     protected void onSuccess() {
         BaseModel result = getObject(BaseModel.class);
-        if(result.getStatus() == 200) {
+        if(result.getStatus() == 0) {
             toast("创建成功");
             this.finish();
         }
@@ -188,19 +185,20 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirm:
-                    if(planArrayList.size() < 2) {
-                        toast("请至少输入一条计划");
-                        return false;
-                    }
-                    ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
-                    pal.remove(pal.size() - 1);
-                    plans.setPlans(pal);
-                    text = new EditText(this);
-                    text.setText(planName);
-                    new AlertDialog.Builder(this).setTitle("请输入计划名").
-                            setView(text).
-                            setPositiveButton("确定", this).
-                            setNegativeButton("取消", null).show();
+                if(planArrayList.size() < 2) {
+                    toast("请至少输入一条计划");
+                    return false;
+                }
+                ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
+                pal.remove(pal.size() - 1);
+                plans.setPlans(pal);
+                View view = getLayoutInflater().inflate(R.layout.set_multi_plan_info_layout, null);
+                etPlanName = (EditText) view.findViewById(R.id.plan_name);
+                etMaxmumber = (EditText) view.findViewById(R.id.max_munber);
+                new AlertDialog.Builder(this).setTitle("请输入计划信息").
+                        setView(view).
+                        setPositiveButton("确定", this).
+                        setNegativeButton("取消", null).show();
                 break;
             case android.R.id.home:
                 finish();
@@ -212,12 +210,17 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
     @Override
     public void onClick(DialogInterface dialog, int id) {
         if(editFlag == 0) {
-            planName = text.getText().toString();
-            get("addPlan", "content", plans.getJsonString(), "name", planName, "cookies", getCookie());
+            planName = etPlanName.getText().toString();
+            maxmumber = Integer.parseInt(etMaxmumber.getText().toString());
+            get("addMultiPlan", "content", plans.getJsonString(),
+                    "name", planName,
+                    "cookies", getCookie(),
+                    "maxmumber", maxmumber,
+                    "condition", 0);
         }
         else {
-            planName = text.getText().toString();
-            get("modifyPlan", "content", plans.getJsonString(), "name", planName, "id", planId);
+            planName = etPlanName.getText().toString();
+            //get("modifyPlan", "content", plans.getJsonString(), "name", planName, "id", planId);
         }
     }
 }

@@ -29,6 +29,7 @@ public class PersonalFragment extends HttpFragment {
     private ListView listView;
     private ActionBar myActionBar;
     SimpleAdapter listAdapter;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -85,16 +86,16 @@ public class PersonalFragment extends HttpFragment {
         myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
-                R.layout.actionbar_layout, null);
+                R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText("个人计划");
+        textview.setText(SPACE + "个人计划");
         int leftnum = width  - WidgetController.getWidth(textview);
         myActionBar.setCustomView(actionbarLayout);
     }
 
     @Override
     public void onResume() {
-        setActionBar();
+        //setActionBar();
         init();
         super.onResume();
     }
@@ -132,9 +133,5 @@ public class PersonalFragment extends HttpFragment {
         menu.clear();
         menuInflater.inflate(R.menu.personal, menu);
         return ;
-    }
-
-    public void showSelectDaysDialog() {
-
     }
 }
