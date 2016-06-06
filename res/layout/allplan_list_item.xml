@@ -13,22 +13,22 @@
         android:orientation="horizontal" >
         <Button
                 android:id="@+id/conversationlist_share"
-                android:layout_width="80dp"
+                android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:gravity="center"
                 android:background="#ff9d02"
                 android:text="分享"
                 android:textColor="@android:color/white"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
          <Button
                 android:id="@+id/conversationlist_delete"
-                android:layout_width="80dp"
+                android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:gravity="center"
                 android:text="删除"
-                android:background="#f70c34"
+                android:background="@color/red"
                 android:textColor="@android:color/white"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
 
     </LinearLayout>
     <LinearLayout

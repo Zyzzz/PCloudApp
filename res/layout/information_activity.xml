@@ -11,7 +11,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" android:layout_marginTop="30dp"
+                android:layout_height="90dp" android:layout_marginTop="30dp"
                 android:background="@drawable/item_select" android:id="@+id/header">
             <TextView
                     android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/mail">
             <TextView
                     android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:layout_marginTop="1dp" android:id="@+id/nickname">
             <TextView
                     android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                     android:id="@+id/mynickname"
                     android:gravity="fill_vertical|right"
                     android:layout_gravity="center_vertical" android:textColor="@color/gray_xl" android:layout_weight="1"
-                    android:hint="@string/unset"/>
+                    android:hint="@string/unset" android:textSize="20dp"/>
             <ImageView
                     android:layout_width="14dp"
                     android:layout_height="17dp"
@@ -86,7 +86,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:layout_marginTop="30dp" android:id="@+id/sex">
             <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:id="@+id/birthday" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:id="@+id/education" android:layout_marginTop="30dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -165,7 +165,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" android:background="@drawable/item_select"
+                android:layout_height="45dp" android:background="@drawable/item_select"
                 android:id="@+id/work" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" android:background="@drawable/item_select"
+                android:layout_height="90dp" android:background="@drawable/item_select"
                 android:id="@+id/signature" android:layout_marginTop="1dp">
             <TextView
                     android:layout_width="wrap_content"

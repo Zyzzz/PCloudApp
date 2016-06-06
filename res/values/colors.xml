@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_s">#59C5EF</color>
-    <color name="blue_m">#48B2E6</color>
-    <color name="blue_l">#02ACED</color>
-    <color name="blue_xl">#007cc3</color>
-    <color name="gray_s">#F6F6F6</color>
+
+        <!--<color name="blue_s">#59C5EF</color>-->
+        <!--<color name="blue_m">#48B2E6</color>-->
+        <!--<color name="blue_l">#02ACED</color>-->
+        <!--<color name="blue_xl">#007cc3</color>-->
+        <!--<color name="gray_s">#F6F6F6</color>-->
+        <!--<color name="gray_m">#ececec</color>-->
+        <!--<color name="gray_l">#b9b9b9</color>-->
+        <!--<color name="gray_xl">#717171</color>-->
+        <!--<color name="red">#ff3030</color>-->
+        <!--<color name="orange">#ff9d02</color>-->
+
+    <!--<color name="blue_s">#c5e2f2</color>-->
+    <!--<color name="blue_m">#6cb4e5</color>-->
+    <!--<color name="blue_l">#4fa2e3</color>-->
+    <!--<color name="blue_xl">#007cc3</color>-->
+    <!--<color name="gray_s">#F6F6F6</color>-->
+    <!--<color name="gray_m">#ececec</color>-->
+    <!--<color name="gray_l">#b9b9b9</color>-->
+    <!--<color name="gray_xl">#717171</color>-->
+    <!--<color name="red">#ff3030</color>-->
+    <!--<color name="orange">#ff9d02</color>-->
+
+    <color name="blue_s">#12d8d3</color>
+    <color name="blue_m">#12c5c0</color>
+    <color name="blue_l">#109590</color>
+    <color name="blue_xl">#4fa2e3</color>
+    <color name="gray_s">#efefef</color>
     <color name="gray_m">#ececec</color>
     <color name="gray_l">#b9b9b9</color>
-    <color name="gray_xl">#717171</color>
-    <color name="red">#ff3030</color>
+    <color name="gray_xl">#676767</color>
+    <color name="red">#ff3c31</color>
     <color name="orange">#ff9d02</color>
 </resources>

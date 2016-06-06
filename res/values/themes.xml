@@ -3,11 +3,16 @@
     <style name="newTheme"
            parent="android:Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/newbackground</item>
+        <item name="android:popupMenuStyle">@style/menubackground</item>
     </style>
     <style name="newbackground"
            parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#48B2EF</item>
+        <item name="android:background">@color/blue_m</item>
         <item name="android:layout">@layout/actionbar_layout</item>
+    </style>
+    <style name="menubackground"
+           parent="android:Widget.Holo.Light.PopupMenu">
+        <item name="android:background">#ffffff</item>
     </style>
     <style name="newTheme.TimePicker"
            parent="newTheme">
