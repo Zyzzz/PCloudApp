@@ -4,13 +4,22 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Comment;
 import imu.pcloud.app.been.PersonalPlan;
-import imu.pcloud.app.model.*;
+import imu.pcloud.app.model.BaseModel;
+import imu.pcloud.app.model.CommentList;
+import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.model.Plans;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -45,7 +54,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_sharing_plan);
         init();
-        setActionBar(""+planName);
+        setActionBar(planName);
         getPlist();
         SimpleAdapter listAdapter = new SimpleAdapter(this, pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
@@ -63,7 +72,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
             map.put("start_time", plan.getStartTimeString());
             map.put("end_time", plan.getEndTimeString());
             map.put("content", plan.getContent());
-            map.put("title", plan.getTitle() + ":(来自:" + planName + ")");
+            map.put("title", plan.getTitle());
             pList.add(map);
         }
     }

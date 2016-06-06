@@ -16,14 +16,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/start_time" android:layout_weight="1" android:textColor="@android:color/black"
-                android:textSize="30dp" android:layout_marginBottom="1dp"
-                android:background="@android:color/white" android:textStyle="italic" android:gravity="center"
-                android:text="7:222"/>
+                android:textSize="22dp" android:layout_marginBottom="1dp"
+                android:background="@android:color/white"
+                android:text="7:222" android:gravity="center"/>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:id="@+id/end_time" android:layout_weight="1" android:textColor="@android:color/black"
-                  android:textSize="30dp" android:background="@android:color/white"
-                  android:textStyle="italic" android:gravity="center" android:text="7:393"/>
+                  android:textSize="22dp" android:background="@android:color/white"
+                  android:text="7:393" android:gravity="center"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -37,11 +37,6 @@
                 android:id="@+id/plan_title" android:textColor="@android:color/black" android:textSize="18dp"
                 android:background="@android:color/white"
                 android:layout_marginBottom="1dp" android:layout_weight="1" android:paddingLeft="10dp"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/gray_m">
-        </LinearLayout>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="content"
                   android:id="@+id/plan_content" android:textColor="@android:color/black" android:textSize="20dp"
                   android:background="@android:color/white" android:gravity="center"

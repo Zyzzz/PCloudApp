@@ -1,6 +1,7 @@
 package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.ListAdapter;
@@ -13,6 +14,7 @@ import imu.pcloud.app.activity.AllPlanActivity;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.utils.SpaceUtil;
 import imu.pcloud.app.utils.WidgetController;
 
 import java.util.ArrayList;
@@ -36,8 +38,8 @@ public class PersonalFragment extends HttpFragment {
             case R.id.action_manage:
                 startActivity(AllPlanActivity.class);
                 break;
-            case R.id.action_updatedays:
-                break;
+//            case R.id.action_updatedays:
+//                break;
         }
         return true;
     }
@@ -47,6 +49,7 @@ public class PersonalFragment extends HttpFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
+
         listAdapter = new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
                 new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
         listView.setAdapter(listAdapter);
@@ -75,21 +78,20 @@ public class PersonalFragment extends HttpFragment {
         WindowManager wm = getActivity().getWindowManager();
         int width = wm.getDefaultDisplay().getWidth();
         myActionBar=getActivity().getActionBar();
-        myActionBar.setDisplayShowTitleEnabled(true);
-        // 返回箭头（默认不显示）
         myActionBar.setDisplayHomeAsUpEnabled(false);
         // 左侧图标点击事件使能
-        myActionBar.setHomeButtonEnabled(true);
+        myActionBar.setHomeButtonEnabled(false);
         // 使左上角图标(系统)是否显示
         myActionBar.setDisplayShowHomeEnabled(false);
+        //myActionBar.setTitle("");
+        myActionBar.setIcon(R.drawable.return_icon);
         // 显示标题
         myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SPACE + "个人计划");
-        int leftnum = width  - WidgetController.getWidth(textview);
+        textview.setText(SpaceUtil.getSpace(8) + "个人计划");
         myActionBar.setCustomView(actionbarLayout);
     }
 

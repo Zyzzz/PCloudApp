@@ -1,5 +1,6 @@
 package imu.pcloud.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,13 +33,13 @@ public class ShowMultiPlanActivity extends HttpActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_layout);
+        Bundle data = getIntent().getExtras();
+        mode = data.getInt("flag", 0);
+        multiPlan = gson.fromJson(data.getString("plan", ""), MultiPlan.class);
         init();
     }
 
     private void init() {
-        Bundle data = getIntent().getExtras();
-        mode = data.getInt("flag", 0);
-        multiPlan = gson.fromJson(data.getString("plan", ""), MultiPlan.class);
         if(multiPlan == null)
             return;
         Plans plans = new Plans();
@@ -96,12 +97,32 @@ public class ShowMultiPlanActivity extends HttpActivity {
                 joinPlan();
                 break;
             case R.id.lookmember:
+                lookMemeber();
                 break;
             case R.id.updateplan:
+                updatePlan();
                 break;
-
+//            case R.id.check_multi_plan:
+//
+//                break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    public void lookMemeber() {
+        startActivity(TeamMemberActivity.class, getIntent().getExtras());
+    }
+
+    public void updatePlan() {
+        if (multiPlan.getUserId() != getUserId()) {
+            toast("您没有修改计划的权限");
+            return;
+        }
+        Bundle data = new Bundle();
+        data.putString("multi_plan", gson.toJson(multiPlan));
+        Intent intent = new Intent(this, AddMultiPlanActivity.class);
+        intent.putExtras(data);
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -116,5 +137,17 @@ public class ShowMultiPlanActivity extends HttpActivity {
                 break;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(resultCode) {
+            case 0:
+                if(data != null) {
+                    multiPlan = gson.fromJson(data.getExtras().getString("multi_plan", ""), MultiPlan.class);
+                    init();
+                }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

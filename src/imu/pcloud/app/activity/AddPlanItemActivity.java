@@ -3,6 +3,7 @@ package imu.pcloud.app.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -155,6 +156,7 @@ public class AddPlanItemActivity extends HttpActivity implements AdapterView.OnI
         addFlag = pos;
         nowPlan = plan;
         AddItemFragment addItemFragment = new AddItemFragment();
+        addItemFragment.setPlan(plan);
         addItemFragment.setOnPlanInputListener(this);;
         addItemFragment.show(getFragmentManager(), "修改计划");
     }

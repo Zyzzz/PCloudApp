@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="70dp"
+                  android:layout_height="60dp"
                   android:orientation="horizontal"
                   android:background="@drawable/item_select"
                   android:id="@+id/usercode_layout" android:baselineAligned="false">
@@ -12,22 +12,15 @@
                 android:id="@+id/plancircle_image"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:background="@drawable/header"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray_m">
-        </LinearLayout>
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center"/>
         <TextView
                 android:id="@+id/plancircle_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/black"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical" android:layout_marginLeft="10dp" android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>

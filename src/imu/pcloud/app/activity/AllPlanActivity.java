@@ -147,7 +147,8 @@ public class AllPlanActivity extends HttpActivity
                 }
                 mergeCloudPlanToLocal((ArrayList<PersonalPlan>) planList.getPersonalPlans());
             }
-            listView.onRefreshComplete();
+            if(listView.isRefreshing())
+                listView.onRefreshComplete();
         }
         else if(clickFlag == SHARE){
             BaseModel result = getObject(BaseModel.class);
@@ -299,6 +300,12 @@ public class AllPlanActivity extends HttpActivity
     @Override
     public void onRefresh(PullToRefreshBase<ListView> refreshView) {
         setSelectedPlanId();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                get("getPlanList", "cookies", getCookie());
+            }
+        }, 1000);
     }
 
     @Override

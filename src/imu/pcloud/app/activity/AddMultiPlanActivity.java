@@ -2,6 +2,7 @@ package imu.pcloud.app.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.MultiPlan;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.fragment.AddItemFragment;
 import imu.pcloud.app.listener.OnPlanInputListener;
@@ -36,14 +38,15 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     private Plan newPlan= new Plan("", "", "点击添加新内容", "");
     private Plan nowPlan;
-    private int maxmumber;
+    private int maxmumber = 0;
     SimpleAdapter listAdapter;
-    Plans plans = new Plans();
     PersonalPlan personalPlan = new PersonalPlan();
     String planName = "新多人计划";
     int addFlag = 0;
     int editFlag = 0;
     int planId = 0;
+    Plans plans = new Plans();
+    MultiPlan multiPlan;
 
     public Plan getNowPlan() {
         return nowPlan;
@@ -65,11 +68,13 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     }
 
     private void initEdit(Bundle saveInstanceState) {
-        Plans plans = new Plans();
-        plans.setByJsonString(getIntent().getExtras().getString("planString", ""));
-        planName = saveInstanceState.getString("planName", "新多人计划");
-        planId = saveInstanceState.getInt("planId", -1);
+        multiPlan = gson.fromJson(saveInstanceState.getString("multi_plan", ""), MultiPlan.class);
+        plans = new Plans();
+        plans.setByJsonString(multiPlan.getContent());
+        planName = multiPlan.getName();
+        planId = multiPlan.getId();
         planArrayList = plans.getPlans();
+        maxmumber = multiPlan.getMaxmumber();
     }
 
     protected void init() {
@@ -104,11 +109,18 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
     protected void onSuccess() {
         BaseModel result = getObject(BaseModel.class);
         if(result.getStatus() == 0) {
-            toast("创建成功");
-            this.finish();
-        }
-        else if(result.getStatus() == 205) {
-            toast("修改成功");
+            if(editFlag == 0)
+                toast("创建成功");
+            else {
+                toast("修改成功");
+                plans.setPlans(planArrayList);
+                multiPlan.setContent(plans.getJsonString());
+                multiPlan.setName(planName);
+                multiPlan.setMaxmumber(maxmumber);
+                Intent data = new Intent();
+                data.putExtra("multi_plan", gson.toJson(multiPlan));
+                setResult(0, data);
+            }
             this.finish();
         }
         else {
@@ -153,6 +165,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         nowPlan = plan;
         AddItemFragment addItemFragment = new AddItemFragment();
         addItemFragment.setOnPlanInputListener(this);;
+        addItemFragment.setPlan(plan);
         addItemFragment.show(getFragmentManager(), "修改计划");
     }
 
@@ -191,10 +204,15 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
                 }
                 ArrayList<Plan> pal = new ArrayList<Plan>(planArrayList);
                 pal.remove(pal.size() - 1);
+                if(plans == null)
+                    plans = new Plans();
                 plans.setPlans(pal);
                 View view = getLayoutInflater().inflate(R.layout.set_multi_plan_info_layout, null);
                 etPlanName = (EditText) view.findViewById(R.id.plan_name);
                 etMaxmumber = (EditText) view.findViewById(R.id.max_munber);
+                etPlanName.setText(planName);
+                if(maxmumber != 0)
+                    etMaxmumber.setText("" + maxmumber);
                 new AlertDialog.Builder(this).setTitle("请输入计划信息").
                         setView(view).
                         setPositiveButton("确定", this).
@@ -220,7 +238,11 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         }
         else {
             planName = etPlanName.getText().toString();
-            //get("modifyPlan", "content", plans.getJsonString(), "name", planName, "id", planId);
+            get("modfiyMultiPlan",
+                    "content", plans.getJsonString(),
+                    "name", planName,
+                    "multiPlanId", planId,
+                    "maxmumber", maxmumber);
         }
     }
 }

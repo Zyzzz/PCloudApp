@@ -39,7 +39,7 @@ public class SetInformationActivity extends HttpActivity implements View.OnClick
         Bundle data = getIntent().getExtras();
         layoutId = data.getInt("layoutId", R.layout.setname_activity);
         itemId = data.getInt("itemId", R.id.nickname);
-        setActionBar(data.getString("layoutName"), "");
+        setActionBar(data.getString("layoutName"));
         userModel = getUserModel();
         setContentView(layoutId);
         switch (itemId) {

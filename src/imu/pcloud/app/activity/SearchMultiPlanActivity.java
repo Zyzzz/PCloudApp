@@ -1,12 +1,10 @@
 package imu.pcloud.app.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.*;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.MultiPlan;
 import imu.pcloud.app.model.MultiPlanList;
@@ -20,7 +18,9 @@ import java.util.Map;
 /**
  * Created by guyu on 2016/6/4.
  */
-public class SearchMultiPlanActivity extends HttpActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class SearchMultiPlanActivity extends HttpActivity implements
+        View.OnClickListener,
+        AdapterView.OnItemClickListener, SimpleAdapter.ViewBinder {
 
     ListView listView;
     EditText text;
@@ -36,13 +36,14 @@ public class SearchMultiPlanActivity extends HttpActivity implements View.OnClic
 
     private void init() {
         setContentView(R.layout.search_multi_plan_layout);
-        setActionBar("加入群计划");
+        setActionBar(R.layout.actionbar_check_layout, "加入群计划");
         text = find(R.id.search_text);
         text.clearFocus();
         search = find(R.id.search_button);
         listView = find(R.id.multi_listview);
         adapter = new SimpleAdapter(this, pList, R.layout.plancircle_item,
-                new String[]{"name"}, new int[]{R.id.plancircle_name});
+                new String[]{"name", "image"}, new int[]{R.id.plancircle_name, R.id.plancircle_image});
+        adapter.setViewBinder(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         search.setOnClickListener(this);
@@ -62,6 +63,7 @@ public class SearchMultiPlanActivity extends HttpActivity implements View.OnClic
         for(MultiPlan multiPlan: multiPlanList.getMultiPlans()) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("name", multiPlan.getName());
+            map.put("image", imageUtil.getIcon(multiPlan.getId()));
             pList.add(map);
         }
         adapter.notifyDataSetChanged();
@@ -103,5 +105,15 @@ public class SearchMultiPlanActivity extends HttpActivity implements View.OnClic
         data.putString("plan", gson.toJson(multiPlan));
         data.putInt("flag", 1);
         startActivity(ShowMultiPlanActivity.class, data);
+    }
+
+    @Override
+    public boolean setViewValue(View view, Object data, String textRepresentation) {
+        if(view instanceof ImageView && data instanceof Drawable) {
+            ImageView iv = (ImageView) view;
+            iv.setImageDrawable((Drawable) data);
+            return true;
+        }
+        return false;
     }
 }

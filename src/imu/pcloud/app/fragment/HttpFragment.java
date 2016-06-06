@@ -18,6 +18,7 @@ import imu.pcloud.app.activity.HttpActivity;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
+import imu.pcloud.app.utils.ImageUtil;
 import imu.pcloud.app.utils.SysApplication;
 import org.apache.http.Header;
 
@@ -34,6 +35,7 @@ abstract public class HttpFragment extends Fragment {
     protected SharedPreferences.Editor editor;
     private  String UserName;
     private  String UserPassword;
+    protected ImageUtil imageUtil;
     final public static String SPACE = "           ";
 
     @Override
@@ -41,7 +43,7 @@ abstract public class HttpFragment extends Fragment {
         super.onAttach(activity);
         sharedPreferences = getActivity().getSharedPreferences("userinfo", getActivity().MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        
+        imageUtil = new ImageUtil(getActivity());
     }
 
     void get(String url, Object... prams) {
@@ -60,7 +62,7 @@ abstract public class HttpFragment extends Fragment {
     abstract protected void onSuccess();
 
     protected  void  onFailure(){
-
+        toast("SERVER ERROR");
     }
 
 
@@ -105,7 +107,6 @@ abstract public class HttpFragment extends Fragment {
 
         @Override
         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-            toast("网络连接失败");
             HttpFragment.this.onFailure();
         }
     }

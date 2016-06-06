@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AccountActivity;
@@ -21,6 +22,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     View head;
     View mySharing;
     View myAccount;
+    ImageView header;
     TextView nickName;
     TextView email;
     UserModel userModel;
@@ -32,6 +34,8 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         head = view.findViewById(R.id.personal_info);
         mySharing = view.findViewById(R.id.my_sharing);
         myAccount = view.findViewById(R.id.my_account);
+        header = (ImageView) view.findViewById(R.id.personal_header);
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId()));
         head.setOnClickListener(this);
         mySharing.setOnClickListener(this);
         myAccount.setOnClickListener(this);

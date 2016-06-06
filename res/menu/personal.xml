@@ -6,11 +6,11 @@
         android:showAsAction="never"
         android:title="管理计划">
     </item>
-    <item
-        android:id="@+id/action_updatedays"
-        android:showAsAction="never"
-        android:title="更改天数">
-    </item>
+    <!--<item-->
+        <!--android:id="@+id/action_updatedays"-->
+        <!--android:showAsAction="never"-->
+        <!--android:title="更改天数">-->
+    <!--</item>-->
 
 
 </menu>

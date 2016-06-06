@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 public class Plans {
 
     public ArrayList<Plan> plans = new ArrayList<Plan>();
+    public String discribe;
     Gson gson = new GsonBuilder().create();
 
     public ArrayList<Plan> getPlans() {
