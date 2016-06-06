@@ -12,6 +12,7 @@ import android.widget.*;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.UserSharingActivity;
 import imu.pcloud.app.been.PersonalPlan;
+import imu.pcloud.app.utils.ImageUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -26,14 +27,18 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
     private Button curDel_btn;
     private float x,ux;
     private UserSharingActivity mActivity;
-    public AdspterHide(UserSharingActivity activity, Context mContext,  List<Map<String, Object>> arrays) {
+    private List<PersonalPlan> planList;
+    ImageUtil imageUtil;
+    public AdspterHide(UserSharingActivity activity, Context mContext,  List<Map<String, Object>> arrays, List<PersonalPlan> planList) {
         this.mContext = mContext;
         this.arrays = arrays;
         mActivity = activity;
         layoutInflater = activity.getLayoutInflater();
+        this.planList = planList;
+        imageUtil = new ImageUtil(mContext);
   }
     public final class ViewHolder {
-       /// ImageView selector;
+        ImageView user_sharing_image;
         View item;
         TextView user_sharing_name;
         //ImageView tick;
@@ -50,6 +55,7 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
     }
      @Override
        public View getView(int position, View convertView, ViewGroup parent) {
+            PersonalPlan plan = planList.get(position);
             //getData();
             ViewHolder holder = null;
             //PersonalPlan plan = personalPlanArrayList.get(position);
@@ -63,6 +69,8 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
                 holder.user_sharing_name = (TextView) convertView.findViewById(R.id.user_sharing_name);
                 //holder.tick = (ImageView) convertView.findViewById(R.id.tick);
                 holder.position = position;
+                holder.user_sharing_image = (ImageView) convertView.findViewById(R.id.user_sharing_image);
+                holder.user_sharing_image.setBackgroundDrawable(imageUtil.getIcon(plan.getId()));
                 linearLayout = (LinearLayout) convertView.findViewById(R.id.conversatinListview_front);
                 final Button btn_delete = (Button) convertView.findViewById(R.id.UserSharing_delete);
                 //final Button btn_share = (Button) convertView.findViewById(R.id.conversationlist_share);

@@ -1,5 +1,6 @@
 package imu.pcloud.app.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.utils.ImageUtil;
 //import imu.pcloud.app.R;
 
 import java.util.List;
@@ -21,9 +23,11 @@ public class MyAdspter extends BaseAdapter {
     private List<Map<String, Object>> data;
     private LayoutInflater layoutInflater;
     private Context context;
+    private ImageUtil imageUtil;
 
     public MyAdspter(Context context, List<Map<String, Object>> data) {
         this.context = context;
+        imageUtil = new ImageUtil(context);
         this.data = data;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -68,7 +72,8 @@ public class MyAdspter extends BaseAdapter {
             zujian = new Zujian();
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.zone_list_item, null);
-          //  zujian.image = (ImageView) convertView.findViewById(R.id.image);
+            zujian.image = (ImageView) convertView.findViewById(R.id.image);
+            zujian.image.setBackgroundDrawable(imageUtil.getIcon(position));
             zujian.title = (TextView) convertView.findViewById(R.id.title);
             //zujian.view=(Button)convertView.findViewById(R.id.view);
             //zujian.info = (TextView) convertView.findViewById(R.id.info);

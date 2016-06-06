@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:textColor="#FFFFFFFF"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="title"
             android:layout_centerVertical="true"

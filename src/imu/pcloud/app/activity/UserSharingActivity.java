@@ -31,7 +31,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         setContentView(R.layout.user_sharing_layout);
         falg = true;
         //getActionBar().setDisplayHomeAsUpEnabled(true);
-        setActionBar("我的分享");
+        setActionBar(R.layout.actionbar_check_layout, "我的分享");
         listView1 = (PullToRefreshListView)findViewById(R.id.user_sharing_listView);
         listView1.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listView1.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
@@ -92,7 +92,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
                     sharingRecords = userSharingList.getSharingRecords();
                     personalPlens = userSharingList.getPersonalPlans();
                     list = getData();
-                    listAdapter = new AdspterHide(this, this, list);
+                    listAdapter = new AdspterHide(this, this, list, personalPlens);
 //                  ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
 //                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
                     listView1.setAdapter(listAdapter);

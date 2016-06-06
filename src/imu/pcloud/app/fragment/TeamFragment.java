@@ -1,12 +1,10 @@
 package imu.pcloud.app.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.widget.*;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
@@ -23,7 +21,9 @@ import java.util.*;
 /**
  * Created by acer on 2016/5/11.
  */
-public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRefreshListener, AdapterView.OnItemClickListener{
+public class TeamFragment extends HttpFragment implements
+        PullToRefreshBase.OnRefreshListener,
+        AdapterView.OnItemClickListener, SimpleAdapter.ViewBinder{
     private PullToRefreshListView listview;
     SimpleAdapter adapter;
     private ArrayList<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
@@ -35,8 +35,9 @@ public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRe
         View view = inflater.inflate(R.layout.allplan, container, false);
         listview= (PullToRefreshListView) view.findViewById(R.id.allplan_listview);
         adapter = new SimpleAdapter(getActivity(), pList, R.layout.plancircle_item,
-                new String[]{"name"}, new int[]{R.id.plancircle_name});
+                new String[]{"name", "image"}, new int[]{R.id.plancircle_name, R.id.plancircle_image});
         listview.setAdapter(adapter);
+        adapter.setViewBinder(this);
         listview.setOnRefreshListener(this);
         listview.setOnItemClickListener(this);
         refreshData();
@@ -48,6 +49,7 @@ public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRe
         for(MultiPlan multiPlan: multiPlanList.getMultiPlans()) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("name", multiPlan.getName());
+            map.put("image", imageUtil.getIcon(multiPlan.getId()));
             pList.add(map);
         }
         adapter.notifyDataSetChanged();
@@ -61,7 +63,7 @@ public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRe
         View actionbarLayout = LayoutInflater.from(this.getActivity()).inflate(
                 R.layout.actionbar_fra_layout, null);
         TextView textview=(TextView) actionbarLayout.findViewById(R.id.acText);
-        textview.setText(SpaceUtil.getSpace(4) + "群计划");
+        textview.setText(SpaceUtil.getSpace(8) + "群计划");
         getActivity().getActionBar().setCustomView(actionbarLayout);
     }
 
@@ -140,5 +142,15 @@ public class TeamFragment extends HttpFragment implements PullToRefreshBase.OnRe
         data.putString("plan", gson.toJson(multiPlan));
         data.putInt("flag", 0);
         startActivity(ShowMultiPlanActivity.class, data);
+    }
+
+    @Override
+    public boolean setViewValue(View view, Object data, String textRepresentation) {
+        if(view instanceof ImageView && data instanceof Drawable) {
+            ImageView iv = (ImageView) view;
+            iv.setImageDrawable((Drawable) data);
+            return true;
+        }
+        return false;
     }
 }

@@ -26,7 +26,7 @@ public class RepasswordActivity extends HttpActivity implements View.OnClickList
 
     private void init() {
         setContentView(R.layout.repassword_activity);
-        setActionBar("重置密码");
+        setActionBar(R.layout.actionbar_check_layout, "重置密码");
         oldpassword = find(R.id.oldpassword);
         newpassword = find(R.id.newpassword);
         repassword = find(R.id.repassword);

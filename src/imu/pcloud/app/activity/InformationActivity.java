@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
@@ -27,6 +28,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     private TextView tvSign;
     private TextView tvEdu;
     private TextView tvWork;
+    private ImageView header;
     UserModel userModel;
     String layoutName;
 
@@ -66,7 +68,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     }
 
     private void init() {
-        setActionBar("个人信息");
+        setActionBar(R.layout.actionbar_check_layout, "个人信息");
         sex = find(R.id.sex);
         nickname = find(R.id.nickname);
         birthday = find(R.id.birthday);
@@ -80,6 +82,8 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         tvEdu = find(R.id.myeducation);
         tvWork = find(R.id.mywork);
         tvSign = find(R.id.mysignature);
+        header = find(R.id.header_image);
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId()));
         sex.setOnClickListener(this);
         nickname.setOnClickListener(this);
         birthday.setOnClickListener(this);

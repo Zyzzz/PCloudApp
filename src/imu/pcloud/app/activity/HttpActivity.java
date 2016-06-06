@@ -14,10 +14,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.R;
 import imu.pcloud.app.model.UserModel;
-import imu.pcloud.app.utils.GsonTool;
-import imu.pcloud.app.utils.HttpClient;
-import imu.pcloud.app.utils.SysApplication;
-import imu.pcloud.app.utils.ViewFinder;
+import imu.pcloud.app.utils.*;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
 
@@ -34,6 +31,7 @@ abstract public class HttpActivity extends Activity {
     protected SharedPreferences.Editor editor;
     protected ViewFinder finder;
     protected ActionBar myActionBar;
+    protected ImageUtil imageUtil;
     final public static String SPACE = "         ";
 
     @Override
@@ -42,6 +40,7 @@ abstract public class HttpActivity extends Activity {
         sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         finder = new ViewFinder(this);
+        imageUtil = new ImageUtil(this);
         setOverflowShowingAlways();
     }
 
@@ -169,10 +168,11 @@ abstract public class HttpActivity extends Activity {
         // 左侧图标点击事件使能
         myActionBar.setHomeButtonEnabled(true);
         // 使左上角图标(系统)是否显示
-        myActionBar.setDisplayShowHomeEnabled(false);
-        myActionBar.setTitle("返回");
+        myActionBar.setDisplayShowHomeEnabled(true);
+        //myActionBar.setTitle("");
+        myActionBar.setIcon(R.drawable.return_icon);
         // 显示标题
-        myActionBar.setDisplayShowTitleEnabled(true);
+        myActionBar.setDisplayShowTitleEnabled(false);
         myActionBar.setDisplayShowCustomEnabled(true);//显示自定义视图
         View actionbarLayout = LayoutInflater.from(this).inflate(
                 layoutId, null);

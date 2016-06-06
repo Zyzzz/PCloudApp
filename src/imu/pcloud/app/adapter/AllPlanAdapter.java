@@ -97,7 +97,7 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
                 int downY;
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    int bottomWidth = btn_delete.getWidth() + btn_share.getWidth();
+                    int bottomWidth = btn_delete.getWidth() * 2;
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             // Log.i("", "ACTION_DOWN");
@@ -111,7 +111,7 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
                             // break;
                             int dx = (int) (event.getRawX() - downX);
                             // Log.i("", "dy___" + dx);
-                            if (isOpen) {
+                            if (isOpen ) {
                                 // 打开状态
                                 // 向右滑动
                                 if (dx > 0 && dx < bottomWidth) {

@@ -21,7 +21,7 @@ public class AccountActivity extends HttpActivity implements View.OnClickListene
     }
 
     private void init() {
-        setActionBar("账户信息");
+        setActionBar(R.layout.actionbar_check_layout, "账户信息");
         setContentView(R.layout.reaccount_activity);
         password = find(R.id.password);
         logout = find(R.id.logout);

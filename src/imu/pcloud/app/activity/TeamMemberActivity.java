@@ -1,8 +1,11 @@
 package imu.pcloud.app.activity;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import imu.pcloud.app.R;
@@ -11,6 +14,7 @@ import imu.pcloud.app.been.MultiPlanMember;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.User;
 import imu.pcloud.app.model.MultiPlanList;
+import imu.pcloud.app.utils.ViewFinder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +22,7 @@ import java.util.HashMap;
 /**
  * Created by acer on 2016/6/1.
  */
-public class TeamMemberActivity extends HttpActivity {
+public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.ViewBinder {
 
     ListView listView;
     SimpleAdapter adapter;
@@ -44,12 +48,13 @@ public class TeamMemberActivity extends HttpActivity {
     }
 
     private void init() {
-        setActionBar("群计划成员");
+        setActionBar(R.layout.actionbar_check_layout, "群计划成员");
         setContentView(R.layout.teammenber_layout);
         listView = find(R.id.teammember_list);
         adapter = new SimpleAdapter(this, plist, R.layout.teammember_list_item,
-                new String[]{"name"}, new int[]{R.id.nick_name});
+                new String[]{"name", "image"}, new int[]{R.id.nick_name, R.id.header});
         listView.setAdapter(adapter);
+        adapter.setViewBinder(this);
         Bundle data = getIntent().getExtras();
         mode = data.getInt("flag", 0);
         multiPlan = gson.fromJson(data.getString("plan", ""), MultiPlan.class);
@@ -66,6 +71,7 @@ public class TeamMemberActivity extends HttpActivity {
         for(User u:userArrayList) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("name", u.getUsername());
+            map.put("image", imageUtil.getHeader(u.getId()));
             plist.add(map);
         }
         adapter.notifyDataSetChanged();
@@ -79,5 +85,15 @@ public class TeamMemberActivity extends HttpActivity {
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    public boolean setViewValue(View view, Object data, String textRepresentation) {
+        if(view instanceof ImageView && data instanceof Drawable) {
+            ImageView iv = (ImageView) view;
+            iv.setImageDrawable((Drawable) data);
+            return true;
+        }
+        return false;
     }
 }

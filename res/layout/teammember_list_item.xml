@@ -4,12 +4,12 @@
               android:background="@color/gray_m"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-        <LinearLayout android:id="@+id/linearLayout" android:layout_width="match_parent" android:layout_height="50dp"
+        <LinearLayout android:id="@+id/linearLayout" android:layout_width="match_parent" android:layout_height="60dp"
                       android:orientation="horizontal" android:background="@drawable/item_select"
         >
-                <ImageView android:layout_width="50dp" android:layout_height="50dp"
-                           android:background="@drawable/header" android:layout_marginLeft="10dp"
-                           android:layout_marginRight="10dp" android:id="@+id/imageView7"
+                <ImageView android:layout_width="55dp" android:layout_height="55dp"
+                           android:layout_marginLeft="5dp"
+                           android:layout_marginRight="5dp" android:id="@+id/header"
                            android:layout_gravity="center_vertical"/>
                 <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
                               android:layout_weight="10" android:orientation="vertical"
@@ -20,7 +20,7 @@
                                   android:hint="@string/nick_name" android:layout_weight="2" android:id="@+id/nick_name"
                                   android:textIsSelectable="false" android:gravity="fill_vertical"
                                   android:textAppearance="@android:style/TextAppearance.Medium"
-                                  android:layout_marginRight="5dp"/>
+                                  android:layout_marginRight="5dp" android:textSize="20dp"/>
                 </LinearLayout>
         </LinearLayout>
 </LinearLayout>
