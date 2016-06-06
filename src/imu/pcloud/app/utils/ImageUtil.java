@@ -17,6 +17,7 @@ import java.io.InputStream;
 public class ImageUtil {
     Context context;
     AssetManager assetManager;
+
     public ImageUtil(Context context) {
         this.context = context;
         assetManager = context.getAssets();
