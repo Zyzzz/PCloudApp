@@ -8,7 +8,7 @@
         android:id="@+id/plan_informationf"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/gray_m"
+        android:divider="@color/gray_l"
         android:dividerHeight="1dp"
     >
     </ListView>

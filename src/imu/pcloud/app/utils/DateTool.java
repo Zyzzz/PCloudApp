@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTool {
-	static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
-	static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+	static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static String timeToString(Time time) {
 		if(time == null)

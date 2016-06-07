@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AllPlanActivity;
+import imu.pcloud.app.adapter.PlanItemAdapter;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
@@ -30,7 +31,7 @@ public class PersonalFragment extends HttpFragment {
     private ArrayList<LocalPlan> planArrayList = new ArrayList<LocalPlan>();
     private ListView listView;
     private ActionBar myActionBar;
-    SimpleAdapter listAdapter;
+    PlanItemAdapter listAdapter;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,10 +50,7 @@ public class PersonalFragment extends HttpFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
-
-        listAdapter = new SimpleAdapter(this.getActivity(), pList, R.layout.personal_list_item,
-                new String[]{"start_time","end_time", "content", "title"}, new int[]{R.id.start_time, R.id.end_time, R.id.plan_content, R.id.plan_title});
-        listView.setAdapter(listAdapter);
+        initNowPlan();
         init();
         setHasOptionsMenu(true);
         setActionBar();
@@ -72,6 +70,8 @@ public class PersonalFragment extends HttpFragment {
         if(planArrayList == null){
             planArrayList = new ArrayList<LocalPlan>();
         }
+        listAdapter = new PlanItemAdapter(planArrayList, getActivity());
+        listView.setAdapter(listAdapter);
     }
 
     private void setActionBar() {
@@ -125,7 +125,7 @@ public class PersonalFragment extends HttpFragment {
             map.put("start_time", plan.getStartTimeString());
             map.put("end_time", plan.getEndTimeString());
             map.put("content", plan.getContent());
-            map.put("title", plan.getTitle() + ":(来自:" + plan.getName() + ")");
+            map.put("title", plan.getTitle() + "(来自:" + plan.getName() + ")");
             pList.add(map);
         }
     }

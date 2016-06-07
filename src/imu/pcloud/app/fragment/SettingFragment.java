@@ -50,6 +50,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         userModel = getUserModel();
         View view = inflater.inflate(R.layout.individual_activity, container, false);
+        layoutInflater = getActivity().getLayoutInflater();
         head = view.findViewById(R.id.personal_info);
         mySharing = view.findViewById(R.id.my_sharing);
         myAccount = view.findViewById(R.id.my_account);
@@ -98,7 +99,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     private void showPopupWindow(View parent){
         if (popWindow == null) {
             View view = layoutInflater.inflate(R.layout.pop_select_layout,null);
-            popWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,true);
+            popWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
             initPop(view);
         }
         popWindow.setAnimationStyle(android.R.style.Animation_InputMethod);

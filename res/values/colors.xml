@@ -33,4 +33,6 @@
     <color name="gray_xl">#676767</color>
     <color name="red">#ff3c31</color>
     <color name="orange">#ff9d02</color>
+    <color name="bl">#2d349afe</color>
+    <color name="br">#2d349afe</color>
 </resources>
