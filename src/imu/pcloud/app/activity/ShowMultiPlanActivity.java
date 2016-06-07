@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class ShowMultiPlanActivity extends HttpActivity {
 
-    private ArrayList<Plan> planArrayList = new ArrayList<>();
+    private ArrayList<Plan> planArrayList = new ArrayList<Plan>();
     private List<HashMap<String,Object>> pList =new ArrayList<HashMap<String, Object>>();
     private ListView listView;
     private SimpleAdapter adapter;
