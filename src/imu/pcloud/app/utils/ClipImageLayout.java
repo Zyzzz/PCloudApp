@@ -36,21 +36,12 @@ public class ClipImageLayout extends RelativeLayout
 		mClipImageView.setHorizontalPadding(mHorizontalPadding);
 	}
 
-	/**
-	 * ���⹫�����ñ߾�ķ���,��λΪdp
-	 * 
-	 * @param mHorizontalPadding
-	 */
 	public void setHorizontalPadding(int mHorizontalPadding)
 	{
 		this.mHorizontalPadding = mHorizontalPadding;
 	}
 
-	/**
-	 * ����ͼƬ
-	 * 
-	 * @return
-	 */
+
 	public Bitmap clip()
 	{
 		return mZoomImageView.clip();

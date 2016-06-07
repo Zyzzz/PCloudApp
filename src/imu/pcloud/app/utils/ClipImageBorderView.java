@@ -12,13 +12,8 @@ import android.view.View;
 
 public class ClipImageBorderView extends View
 {
-	/**
-	 * ˮƽ������View�ı߾�
-	 */
-	private int mHorizontalPadding;
-	/**
-	 * �߿�Ŀ�� ��λdp
-	 */
+	 int mHorizontalPadding;
+
 	private int mBorderWidth = 2;
 
 	private Paint mPaint;
@@ -48,13 +43,13 @@ public class ClipImageBorderView extends View
 	protected void onDraw(Canvas canvas)
 	{
 		super.onDraw(canvas);
-		// ���Ʊ߿�
+
 		mPaint.setColor(Color.parseColor("#FFFFFF"));
 		mPaint.setStrokeWidth(mBorderWidth);
 		mPaint.setStyle(Style.STROKE);
-		//���α߿�
+
 //		canvas.drawRect(mHorizontalPadding, mVerticalPadding, getWidth()- mHorizontalPadding, getHeight() - mVerticalPadding, mPaint);
-		//Բ�α߿�
+
 		canvas.drawCircle( getWidth()/2, getHeight()/2, getWidth()/2-mHorizontalPadding, mPaint);
 
 	}
