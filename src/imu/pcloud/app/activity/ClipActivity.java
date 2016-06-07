@@ -28,8 +28,9 @@ public class ClipActivity extends HttpActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.clipimage_layout);
-        setActionBar("图片");
+        //这步必须要加
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loadingDialog=new ProgressDialog(this);
         loadingDialog.setTitle("请稍后...");
@@ -38,7 +39,7 @@ public class ClipActivity extends HttpActivity {
             Toast.makeText(this, "图片加载失败",Toast.LENGTH_SHORT).show();
             return;
         }
-        Bitmap bitmap= ImageTools.convertToBitmap(path, 600,600);
+        Bitmap bitmap=ImageTools.convertToBitmap(path, 600,600);
         if(bitmap==null){
             Toast.makeText(this, "图片加载失败",Toast.LENGTH_SHORT).show();
             return;
@@ -65,7 +66,6 @@ public class ClipActivity extends HttpActivity {
             }
         });
     }
-
     @Override
     protected void onSuccess() {
 
