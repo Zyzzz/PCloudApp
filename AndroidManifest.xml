@@ -92,5 +92,8 @@
         <activity android:name=".activity.ShowMultiPlanActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/newTheme"/>
+        <activity android:name=".activity.ClipActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/newTheme"/>
     </application>
 </manifest>
