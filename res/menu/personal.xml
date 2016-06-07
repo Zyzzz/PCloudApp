@@ -4,7 +4,8 @@
     <item
         android:id="@+id/action_manage"
         android:showAsAction="never"
-        android:title="管理计划">
+        android:title="管理计划"
+        android:icon="@drawable/manageplan">
     </item>
     <!--<item-->
         <!--android:id="@+id/action_updatedays"-->
