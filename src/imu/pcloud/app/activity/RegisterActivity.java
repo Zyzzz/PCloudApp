@@ -27,7 +27,7 @@ public class RegisterActivity extends HttpActivity implements View.OnClickListen
 
     private void init() {
         setContentView(R.layout.register_activity);
-        setActionBar("注册");
+        setActionBar(R.layout.actionbar_check_layout, "注册");
         username = find(R.id.username);
         email = find(R.id.email);
         password = find(R.id.password);

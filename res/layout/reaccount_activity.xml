@@ -52,12 +52,12 @@
             android:layout_marginTop="300dp">
         <Button
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="@string/logout"
-                android:id="@+id/logout" android:background="@drawable/button_select" android:textStyle="bold"
+                android:id="@+id/logout" android:background="@drawable/button_select"
                 android:layout_weight="1.5" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
                 android:textAppearance="@android:style/TextAppearance.Large" android:textColor="@android:color/white"
-                android:textSize="20dp"/>
+                android:textSize="18dp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"

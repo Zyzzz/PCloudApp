@@ -64,11 +64,11 @@
 
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="50dp"
+                  android:layout_height="45dp"
                   android:orientation="horizontal" android:focusableInTouchMode="false"
                   android:background="@drawable/item_select"
                   android:layout_gravity="center_vertical" android:id="@+id/my_sharing"
-                  android:layoutMode="opticalBounds" android:layout_marginTop="50dp">
+                  android:layoutMode="opticalBounds" android:layout_marginTop="30dp">
         <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -93,7 +93,7 @@
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="50dp"
+                  android:layout_height="45dp"
                   android:orientation="horizontal"
                   android:focusableInTouchMode="false"
                   android:background="@drawable/item_select"
