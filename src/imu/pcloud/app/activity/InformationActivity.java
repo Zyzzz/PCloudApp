@@ -112,7 +112,12 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         tvSign = find(R.id.mysignature);
         header = find(R.id.header_image);
         header.setBackgroundDrawable(imageUtil.getHeader(getUserId()));
-        header.setOnClickListener(this);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(header);
+            }
+        });
         sex.setOnClickListener(this);
         nickname.setOnClickListener(this);
         birthday.setOnClickListener(this);
@@ -161,9 +166,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                 layoutId = R.layout.setsn_layout;
                 layoutName = "个性签名";
                 break;
-            case R.id.header_image:
-                showPopupWindow(header);
-//              break;
+
         }
         Bundle data = new Bundle();
         data.putInt("layoutId", layoutId);
