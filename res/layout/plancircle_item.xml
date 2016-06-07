@@ -19,7 +19,7 @@
                 android:id="@+id/plancircle_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_color"
                 android:textSize="20dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical" android:layout_marginLeft="10dp" android:layout_marginTop="10dp"

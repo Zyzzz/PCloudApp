@@ -255,6 +255,12 @@ public class AllPlanActivity extends HttpActivity
         super.onStop();
     }
 
+    @Override
+    protected void onPause() {
+        setNowPlan();
+        super.onPause();
+    }
+
     protected void mergeCloudPlanToLocal(ArrayList<PersonalPlan> cloud) {
         if(cloud == null)
             return;
@@ -307,6 +313,8 @@ public class AllPlanActivity extends HttpActivity
             }
         }, 1000);
     }
+
+
 
     @Override
     public void onClickItem(View view, int position) {

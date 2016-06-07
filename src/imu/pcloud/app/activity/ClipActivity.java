@@ -31,6 +31,7 @@ public class ClipActivity extends HttpActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clipimage_layout);
         //这步必须要加
+        setActionBar("设置头像");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loadingDialog=new ProgressDialog(this);
         loadingDialog.setTitle("请稍后...");
@@ -39,7 +40,7 @@ public class ClipActivity extends HttpActivity {
             Toast.makeText(this, "图片加载失败",Toast.LENGTH_SHORT).show();
             return;
         }
-        Bitmap bitmap=ImageTools.convertToBitmap(path, 600,600);
+        Bitmap bitmap=ImageTools.convertToBitmap(path, 320,320);
         if(bitmap==null){
             Toast.makeText(this, "图片加载失败",Toast.LENGTH_SHORT).show();
             return;
@@ -54,6 +55,7 @@ public class ClipActivity extends HttpActivity {
                     @Override
                     public void run() {
                         Bitmap bitmap = mClipImageLayout.clip();
+
                         String path= Environment.getExternalStorageDirectory()+"/ClipHeadPhoto/cache/"+System.currentTimeMillis()+ ".png";
                         ImageTools.savePhotoToSDCard(bitmap,path);
                         loadingDialog.dismiss();

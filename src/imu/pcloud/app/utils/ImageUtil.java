@@ -13,6 +13,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.been.Image;
 import imu.pcloud.app.model.ImageModel;
+import imu.pcloud.app.model.UserModel;
 import org.apache.http.Header;
 
 import java.io.IOException;
@@ -35,15 +36,22 @@ public class ImageUtil {
     SharedPreferences.Editor editor;
 
     OnSetListener onSetListener;
+    OnLoadListener onLoadListener;
 
     public interface OnSetListener {
-        public void onSet();
+        public void onSet(UserModel userModel);
+    }
+
+    public interface OnLoadListener {
+        public void onLoad(ImageModel imageModel);
     }
 
     public void setOnSetListener(OnSetListener onSetListener) {
         this.onSetListener = onSetListener;
     }
-
+    public void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
     protected MyAsyncHttpResponseHandler myHandler = new MyAsyncHttpResponseHandler();
     public ImageUtil(Context context) {
         this.context = context;
@@ -66,21 +74,35 @@ public class ImageUtil {
         }
     }
 
-    public BitmapDrawable getHeader(int id) {
-        switch (id) {
-            case 21:id = 6;break;
-            case 18:id = 3;break;
+    public BitmapDrawable getHeader(int userId, int imageId) {
+        if(imageId == 0) {
+            int id = userId;
+            switch (id) {
+                case 21:id = 6;break;
+                case 18:id = 3;break;
+            }
+            id = id % 11;
+            try {
+                InputStream assetFile = assetManager.open("header/" + id + ".png");
+                Bitmap bitmap = BitmapFactory.decodeStream(assetFile);
+                BitmapDrawable drawable = new BitmapDrawable(bitmap);;
+                assetFile.close();
+                return drawable;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
-        id = id % 11;
-        try {
-            InputStream assetFile = assetManager.open("header/" + id + ".png");
-            Bitmap bitmap = BitmapFactory.decodeStream(assetFile);
-            BitmapDrawable drawable = new BitmapDrawable(bitmap);;
-            assetFile.close();
-            return drawable;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        else {
+            BitmapDrawable drawable;
+            if(hasImage(imageId)) {
+                drawable = new BitmapDrawable(loadImage(imageId));
+                return  drawable;
+            }
+            else  {
+                downloadImage(imageId);
+                return null;
+            }
         }
     }
 
@@ -111,6 +133,13 @@ public class ImageUtil {
         return ImageEncodeTool.base64ToBitmap(string);
     }
 
+    public boolean hasImage(int imageId) {
+        String string = preferences.getString("image" + imageId, null);
+        if(string == null)
+            return false;
+        return true;
+    }
+
     class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
         @Override
         public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -118,9 +147,13 @@ public class ImageUtil {
             if(mode == 1) {
                 ImageModel imageModel = gson.fromJson(jsonString, ImageModel.class);
                 saveImage(imageModel);
+                if(onLoadListener != null)
+                    onLoadListener.onLoad(imageModel);
             }
             else {
-                onSetListener.onSet();
+                UserModel userModel = gson.fromJson(jsonString, UserModel.class);
+                if(onSetListener != null)
+                    onSetListener.onSet(userModel);
             }
         }
 
@@ -138,6 +171,6 @@ public class ImageUtil {
             else
                 requestParams.put((String) prams[i],  prams[i + 1].getClass().cast(prams[i + 1]));
         }
-        HttpClient.get(url, requestParams, myHandler);
+        HttpClient.post(url, requestParams, myHandler);
     }
 }

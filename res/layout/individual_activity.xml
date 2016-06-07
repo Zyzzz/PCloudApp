@@ -46,7 +46,7 @@
                           android:hint="@string/register_name"
                           android:layout_weight="1" android:id="@+id/email" android:gravity="fill_vertical"
                           android:textAppearance="@android:style/TextAppearance.Medium"
-                          android:textSize="15dp"/>
+                          android:textSize="15dp" android:textColor="@color/text_color"/>
             </LinearLayout>
         </LinearLayout>
         <ImageView
@@ -83,7 +83,7 @@
                 android:layout_height="match_parent">
             <TextView android:layout_width="match_parent" android:layout_height="match_parent"
                       android:hint="@string/personal_sharing" android:layout_weight="1" android:id="@+id/textView6"
-                      android:gravity="fill_vertical" android:textColorHint="@android:color/black"
+                      android:gravity="fill_vertical" android:textColorHint="@color/text_color"
                       android:textSize="20dp"/>
             <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView4"
                        android:background="@drawable/arrow" android:layout_marginRight="10dp"
@@ -111,7 +111,7 @@
                   android:autoText="false" android:layout_marginTop="3dp"
                   android:layout_marginBottom="3dp" android:layout_gravity="center_vertical"
                   android:id="@+id/textView5" android:clickable="false" android:gravity="fill_vertical"
-                  android:hint="@string/account" android:textColorHint="@android:color/black"
+                  android:hint="@string/account" android:textColorHint="@color/text_color"
                   android:textSize="20dp"/>
         <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView3"
                    android:background="@drawable/arrow" android:layout_marginRight="10dp"

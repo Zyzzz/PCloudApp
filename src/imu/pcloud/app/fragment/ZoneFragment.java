@@ -8,31 +8,33 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.PlanCircleActivity;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.PlanCircleList;
 import imu.pcloud.app.adapter.MyAdspter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by acer on 2016/5/11.
  */
-public class ZoneFragment extends HttpFragment {
-    private ListView listView1;
-    private List<PlanCircle> planCircles;
+public class ZoneFragment extends HttpFragment implements PullToRefreshBase.OnRefreshListener{
+    private PullToRefreshListView listView1;
     private List<Map<String, Object>> list;
     MyAdspter myAdspter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.zone_layout, container, false);
-        listView1 = (ListView) view.findViewById(R.id.zone_listView);
+        listView1 = (PullToRefreshListView) view.findViewById(R.id.zone_listView);
         get("getPlanCircleList");
+        listView1.setOnRefreshListener(this);
+        listView1.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新...");
+        listView1.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新...");
+        listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         initActionBar();
         return view;
     }
@@ -85,6 +87,7 @@ public class ZoneFragment extends HttpFragment {
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                position -= 1;
                 Intent intent = new Intent();
                 intent.setClass(getActivity().getApplicationContext(),PlanCircleActivity.class);
                 intent.putExtra("planCircleID",(Integer) list.get(position).get("id"));
@@ -95,7 +98,8 @@ public class ZoneFragment extends HttpFragment {
     }
     @Override
     protected void onFailure() {
-        toast("网络连接失败");
+        if(listView1.isRefreshing())
+            listView1.onRefreshComplete();
         super.onFailure();
     }
 
@@ -104,7 +108,20 @@ public class ZoneFragment extends HttpFragment {
         PlanCircleList planCircleList = getObject(PlanCircleList.class);
         if(planCircleList.getStatus() ==0) {
             planCircles = planCircleList.getPlanCircles();
+            putPlanCircles();
             init();
         }
+        if(listView1.isRefreshing())
+            listView1.onRefreshComplete();
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase refreshView) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                get("getPlanCircleList");
+            }
+        }, 1000);
     }
 }

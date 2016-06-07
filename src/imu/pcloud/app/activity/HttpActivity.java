@@ -10,15 +10,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.R;
+import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.*;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by guyu on 2016/5/11.
@@ -33,6 +37,7 @@ abstract public class HttpActivity extends Activity {
     protected ActionBar myActionBar;
     protected ImageUtil imageUtil;
     final public static String SPACE = "         ";
+    protected List<PlanCircle> planCircles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,21 @@ abstract public class HttpActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void putPlanCircles() {
+        if(planCircles == null)
+            return;
+        else {
+            editor.putString("planCircle", gson.toJson(planCircles));
+            editor.commit();
+        }
+    }
+
+    public void setPlanCircles () {
+        planCircles = gson.fromJson(sharedPreferences.getString("planCircle", ""),
+                new TypeToken<ArrayList<PlanCircle>>() {
+                }.getType());
     }
 
     public <V extends View> V find(final int id) {
@@ -137,6 +157,7 @@ abstract public class HttpActivity extends Activity {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 result[0] = gson.fromJson(new String(bytes), UserModel.class);
+                setUserMoodel(result[0]);
             }
 
             @Override

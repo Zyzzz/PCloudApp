@@ -82,8 +82,8 @@ public class PlanItemAdapter extends BaseAdapter {
             right = 0;
         }
         else {
-            left = per * 50;
-            right = 50 - left;
+            left = per * 100;
+            right = 100 - left;
             holder.back.setBackgroundResource(R.drawable.back);
         }
         holder.back.setLayoutParams(new LinearLayout.LayoutParams(

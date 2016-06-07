@@ -5,12 +5,12 @@
                 android:background="#000000" >
 
 
-    <com.byl.clipheadphoto.clip.ClipImageLayout
+    <imu.pcloud.app.utils.ClipImageLayout
             android:id="@+id/id_clipImageLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@+id/rl_botom"
-           />
+            />
 
     <RelativeLayout
             android:id="@+id/rl_botom"

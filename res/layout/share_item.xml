@@ -11,5 +11,5 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/plan_circle_name" android:background="@android:color/white"
-            android:textColor="@android:color/black" android:gravity="center"/>
+            android:textColor="@color/text_color" android:gravity="center"/>
 </LinearLayout>

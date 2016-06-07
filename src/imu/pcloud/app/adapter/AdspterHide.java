@@ -55,10 +55,8 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
     }
      @Override
        public View getView(int position, View convertView, ViewGroup parent) {
-            PersonalPlan plan = planList.get(position);
-            //getData();
+            Integer planId = (Integer) arrays.get(position).get("planId");
             ViewHolder holder = null;
-            //PersonalPlan plan = personalPlanArrayList.get(position);
             LinearLayout linearLayout;
             LinearLayout backLayout;
             if(convertView == null) {
@@ -67,10 +65,9 @@ public class AdspterHide extends BaseAdapter implements View.OnClickListener{
                 //holder.selector = (ImageView) convertView.findViewById(R.id.user_sharing_image);
                 holder.item = convertView.findViewById(R.id.item);
                 holder.user_sharing_name = (TextView) convertView.findViewById(R.id.user_sharing_name);
-                //holder.tick = (ImageView) convertView.findViewById(R.id.tick);
                 holder.position = position;
                 holder.user_sharing_image = (ImageView) convertView.findViewById(R.id.user_sharing_image);
-                holder.user_sharing_image.setBackgroundDrawable(imageUtil.getIcon(plan.getId()));
+                holder.user_sharing_image.setBackgroundDrawable(imageUtil.getIcon(planId));
                 linearLayout = (LinearLayout) convertView.findViewById(R.id.conversatinListview_front);
                 final Button btn_delete = (Button) convertView.findViewById(R.id.UserSharing_delete);
                 //final Button btn_share = (Button) convertView.findViewById(R.id.conversationlist_share);

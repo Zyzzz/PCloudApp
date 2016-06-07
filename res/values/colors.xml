@@ -35,4 +35,5 @@
     <color name="orange">#ff9d02</color>
     <color name="bl">#2d349afe</color>
     <color name="br">#2d349afe</color>
+    <color name="text_color">#5d5d5d</color>
 </resources>

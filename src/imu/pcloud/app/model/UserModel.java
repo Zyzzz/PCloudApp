@@ -20,6 +20,7 @@ public class UserModel extends BaseModel{
 	private Integer verifyFlag;
 	private String secretKey;
 	private String cookies;
+	private Integer headerImageId;
 	
 	public UserModel() {
 		
@@ -32,7 +33,7 @@ public class UserModel extends BaseModel{
 	public UserModel(Integer id, String username, String password,
 			String email, String sex, String birthday, String education,
 			String working, String signature, Integer verifyFlag,
-			String secretKey, String cookies) {
+			String secretKey, String cookies, Integer headerImageId) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -46,6 +47,7 @@ public class UserModel extends BaseModel{
 		this.verifyFlag = verifyFlag;
 		this.secretKey = secretKey;
 		this.cookies = cookies;
+		this.headerImageId = headerImageId;
 	}
 	
 	public void setByUser(User user){
@@ -61,6 +63,7 @@ public class UserModel extends BaseModel{
 		this.verifyFlag = user.getVerifyFlag();
 		this.secretKey = user.getSecretKey();
 		this.cookies = user.getCookies();
+		this.headerImageId = user.getHeadImageId();
 	}
 	
 	public Integer getId() {
@@ -135,6 +138,12 @@ public class UserModel extends BaseModel{
 	public void setCookies(String cookies) {
 		this.cookies = cookies;
 	}
-	
-	
+
+	public Integer getHeaderImageId() {
+		return headerImageId;
+	}
+
+	public void setHeaderImageId(Integer headerImageId) {
+		this.headerImageId = headerImageId;
+	}
 }

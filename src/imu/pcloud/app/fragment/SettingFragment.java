@@ -43,7 +43,7 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         mySharing = view.findViewById(R.id.my_sharing);
         myAccount = view.findViewById(R.id.my_account);
         header = (ImageView) view.findViewById(R.id.personal_header);
-        header.setBackgroundDrawable(imageUtil.getHeader(getUserId()));
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), 0));
         head.setOnClickListener(this);
         header.setOnClickListener(this);
         mySharing.setOnClickListener(this);

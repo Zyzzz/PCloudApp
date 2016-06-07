@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.HttpActivity;
+import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.GsonTool;
 import imu.pcloud.app.utils.HttpClient;
@@ -22,6 +24,8 @@ import imu.pcloud.app.utils.ImageUtil;
 import imu.pcloud.app.utils.SysApplication;
 import org.apache.http.Header;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.Attributes;
 
 /**
@@ -37,6 +41,7 @@ abstract public class HttpFragment extends Fragment {
     private  String UserPassword;
     protected ImageUtil imageUtil;
     final public static String SPACE = "           ";
+    protected List<PlanCircle> planCircles;
 
     @Override
     public void onAttach(Activity activity) {
@@ -121,6 +126,21 @@ abstract public class HttpFragment extends Fragment {
         Intent intent = new Intent(getActivity(), targetActivity);
         intent.putExtras(savedInstanceState);
         startActivity(intent);
+    }
+
+    public void putPlanCircles() {
+        if(planCircles == null)
+            return;
+        else {
+            editor.putString("planCircle", gson.toJson(planCircles));
+            editor.commit();
+        }
+    }
+
+    public void setPlanCircles () {
+        planCircles = gson.fromJson(sharedPreferences.getString("planCircle", ""),
+                new TypeToken<ArrayList<PlanCircle>>() {
+                }.getType());
     }
 
 }

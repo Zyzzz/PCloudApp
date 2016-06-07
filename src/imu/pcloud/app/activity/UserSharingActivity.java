@@ -23,7 +23,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     private boolean falg;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
-    private List<PersonalPlan> personalPlens;
+    private List<PersonalPlan> personalPlans;
     AdspterHide listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +39,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         listView1.getLoadingLayoutProxy(true, false).setReleaseLabel("松开刷新...");
         listView1.setOnRefreshListener(this);
         get("getUserSharingList","cookies",getCookie());
-        //listView1.initSlideMode(2);
-//      listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                toast("aaaaaaaaaaaa");
-//            }
-//        });
-       listView1.setRefreshing();
+        setPlanCircles();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -60,10 +53,18 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     private List<Map<String, Object>> getData(){
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < sharingRecords.size(); i++) {
-            for(int j = 0;j<personalPlens.size();j++) {
-                if(sharingRecords.get(i).getId().getPersonalPlanId()==personalPlens.get(j).getId()){
+            for(int j = 0; j< personalPlans.size(); j++) {
+                if(sharingRecords.get(i).getId().getPersonalPlanId()== personalPlans.get(j).getId()){
                     Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("name", personalPlens.get(j).getName());
+                    String circleName = "";
+                    for(int m = 0; m < planCircles.size(); m++) {
+                        if(planCircles.get(m).getId() == sharingRecords.get(i).getId().getPlanCircleId()) {
+                            circleName = planCircles.get(m).getName();
+                            break;
+                        }
+                    }
+                    map.put("name", personalPlans.get(j).getName() + "(分享到：" + circleName + ")");
+                    map.put("planId", personalPlans.get(j).getId());
                     list.add(map);
                 }
             }
@@ -77,11 +78,11 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         get("deleteSharing","personalPlanId",personalPlanId,"planCircleId",planCircleId);
     }
 
-
     @Override
     protected void onFailure() {
         super.onFailure();
-        listView1.onRefreshComplete();
+        if(listView1.isRefreshing())
+            listView1.onRefreshComplete();
     }
     @Override
     protected void onSuccess() {
@@ -90,11 +91,9 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             if (userSharingList.getStatus() == 400) {
                 if (!userSharingList.getSharingRecords().isEmpty()) {
                     sharingRecords = userSharingList.getSharingRecords();
-                    personalPlens = userSharingList.getPersonalPlans();
+                    personalPlans = userSharingList.getPersonalPlans();
                     list = getData();
-                    listAdapter = new AdspterHide(this, this, list, personalPlens);
-//                  ListAdapter listAdapter=new SimpleAdapter(this,list, R.layout.user_sharing_list_item,
-//                    new String[]{"name"}, new int[]{ R.id.user_sharing_name});
+                    listAdapter = new AdspterHide(this, this, list, personalPlans);
                     listView1.setAdapter(listAdapter);
                 }
                 else {
@@ -103,7 +102,6 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             } else {
                 toast("得到用户分享列表失败，请重新登录");
             }
-            listView1.onRefreshComplete();
         }else {
             BaseModel baseModel = getObject(BaseModel.class);
             if(baseModel.getStatus()==302) {
@@ -114,6 +112,8 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             }
             falg = true;
         }
+        if(listView1.isRefreshing())
+            listView1.onRefreshComplete();
     }
     @Override
     public void onRefresh(PullToRefreshBase<ListView> refreshView) {

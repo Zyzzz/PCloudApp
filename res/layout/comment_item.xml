@@ -24,7 +24,7 @@
                 android:id="@+id/comment_context"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="#666872"
+                android:textColor="@color/text_color"
                 android:textSize="15dp"
                 android:layout_weight="1" android:gravity="center_vertical" android:layout_marginLeft="5dp"
                 android:singleLine="false" android:paddingTop="5dp" android:paddingBottom="5dp"

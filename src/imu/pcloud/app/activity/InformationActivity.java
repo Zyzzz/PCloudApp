@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import imu.pcloud.app.R;
+import imu.pcloud.app.model.ImageModel;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.DateTool;
+import imu.pcloud.app.utils.ImageUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -111,13 +113,13 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         tvWork = find(R.id.mywork);
         tvSign = find(R.id.mysignature);
         header = find(R.id.header_image);
-        header.setBackgroundDrawable(imageUtil.getHeader(getUserId()));
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupWindow(header);
-            }
-        });
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), 0));
+//        header.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showPopupWindow(header);
+//            }
+//        });
         sex.setOnClickListener(this);
         nickname.setOnClickListener(this);
         birthday.setOnClickListener(this);
@@ -284,7 +286,14 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                 break;
             case IMAGE_COMPLETE:
                 final String temppath = data.getStringExtra("path");
-                header.setImageBitmap(getLoacalBitmap(temppath));
+                imageUtil.setHeader(getCookie(), getLoacalBitmap(temppath));
+                imageUtil.setOnSetListener(new ImageUtil.OnSetListener() {
+                    @Override
+                    public void onSet(UserModel userModel) {
+                        setUserMoodel(userModel);
+                        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), getUserModel().getHeaderImageId()));
+                    }
+                });
                 break;
             default:
                 break;
