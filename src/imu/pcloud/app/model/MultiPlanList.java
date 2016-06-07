@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultiPlanList extends BaseModel {
-	private List<MultiPlan> multiPlans = new ArrayList<>();
-	private List<MultiPlanMember> multiPlanMembers = new ArrayList<>();
+	private List<MultiPlan> multiPlans = new ArrayList<MultiPlan>();
+	private List<MultiPlanMember> multiPlanMembers = new ArrayList<MultiPlanMember>();
 	MultiPlan multiPlan = new MultiPlan();
 	public MultiPlan getMultiPlan() {
 		return multiPlan;
