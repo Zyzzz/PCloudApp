@@ -6,16 +6,18 @@
             android:icon="@drawable/more_icon"
             android:title="">
         <menu>
-            <item
-                    android:id="@+id/lookmember"
-                    android:showAsAction="always"
-                    android:title="查看人员">
-            </item>
-            <item
-                    android:id="@+id/join"
-                    android:showAsAction="always"
-                    android:title="申请加入">
-            </item>
+    <item
+            android:id="@+id/lookmember"
+            android:showAsAction="always"
+            android:title="查看人员"
+            android:icon="@drawable/viewnum">
+    </item>
+    <item
+            android:id="@+id/join"
+            android:showAsAction="always"
+            android:title="申请加入"
+            android:icon="@drawable/applyjoin">
+    </item>
         </menu>
     </item>
 </menu>
