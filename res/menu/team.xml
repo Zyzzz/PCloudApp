@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+            android:id="@+id/more"
+            android:showAsAction="always"
+            android:icon="@drawable/more_icon"
+            android:title="">
+        <menu>
+    <item
             android:id="@+id/lookmember"
             android:showAsAction="never"
-            android:title="查看人员">
+            android:title="查看人员"
+            android:icon="@drawable/searchmem">
     </item>
     <item
             android:id="@+id/updateplan"
             android:showAsAction="never"
-            android:title="编辑计划">
+            android:title="编辑计划"
+            android:icon="@drawable/editplan">
     </item>
+        </menu>
     <!--<item-->
             <!--android:id="@+id/check_multi_plan"-->
             <!--android:showAsAction="never"-->
             <!--android:title="查看信息">-->
     <!--</item>-->
+    </item>
 </menu>
