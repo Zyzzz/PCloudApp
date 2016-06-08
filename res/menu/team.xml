@@ -9,7 +9,7 @@
             <item
                     android:id="@+id/lookmember"
                     android:showAsAction="always"
-                    ndroid:icon="@drawable/searchmem"
+                    android:icon="@drawable/searchmem"
                     android:title="查看人员">
             </item>
             <item
