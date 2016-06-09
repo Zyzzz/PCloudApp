@@ -98,7 +98,7 @@ public class PlanCircleActivity extends HttpActivity implements PullToRefreshBas
                 listAdapter.setViewBinder(this);
             }
         } else if(userSharingList.getStatus() == 401){
-            ;toast("该计划圈分享为空");
+            toast("该计划圈分享为空");
         } else{
             toast(userSharingList.getResult());
         }

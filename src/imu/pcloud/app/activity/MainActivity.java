@@ -65,6 +65,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
     private Fragment mFragZone;
     private Fragment mFragTeam;
     private Fragment mFragSetting;
+    private int selected = 0;
 
 
     @Override
@@ -114,6 +115,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction);
         rsetImgs();
+        selected = i;
         switch (i) {
             case 0:
                 if (mFragPersonal == null) {
@@ -206,4 +208,9 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         mImgSetting.setSelected(false);
     }
 
+    @Override
+    protected void onResume() {
+        setSelcet(selected);
+        super.onResume();
+    }
 }

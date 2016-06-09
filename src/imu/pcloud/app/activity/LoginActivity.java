@@ -85,7 +85,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         }
     }
     private void saveLoginInfo(Context context,String email,String password){
-        spf=context.getSharedPreferences("config", context.MODE_PRIVATE);
+        spf=context.getSharedPreferences("config", MODE_PRIVATE);
         SharedPreferences.Editor editor=spf.edit();
         editor.putString("email",email);
         editor.putString("password",password);

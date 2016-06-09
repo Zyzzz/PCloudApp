@@ -134,7 +134,7 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
      * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
      * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED
      */
-    private int currentStatus = STATUS_REFRESH_FINISHED;;
+    private int currentStatus = STATUS_REFRESH_FINISHED;
 
     /**
      * 记录上一次的状态是什么，避免进行重复操作

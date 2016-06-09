@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import imu.pcloud.app.utils.*;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +104,7 @@ abstract public class HttpActivity extends Activity {
     abstract protected void onSuccess();
 
     protected void onFailure(){
-        toast("SERVER ERROR");
+        //toast("SERVER ERROR");
     }
 
     protected void toast(String string) {
@@ -145,6 +147,7 @@ abstract public class HttpActivity extends Activity {
     protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
         SysApplication.getInstance().addActivity(this);
         Intent intent = new Intent(getApplicationContext(), targetActivity);
+        intent = new Intent();
         intent.putExtras(savedInstanceState);
         startActivity(intent);
     }

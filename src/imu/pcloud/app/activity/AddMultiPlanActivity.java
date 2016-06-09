@@ -164,7 +164,7 @@ public class AddMultiPlanActivity extends HttpActivity implements AdapterView.On
         addFlag = pos;
         nowPlan = plan;
         AddItemFragment addItemFragment = new AddItemFragment();
-        addItemFragment.setOnPlanInputListener(this);;
+        addItemFragment.setOnPlanInputListener(this);
         addItemFragment.setPlan(plan);
         addItemFragment.show(getFragmentManager(), "修改计划");
     }

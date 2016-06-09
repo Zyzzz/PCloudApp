@@ -26,12 +26,10 @@
                     android:layout_height="80dp"
                     android:id="@+id/header_image"
                     android:layout_gravity="center_vertical"/>
-            <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="17dp"
-                    android:id="@+id/imageView6"
-                    android:layout_gravity="center_vertical" android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+            <ImageView android:layout_width="14dp" android:layout_height="17dp" android:id="@+id/imageView5"
+                       android:background="@drawable/arrow" android:layout_marginLeft="10dp"
+                       android:layout_marginTop="10dp" android:layout_marginRight="10dp"
+                       android:layout_marginBottom="10dp" android:layout_gravity="center_vertical"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"

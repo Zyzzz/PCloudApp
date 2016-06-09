@@ -39,11 +39,11 @@ public class ImageUtil {
     OnLoadListener onLoadListener;
 
     public interface OnSetListener {
-        public void onSet(UserModel userModel);
+        void onSet(ImageModel imageModel);
     }
 
     public interface OnLoadListener {
-        public void onLoad(ImageModel imageModel);
+        void onLoad(ImageModel imageModel);
     }
 
     public void setOnSetListener(OnSetListener onSetListener) {
@@ -56,7 +56,7 @@ public class ImageUtil {
     public ImageUtil(Context context) {
         this.context = context;
         assetManager = context.getAssets();
-        preferences = context.getSharedPreferences("image_cache", context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences("image_cache", Context.MODE_PRIVATE);
         editor = preferences.edit();
     }
 
@@ -75,6 +75,7 @@ public class ImageUtil {
     }
 
     public BitmapDrawable getHeader(int userId, int imageId) {
+        //imageId = 0;
         if(imageId == 0) {
             int id = userId;
             switch (id) {
@@ -83,9 +84,9 @@ public class ImageUtil {
             }
             id = id % 11;
             try {
-                InputStream assetFile = assetManager.open("header/" + id + ".png");
+                InputStream assetFile = assetManager.open("icon/" + id + ".png");
                 Bitmap bitmap = BitmapFactory.decodeStream(assetFile);
-                BitmapDrawable drawable = new BitmapDrawable(bitmap);;
+                BitmapDrawable drawable = new BitmapDrawable(bitmap);
                 assetFile.close();
                 return drawable;
             } catch (IOException e) {
@@ -97,6 +98,10 @@ public class ImageUtil {
             BitmapDrawable drawable;
             if(hasImage(imageId)) {
                 drawable = new BitmapDrawable(loadImage(imageId));
+                if(drawable.getBitmap() == null) {
+                    downloadImage(imageId);
+                    return null;
+                }
                 return  drawable;
             }
             else  {
@@ -110,6 +115,9 @@ public class ImageUtil {
 
     public void setHeader(String cookies, Bitmap bitmap) {
         String bitmapString = ImageEncodeTool.bitmapToBase64(bitmap);
+        if(!bitmap.isRecycled()){
+            bitmap.recycle();//记得释放资源，否则会内存溢出
+        }
         get("setUserHeader", "imageFile", bitmapString, "cookies", cookies);
         mode = 0;
     }
@@ -130,14 +138,22 @@ public class ImageUtil {
         String string = preferences.getString("image" + imageId, null);
         if(string == null)
             return null;
-        return ImageEncodeTool.base64ToBitmap(string);
+        try {
+            return ImageEncodeTool.base64ToBitmap(string);
+        }   catch(Exception e)  {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void clearImage() {
+        editor.clear();
+        editor.commit();
     }
 
     public boolean hasImage(int imageId) {
         String string = preferences.getString("image" + imageId, null);
-        if(string == null)
-            return false;
-        return true;
+        return string != null;
     }
 
     class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
@@ -151,9 +167,10 @@ public class ImageUtil {
                     onLoadListener.onLoad(imageModel);
             }
             else {
-                UserModel userModel = gson.fromJson(jsonString, UserModel.class);
+                ImageModel imageModel = gson.fromJson(jsonString, ImageModel.class);
+                saveImage(imageModel);
                 if(onSetListener != null)
-                    onSetListener.onSet(userModel);
+                    onSetListener.onSet(imageModel);
             }
         }
 
@@ -171,6 +188,6 @@ public class ImageUtil {
             else
                 requestParams.put((String) prams[i],  prams[i + 1].getClass().cast(prams[i + 1]));
         }
-        HttpClient.post(url, requestParams, myHandler);
+        HttpClient.get(url, requestParams, myHandler);
     }
 }

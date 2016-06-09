@@ -67,7 +67,7 @@ abstract public class HttpFragment extends Fragment {
     abstract protected void onSuccess();
 
     protected  void  onFailure(){
-        toast("SERVER ERROR");
+        //toast("SERVER ERROR");
     }
 
 
@@ -117,12 +117,12 @@ abstract public class HttpFragment extends Fragment {
     }
 
     protected <T> void startActivity(Class<T> targetActivity) {
-        SysApplication.getInstance().addActivity((Activity) getActivity());
+        SysApplication.getInstance().addActivity(getActivity());
         startActivity(new Intent(getActivity(), targetActivity));
     }
 
     protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
-        SysApplication.getInstance().addActivity((Activity) getActivity());
+        SysApplication.getInstance().addActivity(getActivity());
         Intent intent = new Intent(getActivity(), targetActivity);
         intent.putExtras(savedInstanceState);
         startActivity(intent);

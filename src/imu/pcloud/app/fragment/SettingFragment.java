@@ -1,5 +1,6 @@
 package imu.pcloud.app.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,17 +16,20 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.*;
+import imu.pcloud.app.model.ImageModel;
 import imu.pcloud.app.model.UserModel;
+import imu.pcloud.app.utils.ImageUtil;
 import imu.pcloud.app.utils.Information;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 
 /**
  * Created by acer on 2016/5/11.
  */
-public class SettingFragment extends HttpFragment implements View.OnClickListener{
+public class SettingFragment extends HttpFragment implements View.OnClickListener, ImageUtil.OnLoadListener{
     View head;
     View mySharing;
     View myAccount;
@@ -43,16 +47,15 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         mySharing = view.findViewById(R.id.my_sharing);
         myAccount = view.findViewById(R.id.my_account);
         header = (ImageView) view.findViewById(R.id.personal_header);
-        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), 0));
         head.setOnClickListener(this);
         header.setOnClickListener(this);
         mySharing.setOnClickListener(this);
         myAccount.setOnClickListener(this);
         nickName = (TextView) view.findViewById(R.id.nick_name);
         email = (TextView) view.findViewById(R.id.email);
-        nickName.setText(userModel.getUsername());
-        email.setText(userModel.getEmail());
+        imageUtil.setOnLoadListener(this);
         initActionBar();
+        //initView();
         return view;
     }
 
@@ -61,9 +64,16 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
 
     }
 
+    public void initView() {
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), userModel.getHeaderImageId()));
+        nickName.setText(userModel.getUsername());
+        email.setText(userModel.getEmail());
+    }
+
     @Override
     public void onResume() {
         //initActionBar();
+        initView();
         userModel = getUserModel();
         nickName.setText(userModel.getUsername());
         email.setText(userModel.getEmail());
@@ -79,8 +89,10 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     }
 
     public void onHiddenChanged(boolean hidden) {
-        if(hidden == false)
+        if(hidden == false) {
             initActionBar();
+            initView();
+        }
         super.onHiddenChanged(hidden);
     }
 
@@ -89,7 +101,8 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.personal_info:
-                startActivity(InformationActivity.class);
+                Bundle data = new Bundle();
+                startActivity(InformationActivity.class, data);
                 break;
             case R.id.my_sharing:
                 startActivity(UserSharingActivity.class);
@@ -103,5 +116,9 @@ public class SettingFragment extends HttpFragment implements View.OnClickListene
         }
     }
 
+    @Override
+    public void onLoad(ImageModel imageModel) {
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), userModel.getHeaderImageId()));
+    }
 
 }

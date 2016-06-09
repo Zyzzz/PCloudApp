@@ -231,7 +231,7 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
 
     public void setSelectedPlanId() {
         Gson gson = new GsonBuilder().create();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("userinfo", context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         selectedPlanId = gson.fromJson(
                 sharedPreferences.getString("selectedPlanId" + userId, ""),
                 new TypeToken<ArrayList<Integer>>() {

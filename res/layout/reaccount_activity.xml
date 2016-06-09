@@ -45,11 +45,19 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:layout_marginRight="10dp"/>
     </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                  android:layout_height="wrap_content" android:layout_marginTop="250dp">
+        <Button android:layout_width="0dp" android:layout_height="40dp" android:text="清除缓存"
+                android:id="@+id/clear_cache" android:background="@drawable/button_select" android:layout_weight="1.5"
+                android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
+                android:textAppearance="@android:style/TextAppearance.Large" android:textColor="@android:color/white"
+                android:textSize="18dp"/>
+    </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="300dp">
+            android:layout_marginTop="10dp">
         <Button
                 android:layout_width="0dp"
                 android:layout_height="40dp"

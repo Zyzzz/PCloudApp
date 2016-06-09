@@ -71,7 +71,9 @@ public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.Vi
         for(User u:userArrayList) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("name", u.getUsername());
-            map.put("image", imageUtil.getHeader(u.getId(), 0));
+            if(u.getHeadImageId() == null)
+                u.setHeadImageId(0);
+            map.put("image", imageUtil.getHeader(u.getId(), u.getHeadImageId()));
             plist.add(map);
         }
         adapter.notifyDataSetChanged();

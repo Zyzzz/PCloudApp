@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.*;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.model.ImageModel;
 import imu.pcloud.app.model.UserModel;
 import imu.pcloud.app.utils.DateTool;
+import imu.pcloud.app.utils.FileTool;
 import imu.pcloud.app.utils.ImageUtil;
 
 import java.io.File;
@@ -27,13 +30,14 @@ import java.io.FileNotFoundException;
 /**
  * Created by guyu on 2016/5/27.
  */
-public class InformationActivity extends HttpActivity implements View.OnClickListener{
+public class InformationActivity extends HttpActivity implements View.OnClickListener, ImageUtil.OnLoadListener{
     private View nickname;
     private View sex;
     private View birthday;
     private View sign;
     private View edu;
     private View work;
+    private View headerView;
     private TextView tvNickname;
     private TextView tvSex;
     private TextView tvEmail;
@@ -56,7 +60,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
     public static final int IMAGE_COMPLETE = 2; // 结果
     public static final int CROPREQCODE = 3; // 截取
 
-    private String photoSavePath;//保存路径
+    private String photoSavePath = Environment.getExternalStorageDirectory()+"/ClipHeadPhoto/cache/";//保存路径
     private String photoSaveName;//图pian名
     private String path;//图片全路径
 
@@ -113,13 +117,15 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
         tvWork = find(R.id.mywork);
         tvSign = find(R.id.mysignature);
         header = find(R.id.header_image);
-        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), 0));
-//        header.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showPopupWindow(header);
-//            }
-//        });
+        headerView = findViewById(R.id.header);
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), getUserModel().getHeaderImageId()));
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(header);
+            }
+        });
+        imageUtil.setOnLoadListener(this);
         sex.setOnClickListener(this);
         nickname.setOnClickListener(this);
         birthday.setOnClickListener(this);
@@ -202,6 +208,7 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                 Uri imageUri = null;
                 Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 imageUri = Uri.fromFile(new File(photoSavePath,photoSaveName));
+                openCameraIntent.putExtra(MediaStore.Images.Media.MIME_TYPE, "image/png");
                 openCameraIntent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
                 openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(openCameraIntent, PHOTOTAKE);
@@ -211,7 +218,12 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
             @Override
             public void onClick(View arg0) {
                 popWindow.dismiss();
-                Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent openAlbumIntent = new Intent();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {//4.4及以上
+                    openAlbumIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                } else {//4.4以下
+                    openAlbumIntent.setAction(Intent.ACTION_GET_CONTENT);
+                };
                 openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(openAlbumIntent, PHOTOZOOM);
             }
@@ -268,11 +280,25 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                     return;
                 }
                 uri = data.getData();
-                String[] proj = { MediaStore.Images.Media.DATA };
-                Cursor cursor = managedQuery(uri, proj, null, null,null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                path = cursor.getString(column_index);// 图片在的路径
+                if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT){//4.4及以上
+                    String wholeID = DocumentsContract.getDocumentId(uri);
+                    String id = wholeID.split(":")[1];
+                    String[] column = { MediaStore.Images.Media.DATA };
+                    String sel = MediaStore.Images.Media._ID + "=?";
+                    Cursor cursor = getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
+                            sel, new String[] { id }, null);
+                    int columnIndex = cursor.getColumnIndex(column[0]);
+                    if (cursor.moveToFirst()) {
+                        path = cursor.getString(columnIndex);
+                    }
+                    cursor.close();
+                }else{//4.4以下，即4.4以上获取路径的方法
+                    String[] projection = { MediaStore.Images.Media.DATA };
+                    Cursor cursor = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    cursor.moveToFirst();
+                    path = cursor.getString(column_index);
+                }
                 Intent intent3=new Intent(this,ClipActivity.class);
                 intent3.putExtra("path", path);
                 startActivityForResult(intent3, IMAGE_COMPLETE);
@@ -280,18 +306,21 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
             case PHOTOTAKE://拍照
                 path=photoSavePath+photoSaveName;
                 uri = Uri.fromFile(new File(path));
-                Intent intent2=new Intent(this,ClipActivity.class);
+                Intent intent2 = new Intent(this,ClipActivity.class);
                 intent2.putExtra("path", path);
                 startActivityForResult(intent2, IMAGE_COMPLETE);
                 break;
             case IMAGE_COMPLETE:
                 final String temppath = data.getStringExtra("path");
                 imageUtil.setHeader(getCookie(), getLoacalBitmap(temppath));
+                FileTool.delete(temppath);
                 imageUtil.setOnSetListener(new ImageUtil.OnSetListener() {
                     @Override
-                    public void onSet(UserModel userModel) {
+                    public void onSet(ImageModel imageModel) {
+                        userModel.setHeaderImageId(imageModel.getImage().getId());
                         setUserMoodel(userModel);
                         header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), getUserModel().getHeaderImageId()));
+                        toast("设置头像成功");
                     }
                 });
                 break;
@@ -299,6 +328,12 @@ public class InformationActivity extends HttpActivity implements View.OnClickLis
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onLoad(ImageModel imageModel) {
+        header.setBackgroundDrawable(imageUtil.getHeader(getUserId(), userModel.getHeaderImageId()));
     }
 
 }
