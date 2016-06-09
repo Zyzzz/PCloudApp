@@ -5,6 +5,7 @@ import android.webkit.DateSorter;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateTool {
@@ -59,15 +60,47 @@ public class DateTool {
 		}
 	}
 
-//	public static String getRealDate(String dateString) {
-//		if(dateString == null)
-//			return null;
-//		String monthStr = dateString.substring(5, 7);
-//		int month = Integer.parseInt(monthStr);
-//		month++;
-//		monthStr = month < 10 ? "0" + month : "" + month;
-//		String result = dateString.substring(0, 5)  + monthStr + dateString.substring(7);
-//		return result;
-//	}
+	/**
+	 * 判断当前日期是星期几
+	 * @return dayForWeek 判断结果
+	 */
+	static public int getWeek() {
+
+
+		String Week = "";
+		int weekpos = 0;
+		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+			c.setTime(date);
+		if (c.get(Calendar.DAY_OF_WEEK) == 1) {
+			Week += "天";
+			weekpos = 7;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 2) {
+			Week += "一";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 3) {
+			Week += "二";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 4) {
+			Week += "三";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 5) {
+			Week += "四";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 6) {
+			Week += "五";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		if (c.get(Calendar.DAY_OF_WEEK) == 7) {
+			Week += "六";
+			weekpos = c.get(Calendar.DAY_OF_WEEK) - 1;
+		}
+		return weekpos;
+	}
 	
 }

@@ -3,6 +3,7 @@ package imu.pcloud.app.activity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.igexin.sdk.PushManager;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.UserModel;
+import imu.pcloud.app.service.PushMsgService;
 import imu.pcloud.app.utils.*;
 import org.apache.http.Header;
 import org.apache.http.util.ExceptionUtils;
@@ -40,6 +43,7 @@ abstract public class HttpActivity extends Activity {
     protected ImageUtil imageUtil;
     final public static String SPACE = "         ";
     protected List<PlanCircle> planCircles;
+    PushTool pushTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ abstract public class HttpActivity extends Activity {
         finder = new ViewFinder(this);
         imageUtil = new ImageUtil(this);
         setOverflowShowingAlways();
+        //PushManager.getInstance().initialize(this.getApplicationContext());
+        startService(new Intent(this, PushMsgService.class));
     }
 
     private void setOverflowShowingAlways() {

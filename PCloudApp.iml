@@ -17,5 +17,6 @@
     <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
+    <orderEntry type="library" exported="" name="GetuiSDK2.8.1.0" level="project" />
   </component>
 </module>

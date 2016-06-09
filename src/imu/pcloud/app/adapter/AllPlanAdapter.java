@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.activity.AllPlanActivity;
 import imu.pcloud.app.been.PersonalPlan;
+import imu.pcloud.app.model.TimeConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
     LayoutInflater layoutInflater;
     private List<Map<String,Object>> pList =new ArrayList<Map<String, Object>>();
     ArrayList<PersonalPlan> personalPlanArrayList;
-    ArrayList<Integer> selectedPlanId;
+    ArrayList<TimeConfig> selectedPlanId;
     MyOnClickListener myOnClickListener;
     int userId;
     Context context;
@@ -187,11 +188,11 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
         holder.item.setOnClickListener(this);
         holder.item.setClickable(false);
         holder.plan_name.setText((String)pList.get(position).get("plan_name"));
-        if(selectedPlanId.indexOf(plan.getId()) != -1) {
-            holder.selector.setSelected(true);
-        }
-        else {
-            holder.selector.setSelected(false);
+        holder.selector.setSelected(false);
+        for(TimeConfig timeConfig: selectedPlanId) {
+            if(timeConfig.getPlanId() == plan.getId()) {
+                holder.selector.setSelected(true);
+            }
         }
         return convertView;
     }
@@ -234,10 +235,10 @@ public class AllPlanAdapter extends BaseAdapter implements View.OnClickListener
         SharedPreferences sharedPreferences = context.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         selectedPlanId = gson.fromJson(
                 sharedPreferences.getString("selectedPlanId" + userId, ""),
-                new TypeToken<ArrayList<Integer>>() {
+                new TypeToken<ArrayList<TimeConfig>>() {
                 }.getType());
         if(selectedPlanId == null){
-            selectedPlanId = new ArrayList<Integer>();
+            selectedPlanId = new ArrayList<TimeConfig>();
         }
     }
 }

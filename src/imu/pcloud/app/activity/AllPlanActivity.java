@@ -17,6 +17,7 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.adapter.AllPlanAdapter;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.PlanCircle;
+import imu.pcloud.app.fragment.SetTimeFragment;
 import imu.pcloud.app.model.*;
 import imu.pcloud.app.utils.PlanListTool;
 
@@ -28,10 +29,12 @@ import java.util.*;
  */
 public class AllPlanActivity extends HttpActivity
         implements AdapterView.OnItemClickListener,
-        PullToRefreshBase.OnRefreshListener<ListView>,AllPlanAdapter.MyOnClickListener {
+        PullToRefreshBase.OnRefreshListener<ListView>,
+        AllPlanAdapter.MyOnClickListener,
+        SetTimeFragment.OnTimeSetListener{
 
     ArrayList<PersonalPlan> personalPlanArrayList = new ArrayList<PersonalPlan>();
-    ArrayList<Integer> selectedPlanId = new ArrayList<Integer>();
+    ArrayList<TimeConfig> selectedPlanId = new ArrayList<TimeConfig>();
     private PullToRefreshListView listView;
     AllPlanAdapter allPlanAdapter;
     AlertDialog shareDialog;
@@ -188,14 +191,15 @@ public class AllPlanActivity extends HttpActivity
     public void setNowPlan() {
         ArrayList<LocalPlan> localPlans = new ArrayList<LocalPlan>();
         setSelectedPlanId();
-        for(Integer selectedId:selectedPlanId) {
+        for(TimeConfig timeConfig:selectedPlanId) {
             for(PersonalPlan plan:personalPlanArrayList) {
-                if(plan.getId() == selectedId) {
+                if(plan.getId() == timeConfig.getPlanId() && timeConfig.getPlanMode() == TimeConfig.MODE_PERSONAL_PLAN) {
                     String content = plan.getContent();
                     Plans plans = new Plans();
                     plans.setByJsonString(content);
                     for(Plan p:plans.getPlans()) {
                         LocalPlan localPlan = new LocalPlan(p.getStartTimeString(), p.getEndTimeString(), p.getContent(), p.getTitle(), plan.getName());
+                        localPlan.setTimeConfig(timeConfig);
                         localPlans.add(localPlan);
                     }
                 }
@@ -237,10 +241,10 @@ public class AllPlanActivity extends HttpActivity
     public void setSelectedPlanId() {
         selectedPlanId = gson.fromJson(
                 sharedPreferences.getString("selectedPlanId" + getUserId(), ""),
-                new TypeToken<ArrayList<Integer>>() {
+                new TypeToken<ArrayList<TimeConfig>>() {
                 }.getType());
         if(selectedPlanId == null)
-            selectedPlanId = new ArrayList<Integer>();
+            selectedPlanId = new ArrayList<TimeConfig>();
     }
 
     @Override
@@ -314,8 +318,6 @@ public class AllPlanActivity extends HttpActivity
         }, 1000);
     }
 
-
-
     @Override
     public void onClickItem(View view, int position) {
         PersonalPlan plan = personalPlanArrayList.get(position);
@@ -333,23 +335,8 @@ public class AllPlanActivity extends HttpActivity
             startActivity(AddPlanItemActivity.class, data);
         }
         else if(view.getId() == R.id.selector){
-            int i = 0;
             setSelectedPlanId();
-            int length = selectedPlanId.size();
-            for(i = 0; i < length; i++){
-                int selectId = selectedPlanId.get(i);
-                if(selectId == plan.getId()) {
-                    view.setSelected(false);
-                    selectedPlanId.remove(i);
-                    break;
-                }
-            }
-            if(i == length) {
-                selectedPlanId.add(plan.getId());
-                view.setSelected(true);
-            }
-            putSelectedPlanId();
-            setNowPlan();
+            showSetTimeDialog(plan);
         }
         else if(view.getId() == R.id.conversationlist_delete) {
             clickFlag = DELETE;
@@ -386,5 +373,48 @@ public class AllPlanActivity extends HttpActivity
         {
             e.printStackTrace();
         }
+    }
+
+    public void showSetTimeDialog(PersonalPlan plan) {
+        SetTimeFragment setTimeFragment = new SetTimeFragment();
+        TimeConfig t = null;
+        for(TimeConfig timeConfig: selectedPlanId) {
+            if(timeConfig.getPlanId() == plan.getId() && timeConfig.getPlanMode() == TimeConfig.MODE_PERSONAL_PLAN) {
+                t = timeConfig;
+                break;
+            }
+        }
+        if(t != null)
+            setTimeFragment.set(t);
+        else
+            setTimeFragment.set(plan.getId(), TimeConfig.MODE_PERSONAL_PLAN);
+        setTimeFragment.setOnTimeSetListener(this);
+        setTimeFragment.show(getFragmentManager(), "set time");
+    }
+
+    @Override
+    public void onTimeSet(TimeConfig timeConfig) {
+        int flag = 0;
+        for(TimeConfig n: selectedPlanId) {
+            if(n.getPlanId() == timeConfig.getPlanId() && n.getPlanMode() == timeConfig.getPlanMode()) {
+                if(timeConfig.getWeeks() == null) {
+                    selectedPlanId.remove(n);
+                    flag = 1;
+                    break;
+                }
+                else {
+                    n.setWeeks(timeConfig.getWeeks());
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+        if(flag == 0) {
+            if(timeConfig.getWeeks() != null)
+                selectedPlanId.add(timeConfig);
+        }
+        putSelectedPlanId();
+        setNowPlan();
+        allPlanAdapter.notifyDataSetChanged();
     }
 }
