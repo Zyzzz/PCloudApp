@@ -129,7 +129,15 @@ public class AddItemFragment extends DialogFragment implements View.OnClickListe
                 Toast.makeText(getActivity(), "请先设置开始时间", Toast.LENGTH_SHORT).show();
                 return;
             }
-            calendar.setTime(DateTool.stringToTime(startTime.getText().toString()));
+            if(endTime.getText().length() > 0)
+                calendar.setTime(DateTool.stringToTime(endTime.getText().toString()));
+            else
+                calendar.setTime(DateTool.stringToTime(startTime.getText().toString()));
+        }
+        if(v.getId() == R.id.start_time) {
+            if(startTime.getText().length() > 0) {
+                calendar.setTime(DateTool.stringToTime(startTime.getText().toString()));
+            }
         }
         TimePickerDialog.Builder builder = new TimePickerDialog.Builder(getActivity());
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), this,
