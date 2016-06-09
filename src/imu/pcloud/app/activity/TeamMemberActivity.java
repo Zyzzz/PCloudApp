@@ -13,7 +13,9 @@ import imu.pcloud.app.been.MultiPlan;
 import imu.pcloud.app.been.MultiPlanMember;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.User;
+import imu.pcloud.app.model.ImageModel;
 import imu.pcloud.app.model.MultiPlanList;
+import imu.pcloud.app.utils.ImageUtil;
 import imu.pcloud.app.utils.ViewFinder;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.HashMap;
 /**
  * Created by acer on 2016/6/1.
  */
-public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.ViewBinder {
+public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.ViewBinder, ImageUtil.OnLoadListener {
 
     ListView listView;
     SimpleAdapter adapter;
@@ -35,6 +37,7 @@ public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.Vi
         super.onCreate(savedInstanceState);
         init();
         refreshData();
+        imageUtil.setOnLoadListener(this);
     }
 
     @Override
@@ -97,5 +100,10 @@ public class TeamMemberActivity extends HttpActivity implements SimpleAdapter.Vi
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onLoad(ImageModel imageModel) {
+        updateData();
     }
 }

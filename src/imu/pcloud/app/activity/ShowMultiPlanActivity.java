@@ -29,11 +29,12 @@ public class ShowMultiPlanActivity extends HttpActivity {
     private MultiPlan multiPlan;
     private int mode;
     private int clickId;
+    Bundle data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_layout);
-        Bundle data = getIntent().getExtras();
+        data = getIntent().getExtras();
         mode = data.getInt("flag", 0);
         multiPlan = gson.fromJson(data.getString("plan", ""), MultiPlan.class);
         init();
@@ -110,7 +111,7 @@ public class ShowMultiPlanActivity extends HttpActivity {
     }
 
     public void lookMemeber() {
-        startActivity(TeamMemberActivity.class, getIntent().getExtras());
+        startActivity(TeamMemberActivity.class, data);
     }
 
     public void updatePlan() {

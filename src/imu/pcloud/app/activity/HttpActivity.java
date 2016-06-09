@@ -147,7 +147,6 @@ abstract public class HttpActivity extends Activity {
     protected <T> void startActivity(Class<T> targetActivity, Bundle savedInstanceState) {
         SysApplication.getInstance().addActivity(this);
         Intent intent = new Intent(getApplicationContext(), targetActivity);
-        intent = new Intent();
         intent.putExtras(savedInstanceState);
         startActivity(intent);
     }
