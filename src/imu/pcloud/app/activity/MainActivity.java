@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,6 +23,7 @@ import imu.pcloud.app.fragment.SettingFragment;
 import imu.pcloud.app.fragment.TeamFragment;
 import imu.pcloud.app.fragment.ZoneFragment;
 import imu.pcloud.app.model.PlanCircleList;
+import imu.pcloud.app.utils.PushTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +81,6 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
         setPlanCircles();
         get("getPlanCircleList");
     }
-
 
 
     @Override

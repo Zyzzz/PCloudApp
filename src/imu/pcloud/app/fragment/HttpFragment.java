@@ -18,10 +18,7 @@ import imu.pcloud.app.R;
 import imu.pcloud.app.activity.HttpActivity;
 import imu.pcloud.app.been.PlanCircle;
 import imu.pcloud.app.model.UserModel;
-import imu.pcloud.app.utils.GsonTool;
-import imu.pcloud.app.utils.HttpClient;
-import imu.pcloud.app.utils.ImageUtil;
-import imu.pcloud.app.utils.SysApplication;
+import imu.pcloud.app.utils.*;
 import org.apache.http.Header;
 
 import java.util.ArrayList;
@@ -42,6 +39,7 @@ abstract public class HttpFragment extends Fragment {
     protected ImageUtil imageUtil;
     final public static String SPACE = "           ";
     protected List<PlanCircle> planCircles;
+    PushTool pushTool;
 
     @Override
     public void onAttach(Activity activity) {

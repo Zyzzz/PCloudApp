@@ -1,6 +1,8 @@
 package imu.pcloud.app.fragment;
 
 import android.app.ActionBar;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.*;
@@ -15,6 +17,9 @@ import imu.pcloud.app.adapter.PlanItemAdapter;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.LocalPlan;
 import imu.pcloud.app.model.Plan;
+import imu.pcloud.app.model.TimeConfig;
+import imu.pcloud.app.utils.DateTool;
+import imu.pcloud.app.utils.PushTool;
 import imu.pcloud.app.utils.SpaceUtil;
 import imu.pcloud.app.utils.WidgetController;
 
@@ -51,26 +56,37 @@ public class PersonalFragment extends HttpFragment {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
         listView = (ListView) view.findViewById(R.id.personal_listview);
         initNowPlan();
-        init();
         setHasOptionsMenu(true);
         setActionBar();
         return view;
     }
 
-    public void init() {
-        initNowPlan();
-        getData(pList);
-        listAdapter.notifyDataSetChanged();
-    }
-
     public void initNowPlan() {
         String nowPlanString = sharedPreferences.getString("nowPlan" + getUserId(), "");
-        planArrayList = gson.fromJson(nowPlanString,
-                new TypeToken<ArrayList<LocalPlan>>() {}.getType());
+        try {
+            planArrayList = gson.fromJson(nowPlanString,
+                    new TypeToken<ArrayList<LocalPlan>>() {
+                    }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+            planArrayList = new ArrayList<LocalPlan>();
+            editor.remove("nowPlan" + getUserId());
+            editor.commit();
+        }
         if(planArrayList == null){
             planArrayList = new ArrayList<LocalPlan>();
         }
-        listAdapter = new PlanItemAdapter(planArrayList, getActivity());
+        ArrayList<LocalPlan> nLocalPlans = new ArrayList<>(planArrayList);
+        for(LocalPlan localPlan: planArrayList) {
+            TimeConfig timeConfig = localPlan.getTimeConfig();
+            int status;
+            if(timeConfig.getWeeks()[0])
+                continue;
+            else if(!timeConfig.getWeeks()[DateTool.getWeek()])
+                nLocalPlans.remove(localPlan);
+
+        }
+        listAdapter = new PlanItemAdapter(nLocalPlans, getActivity());
         listView.setAdapter(listAdapter);
     }
 
@@ -98,14 +114,16 @@ public class PersonalFragment extends HttpFragment {
     @Override
     public void onResume() {
         //setActionBar();
-        init();
+        initNowPlan();
         super.onResume();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if(hidden == false)
+        if(hidden == false) {
+            //initNowPlan();
             setActionBar();
+        }
         super.onHiddenChanged(hidden);
     }
 
@@ -135,5 +153,9 @@ public class PersonalFragment extends HttpFragment {
         menu.clear();
         menuInflater.inflate(R.menu.personal, menu);
         return ;
+    }
+
+
+    public void initPushService() {
     }
 }
