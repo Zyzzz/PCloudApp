@@ -15,6 +15,7 @@ public class SharingRecord implements java.io.Serializable {
 	private Timestamp sharingTime;
 	private Timestamp lastUpdatingTime;
 	private Integer userId;
+	private String discribe;
 
 	// Constructors
 
@@ -31,12 +32,14 @@ public class SharingRecord implements java.io.Serializable {
 
 	/** full constructor */
 	public SharingRecord(SharingRecordId id, Integer loadingTime,
-			Timestamp sharingTime, Timestamp lastUpdatingTime, Integer userId) {
+			Timestamp sharingTime, Timestamp lastUpdatingTime, Integer userId,
+			String discribe) {
 		this.id = id;
 		this.loadingTime = loadingTime;
 		this.sharingTime = sharingTime;
 		this.lastUpdatingTime = lastUpdatingTime;
 		this.userId = userId;
+		this.discribe = discribe;
 	}
 
 	// Property accessors
@@ -79,6 +82,14 @@ public class SharingRecord implements java.io.Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getDiscribe() {
+		return this.discribe;
+	}
+
+	public void setDiscribe(String discribe) {
+		this.discribe = discribe;
 	}
 
 }

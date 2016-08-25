@@ -18,10 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.been.PlanCircle;
-import imu.pcloud.app.fragment.PersonalFragment;
-import imu.pcloud.app.fragment.SettingFragment;
-import imu.pcloud.app.fragment.TeamFragment;
-import imu.pcloud.app.fragment.ZoneFragment;
+import imu.pcloud.app.fragment.*;
 import imu.pcloud.app.model.PlanCircleList;
 import imu.pcloud.app.utils.PushTool;
 
@@ -141,7 +138,7 @@ public class MainActivity extends HttpActivity implements View.OnClickListener {
                 break;
             case 2:
                 if (mFragTeam == null) {
-                    mFragTeam = new ZoneFragment();
+                    mFragTeam = new DiscoverFragment();
                     transaction.add(R.id.content, mFragTeam);
                 } else {
                     transaction.show(mFragTeam);

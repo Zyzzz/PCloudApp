@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:background="@android:color/white" android:gravity="top">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" android:background="@color/gray_m">
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:background="@android:color/white"
+            android:layout_marginLeft="10dp">
+        <LinearLayout
+                android:id="@+id/from_view"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/icon" android:background="@drawable/logo"
+                    android:layout_marginTop="5dp" android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" android:layout_marginBottom="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="来自美食"
+                    android:id="@+id/from" android:textColor="@color/gray_l" android:gravity="fill_vertical"
+                    android:textSize="14dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/comtent_view"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:layout_marginRight="10dp">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="有哪些好喝的啤酒推荐？"
+                    android:id="@+id/title" android:textColor="@android:color/black" android:textSize="18dp"
+                    android:singleLine="true" android:layout_marginBottom="5dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/content" android:textColor="@color/text_color" android:textSize="15dp"
+                    android:maxLines="3" android:minLines="2"
+                    android:text="马得龙： 这个问题下几乎每一个答案我都翻遍了，也记下了无数爱好者们推荐的啤酒。但我诧异的是，那没多推荐竟然没有人提到这一款饮品：Karmeliet（卡美里特）先说一下我对她的评..."
+                    android:ellipsize="end"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" android:layout_marginRight="5dp">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="61 赞同  ·  89 评论  ·  关注问题"
+                    android:id="@+id/info" android:textSize="14dp" android:textColor="@color/gray_l"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

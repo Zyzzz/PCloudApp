@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@android:color/white">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/info">
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/header" android:layout_gravity="center" android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" android:layout_weight="1">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="古雨"
+                        android:id="@+id/name" android:textColor="@color/text_color" android:layout_marginTop="10dp"
+                        android:singleLine="true" android:maxLines="1" android:minLines="1" android:ellipsize="end"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="在校大学生"
+                        android:id="@+id/sign" android:layout_marginTop="5dp" android:singleLine="true"
+                        android:maxLines="1" android:minLines="1" android:ellipsize="end"
+                        android:textColor="@color/gray_l"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent" android:background="@color/gray_l" android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/load" android:layout_weight="0.1">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="▼1"
+                    android:id="@+id/loadtime" android:layout_gravity="center" android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" android:textStyle="bold" android:gravity="center"
+                    android:textColor="@color/text_color"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" android:background="@color/gray_l">
+    </LinearLayout>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView" android:layout_margin="10dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="这个是我平时学习用的计划，推荐给大家"
+                    android:id="@+id/describe" android:layout_weight="1" android:textColor="@color/text_color"
+                    android:textSize="17dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="创建于 2016-7-1" android:id="@+id/sharing_time"
+                      android:textColor="@color/gray_l" android:textSize="17dp" android:layout_marginTop="20dp"
+                      android:gravity="right"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="著作权归作者所有" android:id="@+id/textView19" android:textColor="@color/gray_l"
+                      android:textSize="17dp" android:gravity="right" android:layout_marginTop="2dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="10dp">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:background="@color/gray_l">
+                    <imu.pcloud.app.view.NoScrollListView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/plan_list" android:visibility="gone"
+                            android:background="@android:color/white"
+                            android:layout_marginTop="0.5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:background="@color/gray_l">
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="↓ 点击查看计划内容"
+                            android:id="@+id/show" android:background="@android:color/white"
+                            android:textColor="@color/gray_l" android:layout_marginTop="0.5dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp" android:background="@color/gray_l">
+            </LinearLayout>
+            <imu.pcloud.app.view.NoScrollListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_list"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -27,7 +27,6 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
     private TextView email;
     private TextView password;
     private UserModel user;
-    private int loginFlag = 0;
     private SharedPreferences spf;
     private Context context;
     /**
@@ -47,8 +46,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
         password = find(R.id.password_text);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
-
-
+        rememberUser();
     }
 
     @Override
@@ -58,6 +56,7 @@ public class LoginActivity extends HttpActivity implements View.OnClickListener 
             setCookie(user.getCookies());
             setUserId(user.getId());
             setUserMoodel(user);
+            saveLoginInfo(this, email.getText().toString(), password.getText().toString());
             startActivity(MainActivity.class);
             finish();
         } else {

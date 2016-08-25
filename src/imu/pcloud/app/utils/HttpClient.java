@@ -12,7 +12,7 @@ import org.apache.http.protocol.HTTP;
  */
 public abstract class HttpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-    /*private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
+    private static final String BASE_URL = "http://183.175.12.153:33333/PCloudServer/";
     //*/private static final String BASE_URL = "http://115.28.53.244:8080/PCloudServer/";
 
     public HttpClient() {

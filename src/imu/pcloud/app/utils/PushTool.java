@@ -43,11 +43,12 @@ public class PushTool {
 
 
     public void push(Context context, LocalPlan plan, int pos) {
+        String title =  plan.getTitle() + "(来自:" + plan.getName() + ")";
         Notification notification = new Notification(
-                R.drawable.logo, plan.getTitle(), System.currentTimeMillis());
+                R.drawable.logo, title, System.currentTimeMillis());
         Intent intent = new Intent(context, WelcomeActivity.class);
         PendingIntent pi= PendingIntent.getActivity(context, 0, intent, 0);
-        notification.setLatestEventInfo(context, plan.getTitle(), plan.getContent(), pi);
+        notification.setLatestEventInfo(context, title, plan.getContent(), pi);
         notificationManager.notify(1, notification);
     }
 

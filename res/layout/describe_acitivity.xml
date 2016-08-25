@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@android:color/white">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2" android:background="@android:color/white" android:fillViewport="false">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/describe" android:textColor="@android:color/black"
+                android:textColorHint="@color/gray_l" android:hint="写下你对你分享的计划的描述" android:background="@android:color/white"
+                android:minLines="3" android:gravity="top|left" android:layout_margin="15dp"/>
+    </ScrollView>
+</LinearLayout>

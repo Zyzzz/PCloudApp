@@ -198,7 +198,7 @@ abstract public class HttpActivity extends Activity {
         myActionBar.setHomeButtonEnabled(true);
         // 使左上角图标(系统)是否显示
         myActionBar.setDisplayShowHomeEnabled(true);
-        //myActionBar.setTitle("");
+        myActionBar.setTitle(" ");
         myActionBar.setIcon(R.drawable.return_icon);
         // 显示标题
         myActionBar.setDisplayShowTitleEnabled(false);

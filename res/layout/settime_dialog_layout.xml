@@ -45,7 +45,7 @@
                 android:id="@+id/button4" android:background="@drawable/week_selector" android:textColor="@color/text_color"
                 android:layout_margin="0.5dp"/>
         <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content"
-                      android:layout_height="match_parent" android:layout_weight="5"/>
+                      android:layout_height="match_parent" android:layout_weight="2"/>
 
     </LinearLayout>
     <LinearLayout
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginBottom="30dp">
         <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content"
-                      android:layout_height="match_parent" android:layout_weight="5"/>
+                      android:layout_height="match_parent" android:layout_weight="2"/>
         <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="周五"
                 android:id="@+id/button5" android:background="@drawable/week_selector" android:textColor="@color/text_color"
                 android:layout_margin="0.5dp"/>

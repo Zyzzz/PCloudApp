@@ -61,6 +61,7 @@ public class AllPlanActivity extends HttpActivity
 
     private void init() {
         setActionBar("设置计划");
+        getPlanCircle();
         setPlanCircles();
         initShareDialog();
         listView = (PullToRefreshListView) findViewById(R.id.allplan_listview);
@@ -177,6 +178,9 @@ public class AllPlanActivity extends HttpActivity
             }
         }
         else if(clickFlag == GETCIRCLE) {
+            PlanCircleList result = getObject(PlanCircleList.class);
+            planCircles.clear();
+            planCircles = result.getPlanCircles();
             editor.putString("planCircle", gson.toJson(planCircles));
             editor.commit();
             setPlanCircleItem();
@@ -261,7 +265,7 @@ public class AllPlanActivity extends HttpActivity
 
     @Override
     protected void onPause() {
-        setNowPlan();
+        //setNowPlan();
         super.onPause();
     }
 
@@ -351,10 +355,13 @@ public class AllPlanActivity extends HttpActivity
             }
         }
         else if(view.getId() == R.id.conversationlist_share) {
-            clickFlag = SHARE;
+            /*clickFlag = SHARE;
             planCircleAdapter.notifyDataSetChanged();
             sharedPersonalPlan = plan;
-            shareDialog.show();
+            shareDialog.show();*/
+            Bundle data = new Bundle();
+            data.putString("sharedPersonalPlan", gson.toJson(plan));
+            startActivity(DescribeActivity.class, data);
         }
     }
 

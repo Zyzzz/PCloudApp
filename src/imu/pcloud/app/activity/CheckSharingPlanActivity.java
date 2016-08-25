@@ -130,7 +130,6 @@ public class CheckSharingPlanActivity extends HttpActivity {
                 toast(baseModel.getResult());
                 setDialogStatus(false, CommentDialog);
             }
-
         }
     }
 
@@ -169,7 +168,7 @@ public class CheckSharingPlanActivity extends HttpActivity {
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.downloan_plan:
+            case R.id.download_plan:
                 if(falg) {
                     ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
                             sharedPreferences.getString("plansString" + getUserId(), ""),
