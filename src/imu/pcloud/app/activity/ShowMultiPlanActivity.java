@@ -15,7 +15,6 @@ import imu.pcloud.app.model.Plans;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by guyu on 2016/6/4.
@@ -70,9 +69,9 @@ public class ShowMultiPlanActivity extends HttpActivity {
 
     @Override
     protected void onSuccess() {
+        BaseModel result = getObject(BaseModel.class);
         switch (clickId) {
             case R.id.join:
-                BaseModel result = getObject(BaseModel.class);
                 if(result.getStatus() == 0) {
                     toast("加入成功");
                     finish();
@@ -80,6 +79,25 @@ public class ShowMultiPlanActivity extends HttpActivity {
                 else {
                     toast(result.getResult());
                 }
+                break;
+            case R.id.getoutplan:
+                if(result.getStatus() == 0) {
+                    toast("退出成功");
+                    finish();
+                }
+                else {
+                    toast(result.getResult());
+                }
+                break;
+            case R.id.removeplan:
+                if(result.getStatus() == 0) {
+                    toast("解散成功");
+                    finish();
+                }
+                else {
+                    toast(result.getResult());
+                }
+                break;
         }
     }
 
@@ -103,15 +121,26 @@ public class ShowMultiPlanActivity extends HttpActivity {
             case R.id.updateplan:
                 updatePlan();
                 break;
-//            case R.id.check_multi_plan:
-//
-//                                                                                                                                                                                                                                                                                                                                                           break;
+            case R.id.getoutplan:
+                getOutPlan();
+                break;
+            case R.id.removeplan:
+                removePlan();
+                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
 
     public void lookMemeber() {
         startActivity(TeamMemberActivity.class, data);
+    }
+
+    public void getOutPlan() {
+        get("getoutMultiplan", "cookies", getCookie(), "multiPlanId", multiPlan.getId());
+    }
+
+    public void removePlan() {
+        get("removeMultiplan", "cookies", getCookie(), "multiPlanId", multiPlan.getId());
     }
 
     public void updatePlan() {
@@ -131,7 +160,12 @@ public class ShowMultiPlanActivity extends HttpActivity {
         menu.clear();
         switch(mode) {
             case 0:
-                getMenuInflater().inflate(R.menu.team, menu);
+                if (multiPlan.getUserId() != getUserId()) {
+                    getMenuInflater().inflate(R.menu.team_member, menu);
+                }
+                else {
+                    getMenuInflater().inflate(R.menu.team_leader, menu);
+                }
                 break;
             case 1:
                 getMenuInflater().inflate(R.menu.overview_team, menu);

@@ -49,7 +49,7 @@
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp" android:background="@color/gray_l">
+                        android:layout_height="0.25dp" android:background="@color/gray_l">
                 </LinearLayout>
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:textAppearance="?android:attr/textAppearanceMedium"

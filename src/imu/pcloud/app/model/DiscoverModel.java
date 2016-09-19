@@ -1,7 +1,6 @@
 package imu.pcloud.app.model;
 
 import imu.pcloud.app.been.Discover;
-import imu.pcloud.app.been.DiscoverId;
 
 import java.util.ArrayList;
 

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Discover;
-import imu.pcloud.app.been.DiscoverId;
 import imu.pcloud.app.utils.ImageUtil;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class DiscoverAdapter extends BaseAdapter implements View.OnClickListener
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        DiscoverId discover = discoverArrayList.get(position).getId();
+        Discover discover = discoverArrayList.get(position);
         if(convertView == null) {
             holder = new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.discover_item, null);
@@ -65,12 +64,12 @@ public class DiscoverAdapter extends BaseAdapter implements View.OnClickListener
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.title.setText(discover.getPlanName());
-        holder.icon.setBackgroundDrawable(new ImageUtil(context).getIcon(discover.getPersonalPlanId()));
+        holder.title.setText(discover.getPersonalPlan().getName());
+        holder.icon.setBackgroundDrawable(new ImageUtil(context).getIcon(discover.getPlanCircle().getId()));
         holder.icon.setScaleType(ImageView.ScaleType.FIT_XY);
-        holder.from.setText("来自" + discover.getPlanCircleName());
-        holder.content.setText(discover.getUsername() + " :  " + discover.getDiscribe());
-        holder.info.setText(getInfo(discover.getLoadingTime(), discover.getCommentCount()));
+        holder.from.setText("来自" + discover.getPlanCircle().getName());
+        holder.content.setText(discover.getUser().getUsername() + " :  " + discover.getSharingRecord().getDiscribe());
+        holder.info.setText(getInfo(discover.getSharingRecord().getLoadingTime(), discover.getCommentTime()));
         return convertView;
     }
 

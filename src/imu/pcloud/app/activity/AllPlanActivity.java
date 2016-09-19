@@ -327,7 +327,9 @@ public class AllPlanActivity extends HttpActivity
         PersonalPlan plan = personalPlanArrayList.get(position);
         if(view.getId() == R.id.item) {
             if (plan.getUserId() != getUserId()) {
-                toast("不可以修改他人的计划");
+                Bundle data = new Bundle();
+                data.putString("planString", gson.toJson(plan));
+                startActivity(ShowPlanActivity.class, data);
                 return;
             }
             String planString = plan.getContent();

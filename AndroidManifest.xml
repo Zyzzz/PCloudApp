@@ -121,6 +121,9 @@
         <activity android:name=".activity.DescribeActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/newTheme"/>
+        <activity android:name=".activity.ShowPlanActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/newTheme"/>
 
 
         <!--  注册广播接收器 -->

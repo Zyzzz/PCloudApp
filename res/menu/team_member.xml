@@ -18,6 +18,11 @@
                     android:icon="@drawable/editplan"
                     android:title="编辑计划">
             </item>
+            <item
+                android:id="@+id/getoutplan"
+                android:showAsAction="always"
+                android:icon="@drawable/getout_plan"
+                android:title="退出计划"></item>
             <!--<item-->
                     <!--android:id="@+id/check_multi_plan"-->
                     <!--android:showAsAction="never"-->

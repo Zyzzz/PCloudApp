@@ -12,7 +12,7 @@ import android.widget.*;
 import com.google.gson.reflect.TypeToken;
 import imu.pcloud.app.R;
 import imu.pcloud.app.been.Comment;
-import imu.pcloud.app.been.DiscoverId;
+import imu.pcloud.app.been.Discover;
 import imu.pcloud.app.been.PersonalPlan;
 import imu.pcloud.app.model.*;
 import imu.pcloud.app.utils.DateTool;
@@ -49,7 +49,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
     //data
     private ArrayList<Comment> commentArrayList;
     private Plans plans;
-    private DiscoverId discover;
+    private Discover discover;
     private ArrayList<Map<String, Object>> pList = new ArrayList<>();
     private ArrayList<Map<String, Object>> cList = new ArrayList<>();
     private SimpleAdapter planAdapter;
@@ -66,10 +66,10 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
         Bundle data = getIntent().getExtras();
         String discoverString = data.getString("discover", null);
         try {
-            discover = gson.fromJson(discoverString, DiscoverId.class);
+            discover = gson.fromJson(discoverString, Discover.class);
         } catch (Exception e) {
             e.printStackTrace();
-            discover = new DiscoverId();
+            discover = new Discover();
         }
         init();
     }
@@ -77,7 +77,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
     private void init() {
         //find view
         setContentView(R.layout.discover_plan_activity);
-        setActionBar(discover.getPlanName());
+        setActionBar(discover.getPersonalPlan().getName());
         header = find(R.id.header);
         name = find(R.id.name);
         sign = find(R.id.sign);
@@ -92,16 +92,16 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
         initDialog();
         //init date
         plans = new Plans();
-        plans.setByJsonString(discover.getContent());
+        plans.setByJsonString(discover.getPersonalPlan().getContent());
         getComment();
         imageUtil.setOnLoadListener(this);
         //init view
-        header.setImageDrawable(imageUtil.getHeader(discover.getUserId(), discover.getHeadImageId()));
-        name.setText(discover.getUsername());
-        sign.setText(discover.getSignature());
-        describe.setText(discover.getDiscribe());
+        header.setImageDrawable(imageUtil.getHeader(discover.getUser().getId(), discover.getUser().getHeadImageId()));
+        name.setText(discover.getUser().getUsername());
+        sign.setText(discover.getUser().getSignature());
+        describe.setText(discover.getSharingRecord().getDiscribe());
         initLoadtime();
-        sharingTime.setText("分享于 " + DateTool.dateToString(discover.getSharingTime()));
+        sharingTime.setText("分享于 " + DateTool.dateToString(discover.getSharingRecord().getSharingTime()));
         setPlanList();
         show.setOnClickListener(this);
         if(!isMyLoad())
@@ -111,7 +111,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
     }
 
     public void initLoadtime() {
-        loadtime.setText("▼ " + discover.getLoadingTime());
+        loadtime.setText("▼ " + discover.getSharingRecord().getLoadingTime());
         if(hasLoad() && !isMyLoad())
             loadtime.setTextColor(Color.rgb(0x4f, 0xa2, 0xe3));
         else
@@ -119,7 +119,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
     }
 
     public boolean isMyLoad() {
-        return discover.getUserId() == getUserId();
+        return discover.getUser().getId() == getUserId();
     }
 
     public void initDialog() {
@@ -133,7 +133,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
                     public void onClick(DialogInterface dialog, int which) {
                         mode = COMMENT;
                         comment = (EditText)layout.findViewById(R.id.text);
-                        get("addComment","cookies",getCookie(),"personalPlanId", discover.getPersonalPlanId(),"content",comment.getText().toString());
+                        get("addComment","cookies",getCookie(),"personalPlanId", discover.getPersonalPlan().getId(),"content",comment.getText().toString());
 
                         setDialogStatus(false, dialog);
                     }
@@ -147,7 +147,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
 
     private void getComment() {
         mode = GET_COMMENT;
-        get("getCommentList","personalPlanId", discover.getPersonalPlanId());
+        get("getCommentList","personalPlanId", discover.getPersonalPlan().getId());
     }
 
     private void refreshComment(CommentList commentList) {
@@ -213,7 +213,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
                 if (baseModel.getStatus() == 0) {
                     downloadPlan();
                     toast("加载计划成功");
-                    discover.setLoadingTime(discover.getLoadingTime() + 1);
+                    discover.getSharingRecord().setLoadingTime(discover.getSharingRecord().getLoadingTime() + 1);
                     initLoadtime();
                 } else {
                     toast(baseModel.getResult());
@@ -222,11 +222,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
     }
 
     private boolean downloadPlan() {
-        PersonalPlan plan = new PersonalPlan();
-        plan.setContent(discover.getContent());
-        plan.setName(discover.getPlanName());
-        plan.setId(discover.getPersonalPlanId());
-        plan.setUserId(discover.getUserId());
+        PersonalPlan plan = discover.getPersonalPlan();
         ArrayList<PersonalPlan> personalPlanArrayList = gson.fromJson(
                 sharedPreferences.getString("plansString" + getUserId(), ""),
                 new TypeToken<ArrayList<PersonalPlan>>() {
@@ -242,7 +238,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
 
     @Override
     public void onLoad(ImageModel imageModel) {
-        header.setImageDrawable(imageUtil.getHeader(discover.getUserId(), discover.getHeadImageId()));
+        header.setImageDrawable(imageUtil.getHeader(discover.getUser().getId(), discover.getUser().getHeadImageId()));
     }
 
     @Override
@@ -267,7 +263,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
                     toast("你已经加载过了");
                     break;
                 }
-                get("increaseLoadingTime", "personalPlanId", discover.getPersonalPlanId(), "planCircleId", discover.getPlanCircleId());
+                get("increaseLoadingTime", "personalPlanId", discover.getPersonalPlan().getId(), "planCircleId", discover.getPlanCircle().getId());
         }
     }
 
@@ -278,7 +274,7 @@ public class DiscoverPlanAcitivity extends HttpActivity implements ImageUtil.OnL
                 }.getType());
         if(personalPlanArrayList != null) {
             for (PersonalPlan var : personalPlanArrayList) {
-                if (var.getId() == discover.getPersonalPlanId()) {
+                if (var.getId() == discover.getPersonalPlan().getId()) {
                     return true;
                 }
             }

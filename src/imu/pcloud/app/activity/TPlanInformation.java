@@ -1,10 +1,7 @@
 package imu.pcloud.app.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import imu.pcloud.app.R;
 
@@ -26,7 +23,7 @@ public class TPlanInformation extends HttpActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
-        getMenuInflater().inflate(R.menu.team, menu);
+        getMenuInflater().inflate(R.menu.team_leader, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

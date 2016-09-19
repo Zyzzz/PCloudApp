@@ -20,7 +20,7 @@ import java.util.*;
 public class UserSharingActivity extends HttpActivity implements PullToRefreshBase.OnRefreshListener<ListView>{
 
     private PullToRefreshListView listView1;
-    private boolean falg;
+    private boolean flag;
     private List<Map<String, Object>> list;
     private List<SharingRecord> sharingRecords;
     private List<PersonalPlan> personalPlans;
@@ -29,7 +29,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_sharing_layout);
-        falg = true;
+        flag = true;
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         setActionBar(R.layout.actionbar_check_layout, "我的分享");
         listView1 = (PullToRefreshListView)findViewById(R.id.user_sharing_listView);
@@ -72,7 +72,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
         return list;
     }
     public void deleteUserSharing(int position){
-        falg = false;
+        flag = false;
         Integer personalPlanId = sharingRecords.get(position).getId().getPersonalPlanId();
         Integer planCircleId = sharingRecords.get(position).getId().getPlanCircleId();
         get("deleteSharing","personalPlanId",personalPlanId,"planCircleId",planCircleId);
@@ -86,7 +86,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
     }
     @Override
     protected void onSuccess() {
-        if(falg) {
+        if(flag) {
             PlanSharingListModel userSharingList = getObject(PlanSharingListModel.class);
             if (userSharingList.getStatus() == 400) {
                 if (!userSharingList.getSharingRecords().isEmpty()) {
@@ -110,7 +110,7 @@ public class UserSharingActivity extends HttpActivity implements PullToRefreshBa
             }else {
                 toast("删除失败");
             }
-            falg = true;
+            flag = true;
         }
         if(listView1.isRefreshing())
             listView1.onRefreshComplete();

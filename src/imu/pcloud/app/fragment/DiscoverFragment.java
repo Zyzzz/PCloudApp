@@ -93,7 +93,7 @@ public class DiscoverFragment extends HttpFragment implements PullToRefreshBase.
         switch(v.getId()) {
             case R.id.comtent_view:
                 Bundle data = new Bundle();
-                data.putString("discover", gson.toJson(discoverArrayList.get(position).getId()));
+                data.putString("discover", gson.toJson(discoverArrayList.get(position)));
                 startActivity(DiscoverPlanAcitivity.class, data);
                 break;
         }
